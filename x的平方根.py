@@ -23,8 +23,13 @@
 #     return min
 def mySqrt(x):  #牛顿迭代法
     result = 1.0
-    while abs(result * result - x) > 0.1:
+    tem=0
+    if result * result - x<0: tem=-(result * result - x)
+    else:tem=result * result - x
+    while tem > 0.1:
         result = (result + x / result) / 2
+        if result * result - x<0: tem=-(result * result - x)
+        else:tem=result * result - x
     return int(result)
-res=mySqrt(21)
+res=mySqrt(14)
 print(res)
