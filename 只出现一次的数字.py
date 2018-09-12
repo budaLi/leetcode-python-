@@ -18,14 +18,14 @@
 #             nums=nums[:mid-1]
 #         else:
 #             nums=nums[mid+1:]
-def singleNumber(nums):     #0异或任何数不变，任何数与自己异或为0。a⊕b⊕a=b
+def singleNumber(nums):     #0异或任何数不变。
         res = 0
         for i in nums:
+            tem=res
             res^=i
+            print(tem,i,res)
         return res
 
 res=singleNumber([4,1,2,1,2])
 print(res)
 
-
-print(~30)      #~a=-a-1

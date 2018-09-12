@@ -22,3 +22,4 @@ def twoSum(numbers, target):
 res=twoSum([0,0,3,4],
 100)
 print(res)
+
