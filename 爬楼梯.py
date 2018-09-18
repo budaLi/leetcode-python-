@@ -14,10 +14,11 @@
 #     else:
 #         res=climbStairs(n-1)+climbStairs(n-2)
 #         return res
+
 def climbStairs(n): #利用列表存储斐波那契数列的前几个数，往后加
     res=[1,2]
     for i in range(2,n):
         res.append(res[i-1]+res[i-2])
     return res[n-1]
-res=climbStairs(35)
+res=climbStairs(3)
 print(res)
