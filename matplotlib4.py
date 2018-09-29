@@ -17,4 +17,3 @@ plt.pie(x=date,labels=labe,autopct='%.0f%%',explode=exolode,shadow=True,colors='
 plt.show()
 
 
-print(chr(ord(str[i]+32)))
