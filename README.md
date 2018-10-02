@@ -162,104 +162,104 @@ python基础巩固以及leetcode刷题代码
 
 78.[数据封装和私有属性](https://github.com/budaLi/leetcode-python-/blob/master/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85%E5%92%8C%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7.py)
 
-79.[数组的度]()
+79.[数组的度](https://github.com/budaLi/leetcode-python-/blob/master/%E6%95%B0%E7%BB%84%E7%9A%84%E5%BA%A6.py)
 
-80.[文字转语言]()
+80.[文字转语言](https://github.com/budaLi/leetcode-python-/blob/master/%E6%96%87%E5%AD%97%E8%BD%AC%E8%AF%AD%E9%9F%B3.py)
 
-81.[旋转字符串]()
+81.[旋转字符串](https://github.com/budaLi/leetcode-python-/blob/master/%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2.py)
 
-82.[最后一个单词的长度]()
+82.[最后一个单词的长度](https://github.com/budaLi/leetcode-python-/blob/master/%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E5%8D%95%E8%AF%8D%E7%9A%84%E9%95%BF%E5%BA%A6.py)
 
-83.[最大同值路径]()
+83.[最大同值路径](https://github.com/budaLi/leetcode-python-/blob/master/%E6%9C%80%E5%A4%A7%E5%90%8C%E5%80%BC%E8%B7%AF%E5%BE%84.py)
 
-84.[最大子序和]()
+84.[最大子序和](https://github.com/budaLi/leetcode-python-/blob/master/%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C.py)
 
-85.[最小移动次数使数组元素相等]()
+85.[最小移动次数使数组元素相等](https://github.com/budaLi/leetcode-python-/blob/master/%E6%9C%80%E5%B0%8F%E7%A7%BB%E5%8A%A8%E6%AC%A1%E6%95%B0%E4%BD%BF%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E7%9B%B8%E7%AD%89.py)
 
-86.[最小轮换的最高分]()
+86.[最小轮换的最高分](https://github.com/budaLi/leetcode-python-/blob/master/%E6%9C%80%E5%B0%8F%E8%BD%AE%E6%8D%A2%E7%9A%84%E6%9C%80%E9%AB%98%E5%88%86.py)
 
-87.[最小连续递增序列]()
+87.[最小连续递增序列](https://github.com/budaLi/leetcode-python-/blob/master/%E6%9C%80%E5%B0%8F%E8%BF%9E%E7%BB%AD%E9%80%92%E5%A2%9E%E5%BA%8F%E5%88%97.py)
 
-88.[最深的二叉树]()
+88.[最深的二叉树](https://github.com/budaLi/leetcode-python-/blob/master/%E6%9C%80%E6%B7%B1%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91.py)
 
-89.[最长公共前缀]()
+89.[最长公共前缀](https://github.com/budaLi/leetcode-python-/blob/master/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80.py)
 
-90.[最长回文串]()
+90.[最长回文串](https://github.com/budaLi/leetcode-python-/blob/master/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E4%B8%B2.py)
 
-91.[有序数组的单一元素]()
+91.[有序数组的单一元素](https://github.com/budaLi/leetcode-python-/blob/master/%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E5%8D%95%E4%B8%80%E5%85%83%E7%B4%A0.py)
 
-92.[有效的三角形个数]()
+92.[有效的三角形个数](https://github.com/budaLi/leetcode-python-/blob/master/%E6%9C%89%E6%95%88%E7%9A%84%E4%B8%89%E8%A7%92%E5%BD%A2%E4%B8%AA%E6%95%B0.py)
 
-93.[有效的括号]()
+93.[有效的括号](https://github.com/budaLi/leetcode-python-/blob/master/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7.py)
 
-94.[棒球比赛]()
+94.[棒球比赛](https://github.com/budaLi/leetcode-python-/blob/master/%E6%A3%92%E7%90%83%E6%AF%94%E8%B5%9B.py)
 
-95.[模拟行走机器人]()
+95.[模拟行走机器人](https://github.com/budaLi/leetcode-python-/blob/master/%E6%A8%A1%E6%8B%9F%E8%A1%8C%E8%B5%B0%E6%9C%BA%E5%99%A8%E4%BA%BA.py)
 
-96.[正则表达式]()
+96.[正则表达式](https://github.com/budaLi/leetcode-python-/blob/master/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.py)
 
-97.[比较含退格的字符串]()
+97.[比较含退格的字符串](https://github.com/budaLi/leetcode-python-/blob/master/%E6%AF%94%E8%BE%83%E5%90%AB%E9%80%80%E6%A0%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2.py)
 
-98.[深浅拷贝]()
+98.[深浅拷贝](https://github.com/budaLi/leetcode-python-/blob/master/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.py)
 
-99.[灯泡开关]()
+99.[灯泡开关](https://github.com/budaLi/leetcode-python-/blob/master/%E7%81%AF%E6%B3%A1%E5%BC%80%E5%85%B3.py)
 
-100.[爬取妹子]()
+100.[爬取妹子](https://github.com/budaLi/leetcode-python-/blob/master/%E7%88%AC%E5%8F%96%E5%A6%B9%E5%AD%90.py)
 
-101.[爬楼梯]()
+101.[爬楼梯](https://github.com/budaLi/leetcode-python-/blob/master/%E7%88%AC%E6%A5%BC%E6%A2%AF.py)
 
-102.[电话号码的字母组合]()
+102.[电话号码的字母组合](https://github.com/budaLi/leetcode-python-/blob/master/%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88.py)
 
-103.[相同的树]()
+103.[相同的树](https://github.com/budaLi/leetcode-python-/blob/master/%E7%9B%B8%E5%90%8C%E7%9A%84%E6%A0%91.py)
 
-104.[相对名次]()
+104.[相对名次](https://github.com/budaLi/leetcode-python-/blob/master/%E7%9B%B8%E5%AF%B9%E5%90%8D%E6%AC%A1.py)
 
-105.[移除元素]()
+105.[移除元素](https://github.com/budaLi/leetcode-python-/blob/master/%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.py)
 
-106.[简单选择排序]()
+106.[简单选择排序](https://github.com/budaLi/leetcode-python-/blob/master/%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F.py)
 
-107.[类继承与不继承object的区别]()
+107.[类继承与不继承object的区别](https://github.com/budaLi/leetcode-python-/blob/master/%E7%B1%BB%E7%BB%A7%E6%89%BF%E4%B8%8E%E4%B8%8D%E7%BB%A7%E6%89%BFobject%E7%9A%84%E5%8C%BA%E5%88%AB.py)
 
-108.[线程中的通信]()
+108.[线程中的通信](https://github.com/budaLi/leetcode-python-/blob/master/%E7%BA%BF%E7%A8%8B%E4%B8%AD%E7%9A%84%E9%80%9A%E4%BF%A1.py)
 
-109.[线程同步]()
+109.[线程同步](https://github.com/budaLi/leetcode-python-/blob/master/%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%2Clock.py)
 
-110.[罗马数字转整数]()
+110.[罗马数字转整数](https://github.com/budaLi/leetcode-python-/blob/master/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0.py)
 
-111.[自除数]()
+111.[自除数](https://github.com/budaLi/leetcode-python-/blob/master/%E8%87%AA%E9%99%A4%E6%95%B0.py)
 
-112.[螺旋矩阵]()
+112.[螺旋矩阵](https://github.com/budaLi/leetcode-python-/blob/master/%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5.py)
 
-113.[被3整除的最大份数()
+113.[被3整除的最大份数(https://github.com/budaLi/leetcode-python-/blob/master/%E8%A2%AB3%E6%95%B4%E5%87%BA%E7%9A%84%E6%9C%80%E5%A4%A7%E4%BB%BD%E6%95%B0.py)
 
-114.[计算二进制字串]()
+114.[计算二进制字串](https://github.com/budaLi/leetcode-python-/blob/master/%E8%AE%A1%E7%AE%97%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AD%97%E4%B8%B2.py)
 
-115.[词典中最长的单词]()
+115.[词典中最长的单词](https://github.com/budaLi/leetcode-python-/blob/master/%E8%AF%8D%E5%85%B8%E4%B8%AD%E6%9C%80%E9%95%BF%E7%9A%84%E5%8D%95%E8%AF%8D.py)
 
-116.[调整字符串中的中文格式]()
+116.[调整字符串中的中文格式](https://github.com/budaLi/leetcode-python-/blob/master/%E8%B0%83%E6%95%B4%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E4%B8%AD%E6%96%87%E6%A0%BC%E5%BC%8F.py)
 
-117.[转换成小写字母]()
+117.[转换成小写字母](https://github.com/budaLi/leetcode-python-/blob/master/%E8%BD%AC%E6%8D%A2%E6%88%90%E5%B0%8F%E5%86%99%E5%AD%97%E6%AF%8D.py)
 
-118.[转置矩阵]()
+118.[转置矩阵](https://github.com/budaLi/leetcode-python-/blob/master/%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5.py)
 
 119.[遗传算法] #还未学习。。只是好奇下下来了。。()
 
-120.[重塑矩阵]()
+120.[重塑矩阵](https://github.com/budaLi/leetcode-python-/blob/master/%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95.py)
 
-121.[重复叠加字符串匹配]()
+121.[重复叠加字符串匹配](https://github.com/budaLi/leetcode-python-/blob/master/%E9%87%8D%E5%A4%8D%E5%8F%A0%E5%8A%A0%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D.py)
 
-122.[重复的子字符串]()
+122.[重复的子字符串](https://github.com/budaLi/leetcode-python-/blob/master/%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2.py)
 
-123.[链表实现]()
+123.[链表实现](https://github.com/budaLi/leetcode-python-/blob/master/%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0.py)
 
-124.[错误的集合]()
+124.[错误的集合](https://github.com/budaLi/leetcode-python-/blob/master/%E9%94%99%E8%AF%AF%E7%9A%84%E9%9B%86%E5%90%88.py)
 
-125.[除自身以外数组的乘积]()
+125.[除自身以外数组的乘积](https://github.com/budaLi/leetcode-python-/blob/master/%E9%99%A4%E8%87%AA%E8%BA%AB%E4%BB%A5%E5%A4%96%E6%95%B0%E7%BB%84%E7%9A%84%E4%B9%98%E7%A7%AF.py)
 
-126.[非递减数列]()
+126.[非递减数列](https://github.com/budaLi/leetcode-python-/blob/master/%E9%9D%9E%E9%80%92%E5%87%8F%E6%95%B0%E5%88%97.py)
 
-127.[颠倒二进制数]()
+127.[颠倒二进制数](https://github.com/budaLi/leetcode-python-/blob/master/%E9%A2%A0%E5%80%92%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BD%8D.py)
 
-128.[验证回文字符串]()
+128.[验证回文字符串](https://github.com/budaLi/leetcode-python-/blob/master/%E9%AA%8C%E8%AF%81%E5%9B%9E%E6%96%87%E5%AD%97%E7%AC%A6%E4%B8%B2.py)
 
-129.[魔法函数]()
+129.[魔法函数](https://github.com/budaLi/leetcode-python-/blob/master/%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0.py)
