@@ -230,7 +230,7 @@ python基础巩固以及leetcode刷题代码
 
 112.[螺旋矩阵](https://github.com/budaLi/leetcode-python-/blob/master/%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5.py)
 
-113.[被3整除的最大份数(https://github.com/budaLi/leetcode-python-/blob/master/%E8%A2%AB3%E6%95%B4%E5%87%BA%E7%9A%84%E6%9C%80%E5%A4%A7%E4%BB%BD%E6%95%B0.py)
+113.[被3整除的最大份数](https://github.com/budaLi/leetcode-python-/blob/master/%E8%A2%AB3%E6%95%B4%E5%87%BA%E7%9A%84%E6%9C%80%E5%A4%A7%E4%BB%BD%E6%95%B0.py)
 
 114.[计算二进制字串](https://github.com/budaLi/leetcode-python-/blob/master/%E8%AE%A1%E7%AE%97%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AD%97%E4%B8%B2.py)
 
@@ -242,7 +242,7 @@ python基础巩固以及leetcode刷题代码
 
 118.[转置矩阵](https://github.com/budaLi/leetcode-python-/blob/master/%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5.py)
 
-119.[遗传算法] #还未学习。。只是好奇下下来了。。()
+119.[遗传算法] #还未学习。。只是好奇下下来了。。(https://github.com/budaLi/leetcode-python-/blob/master/%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95.py)
 
 120.[重塑矩阵](https://github.com/budaLi/leetcode-python-/blob/master/%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95.py)
 
