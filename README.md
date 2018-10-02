@@ -54,11 +54,11 @@ leetcode 刷题
 
 24.[买卖股票的最佳时期](https://github.com/budaLi/leetcode-python-/blob/master/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%9F.py)
 
-25.[二分查找}(https://github.com/budaLi/leetcode-python-/blob/master/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.py)
+25.[二分查找](https://github.com/budaLi/leetcode-python-/blob/master/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.py)
 
 26.[二叉排序树的实现](https://github.com/budaLi/leetcode-python-/blob/master/%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%95%B0%E7%9A%84%E5%AE%9E%E7%8E%B0.py)
 
-27.[二叉树的层次遍历}(https://github.com/budaLi/leetcode-python-/blob/master/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86.py)
+27.[二叉树的层次遍历](https://github.com/budaLi/leetcode-python-/blob/master/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86.py)
 
 28.[二叉树的层平均值](https://github.com/budaLi/leetcode-python-/blob/master/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%B9%B3%E5%9D%87%E5%80%BC.py)
 
