@@ -10,5 +10,5 @@ def maxSubArray(num_list):  #时间复杂度n
         max_value=max(max_value,tem)
     return max_value
 
-res=maxSubArray([-2,1,-3,1,2,4])
+res=maxSubArray([-2,1,-3,1,2,4,-1,8])
 print(res)
