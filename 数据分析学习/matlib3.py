@@ -1,7 +1,9 @@
 #-*- coding:utf8 -*-
 #author : Lenovo
 #date: 2018/8/26
-
+import sys
+reload(sys)
+sys.setdefaultencoding('gbk')
 import matplotlib.pyplot as plt
 import numpy as np
 # plt.rcParams['font.sans-serif']=['SimHei']

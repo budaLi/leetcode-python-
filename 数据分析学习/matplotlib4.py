@@ -1,6 +1,9 @@
-#-*- coding:utf8 -*-
+#-*- coding:utf-8 -*-
 #author : Lenovo
 #date: 2018/8/27
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 import matplotlib.pyplot as plt
 import numpy as np
 from pylab import mpl
