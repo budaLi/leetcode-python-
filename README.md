@@ -263,3 +263,12 @@ python基础巩固以及leetcode刷题代码
 128.[验证回文字符串](https://github.com/budaLi/leetcode-python-/blob/master/%E9%AA%8C%E8%AF%81%E5%9B%9E%E6%96%87%E5%AD%97%E7%AC%A6%E4%B8%B2.py)
 
 129.[魔法函数](https://github.com/budaLi/leetcode-python-/blob/master/%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0.py)
+
+
+#数据可视化
+对在拉勾网采集到的2893条数据进行可视化。
+1.最低经验要求。![Image text](https://raw.github.com/yourName/repositpry/master/yourprojectName/img-folder/test.jpg)
+2.工作年限要求。![Image text](https://raw.github.com/yourName/repositpry/master/yourprojectName/img-folder/test.jpg)
+3.学历要求![Image text](https://raw.github.com/yourName/repositpry/master/yourprojectName/img-folder/test.jpg)
+4.岗位词云。![Image text](https://raw.github.com/yourName/repositpry/master/yourprojectName/img-folder/test.jpg)
+5.公司融资情况。![Image text](https://raw.github.com/yourName/repositpry/master/yourprojectName/img-folder/test.jpg)
