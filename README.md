@@ -263,3 +263,27 @@ python基础巩固以及leetcode刷题代码
 128.[验证回文字符串](https://github.com/budaLi/leetcode-python-/blob/master/%E9%AA%8C%E8%AF%81%E5%9B%9E%E6%96%87%E5%AD%97%E7%AC%A6%E4%B8%B2.py)
 
 129.[魔法函数](https://github.com/budaLi/leetcode-python-/blob/master/%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0.py)
+
+
+对在拉勾网采集到的2893条数据进行可视化。
+===========
+
+1.最低经验要求。
+
+![Image text](https://github.com/budaLi/leetcode-python-/blob/master/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AD%A6%E4%B9%A0/Figure_1.png)
+
+2.工作年限要求。
+
+![Image text](https://github.com/budaLi/leetcode-python-/blob/master/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AD%A6%E4%B9%A0/%E7%BB%8F%E9%AA%8C%E6%9C%80%E9%AB%98%E8%A6%81%E6%B1%82.png)
+
+3.学历要求。
+
+![Image text](https://github.com/budaLi/leetcode-python-/blob/master/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AD%A6%E4%B9%A0/%E5%AD%A6%E5%8E%86%E8%A6%81%E6%B1%82.png)
+
+4.岗位词云。
+
+![Image text](https://github.com/budaLi/leetcode-python-/blob/master/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AD%A6%E4%B9%A0/%E5%B2%97%E4%BD%8D%E8%AF%8D%E4%BA%91.png)
+
+5.公司融资情况。
+
+![Image text](https://github.com/budaLi/leetcode-python-/blob/master/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AD%A6%E4%B9%A0/%E5%85%AC%E5%8F%B8%E8%9E%8D%E8%B5%84%E6%83%85%E5%86%B5.png)
