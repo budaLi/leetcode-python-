@@ -266,6 +266,8 @@ python基础巩固以及leetcode刷题代码
 
 130.[完美数]()
 
+131.[快速排序](https://github.com/budaLi/leetcode-python-/blob/master/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.py)
+
 对在拉勾网采集到的2893条数据进行可视化。
 ===========
 
