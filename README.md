@@ -274,6 +274,17 @@ python基础巩固以及leetcode刷题代码
 
 132.[python中多线程多进程和线程池](https://github.com/budaLi/leetcode-python-/tree/master/python%E4%B8%AD%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%8C%E8%BF%9B%E7%A8%8B%E6%B1%A0)
 
+133.[同构字符串]()
+
+134.[岛屿的周长]()
+
+135.[数组中的K-diff数对]()
+
+136.[相交链表]()
+
+137.[翻转二叉树]()
+
+
 对在拉勾网采集到的2893条数据进行可视化。
 ===========
 
