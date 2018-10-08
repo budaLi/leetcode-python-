@@ -1,6 +1,6 @@
 #-*-coding:utf8-*-
 #author : Lenovo
-#date: 2018/10/8
+#date: 2018/10/9
 class TreeNode(object):
     def __init__(self, x):
         self.val = x

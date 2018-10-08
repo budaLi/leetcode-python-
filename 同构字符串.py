@@ -1,6 +1,6 @@
 #-*-coding:utf8-*-
 #author : Lenovo
-#date: 2018/10/8
+#date: 2018/10/9
 def isIsomorphic(s, t):
     """
     :type s: str

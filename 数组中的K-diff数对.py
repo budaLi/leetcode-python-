@@ -25,7 +25,7 @@
 #     return len(res)
 
 
-def findPairs(nums, k):     #用字典先将对应的值存起来 重复的数值加1
+def findPairs(nums, k):     #用字典先将对应的值存起来 重复的数值加1 好像慢
     """
     :type nums: List[int]
     :type k: int

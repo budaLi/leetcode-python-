@@ -1,6 +1,6 @@
 #-*- coding:utf8 -*-
 #author : Lenovo
-#date: 2018/10/7
+#date: 2018/10/8
 def hasGroupsSizeX(deck):
     """
     :type deck: List[int]
