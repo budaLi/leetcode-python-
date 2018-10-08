@@ -268,22 +268,23 @@ python基础巩固以及leetcode刷题代码
 
 129.[魔法函数](https://github.com/budaLi/leetcode-python-/blob/master/%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0.py)
 
-130.[完美数]()
+130.[完美数](https://github.com/budaLi/leetcode-python-/blob/master/%E5%AE%8C%E7%BE%8E%E6%95%B0.py)
 
 131.[快速排序](https://github.com/budaLi/leetcode-python-/blob/master/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.py)
 
 132.[python中多线程多进程和线程池](https://github.com/budaLi/leetcode-python-/tree/master/python%E4%B8%AD%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%8C%E8%BF%9B%E7%A8%8B%E6%B1%A0)
 
-133.[同构字符串]()
+133.[同构字符串](https://github.com/budaLi/leetcode-python-/blob/master/%E5%90%8C%E6%9E%84%E5%AD%97%E7%AC%A6%E4%B8%B2.py)
 
-134.[岛屿的周长]()
+134.[岛屿的周长](https://github.com/budaLi/leetcode-python-/blob/master/%E5%B2%9B%E5%B1%BF%E7%9A%84%E5%91%A8%E9%95%BF.py)
 
-135.[数组中的K-diff数对]()
+135.[数组中的K-diff数对](https://github.com/budaLi/leetcode-python-/blob/master/%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84K-diff%E6%95%B0%E5%AF%B9.py)
 
-136.[相交链表]()
+136.[相交链表](https://github.com/budaLi/leetcode-python-/blob/master/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8.py)
 
-137.[翻转二叉树]()
+137.[翻转二叉树](https://github.com/budaLi/leetcode-python-/blob/master/%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91.py)
 
+138.[键盘行](https://github.com/budaLi/leetcode-python-/blob/master/%E9%94%AE%E7%9B%98%E8%A1%8C.py)
 
 对在拉勾网采集到的2893条数据进行可视化。
 ===========
