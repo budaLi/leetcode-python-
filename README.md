@@ -11,7 +11,7 @@ python基础巩固以及leetcode刷题代码
 2.[append,pop,remove,extend区别](https://github.com/budaLi/leetcode-python-/blob/master/append%2Cpop%2Cextend%2Cremove%E5%8C%BA%E5%88%AB.py)
 
 3.[condition条件变量](https://github.com/budaLi/leetcode-python-/blob/master/condition%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F.py)
-#失效 【已移动到python多线程多进程和线程池】(https://github.com/budaLi/leetcode-python-/tree/master/python%E4%B8%AD%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%8C%E8%BF%9B%E7%A8%8B%E6%B1%A0)
+#失效 [已移动到python多线程多进程和线程池](https://github.com/budaLi/leetcode-python-/tree/master/python%E4%B8%AD%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%8C%E8%BF%9B%E7%A8%8B%E6%B1%A0)
 
 4.[eval函数](https://github.com/budaLi/leetcode-python-/blob/master/eval%E5%87%BD%E6%95%B0.py)
 
@@ -24,7 +24,7 @@ python基础巩固以及leetcode刷题代码
 8.[pow函数的实现](https://github.com/budaLi/leetcode-python-/blob/master/pow%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9E%E7%8E%B0.py)
 
 9.[python中的GIL](https://github.com/budaLi/leetcode-python-/blob/master/python%E4%B8%AD%E7%9A%84GIL.py)
-#失效【已移动到python中多线程多进程线程池文件】
+#失效[已移动到python中多线程多进程线程池文件](https://github.com/budaLi/leetcode-python-/tree/master/python%E4%B8%AD%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%8C%E8%BF%9B%E7%A8%8B%E6%B1%A0)
 
 10.[python中的三元表达式](https://github.com/budaLi/leetcode-python-/blob/master/python%E4%B8%AD%E7%9A%84%E4%B8%89%E5%85%83%E8%A1%A8%E8%BE%BE%E5%BC%8F.py)
 
@@ -133,7 +133,7 @@ python基础巩固以及leetcode刷题代码
 62.[图片平滑器](https://github.com/budaLi/leetcode-python-/blob/master/%E5%9B%BE%E7%89%87%E5%B9%B3%E6%BB%91%E5%99%A8.py)
 
 63.[多线程编程](https://github.com/budaLi/leetcode-python-/blob/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B.py)
-#失效【已移动到python中多线程多进程线程池文件】(https://github.com/budaLi/leetcode-python-/tree/master/python%E4%B8%AD%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%8C%E8%BF%9B%E7%A8%8B%E6%B1%A0)
+#失效[已移动到python中多线程多进程线程池文件](https://github.com/budaLi/leetcode-python-/tree/master/python%E4%B8%AD%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%8C%E8%BF%9B%E7%A8%8B%E6%B1%A0)
 
 64.[大数字乘法](https://github.com/budaLi/leetcode-python-/blob/master/%E5%A4%A7%E6%95%B0%E5%AD%97%E4%B9%98%E6%B3%95.py)
 
@@ -224,7 +224,7 @@ python基础巩固以及leetcode刷题代码
 107.[类继承与不继承object的区别](https://github.com/budaLi/leetcode-python-/blob/master/%E7%B1%BB%E7%BB%A7%E6%89%BF%E4%B8%8E%E4%B8%8D%E7%BB%A7%E6%89%BFobject%E7%9A%84%E5%8C%BA%E5%88%AB.py)
 
 108.[线程中的通信](https://github.com/budaLi/leetcode-python-/blob/master/%E7%BA%BF%E7%A8%8B%E4%B8%AD%E7%9A%84%E9%80%9A%E4%BF%A1.py)
-#失效【已移动到python中多线程多进程线程池文件】(https://github.com/budaLi/leetcode-python-/tree/master/python%E4%B8%AD%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%8C%E8%BF%9B%E7%A8%8B%E6%B1%A0)
+#失效[已移动到python中多线程多进程线程池文件](https://github.com/budaLi/leetcode-python-/tree/master/python%E4%B8%AD%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%8C%E8%BF%9B%E7%A8%8B%E6%B1%A0)
 
 109.[线程同步](https://github.com/budaLi/leetcode-python-/blob/master/%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%2Clock.py)
 
