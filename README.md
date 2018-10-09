@@ -292,6 +292,10 @@ python基础巩固以及leetcode刷题代码
 
 141.[整数拆分](https://github.com/budaLi/leetcode-python-/blob/master/%E6%95%B4%E6%95%B0%E6%8B%86%E5%88%86.py)
 
+142.[路径总和](https://github.com/budaLi/leetcode-python-/blob/master/%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C.py)
+
+143.[盛水最多的容器](https://github.com/budaLi/leetcode-python-/blob/master/%E7%9B%9B%E6%B0%B4%E6%9C%80%E5%A4%9A%E7%9A%84%E5%AE%B9%E5%99%A8.py)
+
 对在拉勾网采集到的2893条数据进行可视化。
 ===========
 
