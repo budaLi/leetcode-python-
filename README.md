@@ -286,6 +286,12 @@ python基础巩固以及leetcode刷题代码
 
 138.[键盘行](https://github.com/budaLi/leetcode-python-/blob/master/%E9%94%AE%E7%9B%98%E8%A1%8C.py)
 
+139.[两个数的交集](https://github.com/budaLi/leetcode-python-/blob/master/%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4%E9%9B%86.py)
+
+140.[两个数的交集II](https://github.com/budaLi/leetcode-python-/blob/master/%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4%E9%9B%86II.py)
+
+141.[整数拆分](https://github.com/budaLi/leetcode-python-/blob/master/%E6%95%B4%E6%95%B0%E6%8B%86%E5%88%86.py)
+
 对在拉勾网采集到的2893条数据进行可视化。
 ===========
 
