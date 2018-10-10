@@ -296,6 +296,8 @@ python基础巩固以及leetcode刷题代码
 
 143.[盛水最多的容器](https://github.com/budaLi/leetcode-python-/blob/master/%E7%9B%9B%E6%B0%B4%E6%9C%80%E5%A4%9A%E7%9A%84%E5%AE%B9%E5%99%A8.py)
 
+144.[翻转矩阵后的得分](https://github.com/budaLi/leetcode-python-/blob/master/%E7%BF%BB%E8%BD%AC%E7%9F%A9%E9%98%B5%E5%90%8E%E7%9A%84%E5%BE%97%E5%88%86.py)
+
 对在拉勾网采集到的2893条数据进行可视化。
 ===========
 
