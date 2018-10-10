@@ -298,6 +298,10 @@ python基础巩固以及leetcode刷题代码
 
 144.[翻转矩阵后的得分](https://github.com/budaLi/leetcode-python-/blob/master/%E7%BF%BB%E8%BD%AC%E7%9F%A9%E9%98%B5%E5%90%8E%E7%9A%84%E5%BE%97%E5%88%86.py)
 
+145.[格雷编码](https://github.com/budaLi/leetcode-python-/blob/master/%E6%A0%BC%E9%9B%B7%E7%BC%96%E7%A0%81.py)
+
+146.[删除链表中的节点](https://github.com/budaLi/leetcode-python-/blob/master/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9.py)
+
 对在拉勾网采集到的2893条数据进行可视化。
 ===========
 
