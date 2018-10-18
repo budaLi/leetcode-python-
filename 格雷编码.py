@@ -1,4 +1,4 @@
-#-*-coding:utf8-*-
+#-*- coding:utf8 -*-
 #author : Lenovo
 #date: 2018/10/10
 class Solution(object):
