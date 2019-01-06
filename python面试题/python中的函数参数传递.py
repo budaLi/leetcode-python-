@@ -27,3 +27,11 @@ if __name__=="__main__":
 
 #当参数类型为可变类型时  相当于对这个可变对象进行操作
 
+import hashlib
+
+h=hashlib.md5()
+
+h.update("123".encode("utf-8"))
+
+print(h.digest())   #以二进制形式存储
+print(h.hexdigest())
