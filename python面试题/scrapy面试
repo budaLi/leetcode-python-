@@ -1,0 +1,19 @@
+
+
+scrapy 是 基于 twisted 的网络爬虫框架  而twisted 是用Pyhon实现的基于事件驱动的
+网络引擎模型 事件驱动指的是在持续事务处理过程中 进行决策的一种策略 即跟随当前
+时间点出现的事件 调用可用资源 执行相关任务 使不断出现的问题得以解决 防止事务堆积
+
+scrapy有五大组成部分 spider ,scrapy engine ,schduler ,downloader ,itempipeline
+以及各种中间件 如 spider middlewares , scherduler middlewares ,downloader middlewares;
+
+首先spider从一个start_url 也就是一个种子url开始 经过scrapy-engine 将种子url放入scheduler,
+其中spider-middlerwares 可以进行url规则的过滤 比如设置某种类型的url不再进行深入爬取 例如
+crawlspider模板中的rules，然后schedeler将url进行入队 通过scrapy-engine 通过downloader-middlewares
+到达downloader 其中downloadermiddlewares 可以用来进行设置 user-agent ,ip代理等，然后downloader
+下载内容再通过scrapy-engine 将响应传回到spiders 其中包括提取的内容以及新的可以爬取的url,
+提取的内容进入到item pipeline中进行数据清洗 数据存储等操作 可以存放到数据库 本地等
+其余的url再次进行爬取 知道scheduler队列中无url
+
+
+
