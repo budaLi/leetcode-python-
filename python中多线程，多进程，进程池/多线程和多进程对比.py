@@ -34,7 +34,7 @@ if __name__=='__main__':
     #在这里更改ProcessPoolExecutor或者ThreadPoolExecutor就可以切换多进程和多线程 要注意的是多进程需要使用if __name__=='__main__':
     #对斐波那契数列数列的25-40项进行测试 多线程 102秒 多进程 20秒 实在是可怕。。。
     with ProcessPoolExecutor(3) as excutor: #在这里可以设置开启几个线程或几个进程
-        all_task=[excutor.submit(random,(num)) for num in range(25,40)]
+        all_task = [excutor.submit(random, (num)) for num in range(1, 5)]
         start_time=time.time()
         for future in as_completed(all_task):
             data=future.result()    #可以返回程序执行完成的结果
