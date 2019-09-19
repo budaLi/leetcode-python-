@@ -97,7 +97,7 @@ class GeneticAlgorithm(object):
 def main():
     import hashlib
     m=hashlib.md5()
-    m.update(u'梁狗狗'.encode('utf-8'))
+    m.update(u'abcd'.encode('utf-8'))
     m=m.hexdigest()
     print(m)
     password = m     # 要破解的密码

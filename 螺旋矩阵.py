@@ -19,3 +19,4 @@ def spiralMatrixIII(R, C, r0, c0):
         if r0<=R and c0+1<=C:
             flag=flag+1
             res.append([r0,c0+1])
+
