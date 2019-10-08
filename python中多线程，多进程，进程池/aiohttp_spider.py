@@ -12,7 +12,7 @@ import re
 
 class Spider:
     def __init__(self):
-        self.start_url = ''
+        self.start_url = 'https://yq.aliyun.com/articles/'
         self.pool = ""
         self.stop = False
         self.waitting_url = Queue()
@@ -24,10 +24,10 @@ class Spider:
         :return:
         """
         urls = []
-        pq = PyQuery()
+        pq = PyQuery(html)
         for link in pq.items("a"):
             url = link.attr("href")
-            if url and url.startwith("http") and url not in self.seen_urls:
+            if url and url.startwith("https") and url not in self.seen_urls:
                 urls.append(url)
                 self.waitting_url.put(url)
         return urls
@@ -42,34 +42,27 @@ class Spider:
         html = await self.fetch(url, session)
         self.seen_urls.add(url)
         self.extract_urls(html)
-        pq = PyQuery()
-        title = pq("title").text()
+        pq = PyQuery(html)
+        title = pq("#blog-title").text()
         async with pool.acquire() as conn:
             async with conn.cursor() as cur:
                 insert_sql = "insert into spider(title) values('{}')".format(title)
                 await cur.execute(insert_sql)
 
-    async def consumer(self, pool):
-        async with aiohttp.ClientSession() as session:
-            while not self.stop:
-                url = self.waitting_url.get()
-                if re.match("http://.*?jobble.com", url):
-                    if url not in self.seen_urls:
-                        asyncio.ensure_future(self.article_handler(url, session))
-                else:
-                    if url not in self.seen_urls:
-                        asyncio.ensure_future(self.init_urls(url, session))
+    async def consumer(self, pool, session):
+        while not self.stop:
+            url = self.waitting_url.get()
+            if re.match("https://yq.aliyun.com/articles/\d*", url):
+                if url not in self.seen_urls:
+                    asyncio.ensure_future(self.article_handler(url, session, pool))
+            else:
+                if url not in self.seen_urls:
+                    asyncio.ensure_future(self.init_urls(url, session))
 
     async def init_urls(self, url, session):
         html = await self.fetch(url, session)
         self.seen_urls.add(url)
         self.extract_urls(html=html)
-
-    async def connection(self, loop):
-        pool = await aiomysql.create_pool(host="127.0.0.1", port=3306, user='root', password='root', db='aiospider',
-                                          loop=loop, charset='utf-8', autocommit=True)
-        asyncio.ensure_future(self.init_urls(self.start_url))
-        asyncio.ensure_future(self.consumer(self.pool))
 
     async def fetch(self, url, session):
         try:
@@ -80,7 +73,15 @@ class Spider:
         except Exception as e:
             print(e)
 
+    async def main(self, loop):
+        await aiomysql.create_pool(host="127.0.0.1", port=3306, user='root', password='root', db='aiospider',
+                                   loop=loop, charset='utf8', autocommit=True)
+        async with aiohttp.ClientSession() as session:
+            asyncio.ensure_future(self.init_urls(self.start_url, session))
+            asyncio.ensure_future(self.consumer(self.pool, session))
 
 if __name__ == "__main__":
     spider = Spider()
-    spider.fetch()
+    loop = asyncio.get_event_loop()
+    asyncio.ensure_future(spider.main(loop))
+    loop.run_forever()
