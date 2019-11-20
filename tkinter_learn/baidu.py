@@ -17,9 +17,9 @@ from ip import GetIp
 import threading
 
 count = 0
-max_size = 100
+
 url_queue = Queue()
-image_queue = Queue(max_size)
+image_queue = Queue()
 index_queue = Queue()
 str_table = {
     '_z2C$q': ':',
@@ -76,13 +76,8 @@ def decode(url):
 def buildUrls(word):
     word = urllib.parse.quote(word)
     url = r"http://image.baidu.com/search/acjson?tn=resultjson_com&ipn=rj&ct=201326592&fp=result&queryWord={word}&cl=2&lm=-1&ie=utf-8&oe=utf-8&st=-1&ic=0&word={word}&face=0&istype=2nc=1&pn={pn}&rn=60"
-    # urls = (url.format(word=word, pn=x) for x in itertools.count(start=0, step=60))
-    urls = [url.format(word=word, pn=x) for x in range(0, 600, 60)]
-    # for x in range(0,60000,60):
-    #     print(x)
-    #
-    # for one in urls:
-    #     print(one)
+    urls = (url.format(word=word, pn=x) for x in itertools.count(start=0, step=60))
+    # urls = [url.format(word=word, pn=x) for x in range(0, 600, 60)]
     return urls
 
 
@@ -143,7 +138,7 @@ def main(proxies):
 
 if __name__ == '__main__':
     getip = GetIp()
-    lis = ["橙汁"]
+    lis = ["鱼香肉丝"]
     # with open("name",'r',encoding="utf8") as f:
     #     for one in f.readlines():
     #         lis.append(one.strip())
