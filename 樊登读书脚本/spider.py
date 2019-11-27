@@ -20,7 +20,7 @@ phone_excel = xlrd.open_workbook(phone_file_path)
 phoe_tables = phone_excel.sheet_by_index(0)
 phone_get_col = 1
 phone_write_col = 2
-wait_time = 2
+wait_time = 3
 
 phone_can_use_index = 0
 
@@ -46,6 +46,7 @@ for index, link in enumerate(link_data):
 
     if has_phone:
         driver.get(link)
+        time.sleep(wait_time)
         try:
             text = driver.find_element_by_xpath("/html/body/div[1]/div[1]/p[1]")
             if text.text == "开卡失败":
@@ -56,7 +57,7 @@ for index, link in enumerate(link_data):
                 # print(text.text)
                 continue
         except Exception as e:
-            pass
+            time.sleep(wait_time)
             # print(e)
         try:
             print("该卡可以使用，正在查询可用手机号。。")
@@ -64,9 +65,11 @@ for index, link in enumerate(link_data):
             if text.text == "欢迎加入樊登读书，即刻获得":
                 flag = True
                 while flag:
-                    for ph_number_index in range(phone_can_use_index, len(phone_data)):
+                    q = phone_can_use_index
+                    for ph_number_index in range(q, len(phone_data)):
                         driver.get(link)
                         print("当前查询手机号为{}".format(phone_data[ph_number_index]))
+                        time.sleep(wait_time)
                         driver.find_element_by_xpath('//*[@id="app"]/div[1]/div[2]/div[1]/input').send_keys(
                             phone_data[ph_number_index])
                         driver.find_element_by_xpath('//*[@id="app"]/div[1]/div[2]/div[3]/input').send_keys(
@@ -75,21 +78,28 @@ for index, link in enumerate(link_data):
                         time.sleep(wait_time)
                         # 点击开卡
                         driver.find_element_by_xpath('//*[@id="join-btn"]').click()
+                        # 点击开卡后页面延迟较为严重
                         time.sleep(wait_time)
                         try:
                             tem = driver.find_element_by_xpath('/html/body/div[1]/div[1]/p[1]')
                             if tem.text == "开卡失败":
+                                phone_can_use_index +=1
                                 print("开卡失败，您已经是樊登读书好友")
                                 write_to_excel(phone_file_path, ph_number_index + 1, phone_write_col, "开卡失败您已经是樊登读书书友")
-                        except Exception:
+                        except Exception as e:
+                            print(e)
+                            time.sleep(wait_time)
                             try:
-                                print("开卡成功")
-                                write_to_excel(link_file_path, index + 1, link_write_col, "成功领取")
-                                write_to_excel(phone_file_path, phone_can_use_index + 1, phone_write_col, "开卡成功")
-                                has_phone = True
-                                flag = False
-                            except Exception:
-                                print("e")
+                                if driver.find_element_by_xpath('/html/body/div[1]/div/h1').text == "领取成功！":
+                                    print("开卡成功")
+                                    write_to_excel(link_file_path, index + 1, link_write_col, "领取成功")
+                                    write_to_excel(phone_file_path, phone_can_use_index + 1, phone_write_col, "领取成功")
+                                    phone_can_use_index += 1
+                                    has_phone = True
+                                    flag = False
+                                    break
+                            except Exception as e:
+                                print(e)
                     print("当前手机号已全被使用")
                     has_phone = False
                     flag = False
