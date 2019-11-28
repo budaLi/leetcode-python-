@@ -2,12 +2,16 @@
 # @Author  : Libuda
 # @FileName: spider.py
 # @Software: PyCharm
+
+# 仍然存在Bug  换个思路
 import xlrd
 from xlutils.copy import copy
 from selenium import webdriver
 import time
-driver = webdriver.Chrome(r'C:\Users\lenovo\PycharmProjects\Spider\chromedriver.exe')
 
+wait_time = 3  # 各个阶段等待时间
+
+driver = webdriver.Chrome(r'C:\Users\lenovo\PycharmProjects\Spider\chromedriver.exe')
 link_file_path = r"C:\Users\lenovo\PycharmProjects\leetcode-python-\樊登读书脚本\link.xls"
 phone_file_path = r'C:\Users\lenovo\PycharmProjects\leetcode-python-\樊登读书脚本\phone_number.xls'
 
@@ -20,7 +24,7 @@ phone_excel = xlrd.open_workbook(phone_file_path)
 phoe_tables = phone_excel.sheet_by_index(0)
 phone_get_col = 1
 phone_write_col = 2
-wait_time = 3
+
 
 phone_can_use_index = 0
 
@@ -51,7 +55,7 @@ for index, link in enumerate(link_data):
             text = driver.find_element_by_xpath("/html/body/div[1]/div[1]/p[1]")
             if text.text == "开卡失败":
                 write_to_excel(link_file_path, index + 1, link_write_col, "已使用")
-                print("该卡已经被使用")
+                print("该卡已经被使用..{}".format(link))
                 continue
             else:
                 # print(text.text)
@@ -60,7 +64,7 @@ for index, link in enumerate(link_data):
             time.sleep(wait_time)
             # print(e)
         try:
-            print("该卡可以使用，正在查询可用手机号。。")
+            print("该卡可以使用:{}，正在查询可用手机号。。".format(link))
             text = driver.find_element_by_xpath('//*[@id="app"]/div[1]/div[1]/p')
             if text.text == "欢迎加入樊登读书，即刻获得":
                 flag = True
@@ -87,7 +91,7 @@ for index, link in enumerate(link_data):
                                 print("开卡失败，您已经是樊登读书好友")
                                 write_to_excel(phone_file_path, ph_number_index + 1, phone_write_col, "开卡失败您已经是樊登读书书友")
                         except Exception as e:
-                            print(e)
+                            # print(e)
                             time.sleep(wait_time)
                             try:
                                 if driver.find_element_by_xpath('/html/body/div[1]/div/h1').text == "领取成功！":
@@ -97,11 +101,19 @@ for index, link in enumerate(link_data):
                                     phone_can_use_index += 1
                                     has_phone = True
                                     flag = False
-                                    break
+                                    continue
                             except Exception as e:
-                                print(e)
+                                print("此电话号码有问题")
+                                # write_to_excel(link_file_path, index + 1, link_write_col, "此电话号码有问题")
+                                write_to_excel(phone_file_path, phone_can_use_index + 1, phone_write_col, "此电话号码有问题")
+                                phone_can_use_index += 1
+                                has_phone = True
+                                flag = False
+                                continue
+                                # print(e)
                     print("当前手机号已全被使用")
-                    has_phone = False
+                    if phone_can_use_index == len(phone_data):
+                        has_phone = False
                     flag = False
 
             else:
