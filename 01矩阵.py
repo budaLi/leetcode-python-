@@ -29,7 +29,47 @@ class Solution(object):     #有待思考 BFS  广度优先算法
                         matrix[i][j]=min(tem)+1
         return matrix
 
-S=Solution()
-res=S.updateMatrix([[1, 0, 1, 1, 0, 0, 1, 0, 0, 1], [0, 1, 1, 0, 1, 0, 1, 0, 1, 1], [0, 0, 1, 0, 1, 0, 0, 1, 0, 0], [1, 0, 1, 0, 1, 1, 1, 1, 1, 1], [0, 1, 0, 1, 1, 0, 0, 0, 0, 1], [0, 0, 1, 0, 1, 1, 1, 0, 1, 0], [0, 1, 0, 1, 0, 1, 0, 0, 1, 1], [1, 0, 0, 0, 1, 1, 1, 1, 0, 1], [1, 1, 1, 1, 1, 1, 1, 0, 1, 0], [1, 1, 1, 1, 0, 1, 0, 0, 1, 1]])
-for one in res:
-    print(one)
+
+# S=Solution()
+# res=S.updateMatrix([[1, 0, 1, 1, 0, 0, 1, 0, 0, 1], [0, 1, 1, 0, 1, 0, 1, 0, 1, 1], [0, 0, 1, 0, 1, 0, 0, 1, 0, 0], [1, 0, 1, 0, 1, 1, 1, 1, 1, 1], [0, 1, 0, 1, 1, 0, 0, 0, 0, 1], [0, 0, 1, 0, 1, 1, 1, 0, 1, 0], [0, 1, 0, 1, 0, 1, 0, 0, 1, 1], [1, 0, 0, 0, 1, 1, 1, 1, 0, 1], [1, 1, 1, 1, 1, 1, 1, 0, 1, 0], [1, 1, 1, 1, 0, 1, 0, 0, 1, 1]])
+# for one in res:
+#     print(one)
+
+s = """{
+"state":{
+"code":0,
+"errorMessage":"string"
+},
+"data":[
+{
+"Guid":"string",
+"Name":"string",
+"ApeType":"string",
+"Model":"string",
+"Server":"string",
+"Place":"string",
+"MonitorDirection":"string",
+"Longitude":"string",
+"Latitude":"string",
+"SpaceZ":"string",
+"PitchAngle":"string",
+"DeflectionAngle":"string",
+"MapState":"string",
+"NearestSightDistance":"string",
+"FarthestSightDistance":"string",
+"ViewAngleY":"string",
+"WidthSpanRate":"string",
+"Description":"string",
+"ProductionNumber":"string",
+"Manufacturer":"string",
+"Remark":"string",
+"Functionary":"string"
+}
+]
+}"""
+
+s = eval(s)
+tem = s['state']
+
+for key, value in tem.items():
+    print(key)

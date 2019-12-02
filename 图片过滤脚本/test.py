@@ -49,9 +49,10 @@ delete_file = ['cs_1106_20191106_140956131_1.jpg', 'xs-1_1015_20191016_114122066
                'cs_1106_20191107_095117330_1.jpg', 'xs-1_1015_20191016_141324816_3.jpg',
                'yf_1010_20191011_092612429_1.jpg', 'yf_1010_20191010_150334441_1.jpg']
 delete_path = r'C:\Users\lenovo\Desktop\ssh'
-res_path = "image.txt"
+res_path = r"C:\Users\lenovo\PycharmProjects\leetcode-python-\图片过滤脚本\image.txt"
 with open(res_path, 'w') as  f:
     for root, dirs, files in os.walk(delete_path):
+        print(files)
         for file in files:
             f.write(os.path.join(root, file) + '\n')
             # for one in dirs:
