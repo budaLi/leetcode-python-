@@ -278,6 +278,7 @@ def main():
             register(phone_data)
             driver.close()
             driver.switch_to.window(windows)
+            crawl_count += 1
 
         time.sleep(60)
 
