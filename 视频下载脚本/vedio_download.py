@@ -6,7 +6,6 @@ import sys
 from contextlib import closing  # 把任意对象变为上下文管理 并支持with语句
 import requests
 from tqdm import tqdm
-import time
 
 # 禁用安全请求警告
 requests.packages.urllib3.disable_warnings()
