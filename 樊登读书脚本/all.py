@@ -66,20 +66,25 @@ def get_phone_number(star_date, end_date):
     flag = True
 
     while flag:
+        break_set = set()
         time.sleep(wait_time)  # 时间间隔
         for i in range(1, 11):
-            print(i)
             res_dic = {}
             try:
                 res_dic['phone_number'] = driver.find_element_by_xpath(num_tem.format(i)).text
                 res_dic['date'] = datetime.datetime.strptime(driver.find_element_by_xpath(date_tem.format(i)).text,
                                                              "%Y.%m.%d %H:%M:%S")
-
+                if res_dic['phone_number'] not in break_set:
+                    break_set.add(res_dic['phone_number'])
+                else:
+                    flag = False
+                    break
                 if res_dic['date'] < star_date or res_dic['date'] > end_date:
                     flag = False
                     break
                 else:
-                    print("正在获取手机号")
+                    pass
+                    # print("已获取手机号：{}".format(res_dic['phone_number']))
 
                 result.append([res_dic['phone_number'], res_dic['date']])
             except Exception as e :
@@ -87,30 +92,27 @@ def get_phone_number(star_date, end_date):
                 break
         try:
             #这儿要处理
-            driver.find_element_by_css_selector('.ant-pagination-next').click()
-            print("点击")
+            driver.find_element_by_css_selector('.ant-pagination-next > a').click()
         except Exception as e:
-            print(e)
             try:
                 driver.find_element_by_xpath(
                     '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[12]').click()
             except Exception as e:
-                print(e)
                 try:
                     driver.find_element_by_xpath(
                         '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[10]').click()
                 except Exception as e:
-                    print(e)
                     flag = False
                     print("翻页结束,等待页数回滚中。。。")
-    # pre_flag = True
-    # while pre_flag:
-    #     try:
-    #         driver.find_element_by_css_selector('.ant-pagination-prev').click()
-    #     except Exception as e:
-    #         pre_flag = False
-    #         print("回滚结束")
-    #
+    pre_flag = True
+    while pre_flag:
+        try:
+            driver.find_element_by_css_selector('.ant-pagination-prev').click()
+            time.sleep(wait_time)
+        except Exception as e:
+            pre_flag = False
+            print("回滚结束")
+
     print("已爬取到新手机号：{}个".format(len(result)))
     return result
 
@@ -121,14 +123,12 @@ def register(phone_data):
     phoe_tables = phone_excel.sheet_by_index(0)
     phone_can_use_index = phoe_tables.nrows
     link_data = [get_keywords_data(link_tables, i, link_get_col) for i in range(link_can_use_index, link_tables.nrows)]
-    # phone_data = [str(int(get_keywords_data(phoe_tables, i, phone_get_col))) for i in range(1, phoe_tables.nrows)]
-    # phone_data = [phone[0] for phone in phone_datas]
     length = len(phone_data)
     phone_index = 0
     has_phone = True
     for index, link in enumerate(link_data):
-        if ding_num <= 5:
-            print("当前链接条数不足 请及时补充！")
+        if len(link_data) <= ding_num:
+            print("当前链接条数为：{}，当前链接条数不足 请及时补充！".format(len(link_data)))
             send.send_test(user_list, ding_num)
         ding_num-=1
         if has_phone:
@@ -207,7 +207,7 @@ def register(phone_data):
                                         link_can_use_index += 1
                                         phone_can_use_index += 1
                                         has_phone = True
-                                        continue
+                                        break
                                 except Exception as e:
                                     print("此电话号码有问题")
                                     # write_to_excel(link_file_path, index + 1, link_write_col, "此电话号码有问题")
