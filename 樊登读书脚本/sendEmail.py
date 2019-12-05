@@ -46,5 +46,5 @@ class SendEmail:
 
 if __name__ == "__main__":
     send = SendEmail()
-    user_list = ['1364826576@qq.com']
+    user_list = ['1364826576@qq.com', '1410000000@qq.com']
     send.send_test(user_list, "4")

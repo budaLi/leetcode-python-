@@ -10,7 +10,7 @@ import datetime
 from sendEmail import SendEmail
 
 send = SendEmail()
-user_list = ['1364826576@qq.com']
+user_list = ['1364826576@qq.com', '1410000000@qq.com']
 
 phone_num = 13281890000
 wait_time = 3  # 各个阶段等待时间
@@ -64,9 +64,9 @@ def get_phone_number(star_date, end_date):
     num_tem = '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/div/div/div[1]/div/table/tbody/tr[{}]/td[4]'
     date_tem = '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/div/div/div[1]/div/table/tbody/tr[{}]/td[6]'
     flag = True
-
+    break_set = set()
     while flag:
-        break_set = set()
+
         time.sleep(wait_time)  # 时间间隔
         for i in range(1, 11):
             res_dic = {}
@@ -107,6 +107,8 @@ def get_phone_number(star_date, end_date):
     pre_flag = True
     while pre_flag:
         try:
+            for i in range(10):
+                break_set.pop()
             driver.find_element_by_css_selector('.ant-pagination-prev').click()
             time.sleep(wait_time)
         except Exception as e:
@@ -237,6 +239,8 @@ def register(phone_data):
                     continue
             except Exception as e:
                 pass
+    # 发邮件
+    send.send_test(user_list, 0)
     print("链接已经全部用完 请及时补充！")
                 # print(e)
 
