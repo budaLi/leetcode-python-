@@ -8,7 +8,7 @@ from selenium import webdriver
 import time
 import datetime
 from sendEmail import SendEmail
-import copy as deepcopy
+from copy import deepcopy
 
 send = SendEmail()
 user_list = ['1364826576@qq.com']
@@ -43,6 +43,7 @@ def get_keywords_data(tables, row, col):
     actual_data = tables.cell_value(row, col)
     return actual_data
 
+
 def write_to_excel(file_path, row, col, value):
     work_book = xlrd.open_workbook(file_path, formatting_info=False)
     write_to_work = copy(work_book)
@@ -61,71 +62,55 @@ def get_phone_number(star_date, end_date):
     except Exception as e:
         pass
 
-    # all_data_len = driver.find_element_by_xpath('//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[1]').text.split("条")[0].split("共")[1]
-    # print("总共 {} 条数据".format(all_data_len))
-    num_tem = '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/div/div/div[1]/div/table/tbody/tr[{}]/td[4]'
-    date_tem = '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/div/div/div[1]/div/table/tbody/tr[{}]/td[6]'
+    # num_tem = '//*[@id="app"]/div/div[2]/div[2]/div[3]/div[3]/div[2]/div[1]/div/div[2]/table[2]/tr[{}]/td[4]/div/div/div/div'
+    # date_tem = '//*[@id="app"]/div/div[2]/div[2]/div[3]/div[3]/div[2]/div[1]/div/div[1]/table[2]/tr[{}]/td[7]'
+
+
+
     flag = True
+    phone_lis = []
+    data_lis = []
     while flag:
-
-        time.sleep(wait_time)  # 时间间隔
-        for i in range(1, 11):
-            res_dic = {}
-            try:
-                res_dic['phone_number'] = driver.find_element_by_xpath(num_tem.format(i)).text
-                res_dic['date'] = datetime.datetime.strptime(driver.find_element_by_xpath(date_tem.format(i)).text,
-                                                             "%Y.%m.%d %H:%M:%S")
-
-                if res_dic['date'] < star_date or res_dic['date'] > end_date:
-                    flag = False
-                    break
-                else:
-                    if res_dic['phone_number'] not in totle_break_set:
-                        totle_break_set.add(res_dic['phone_number'])
-                        # print("已获取手机号：{}".format(res_dic['phone_number']))
-                    else:
-                        flag = False
-                        break
-                        # pass
-
-                result.append([res_dic['phone_number'], res_dic['date']])
-            except Exception as e :
-                # print(e)
-                flag = False
-                break
         try:
-            #这儿要处理
-            driver.find_element_by_css_selector('.ant-pagination-next > a').click()
+            phones = driver.find_elements_by_css_selector(".phone")
+            for one in phones:
+                phone_lis.append(one.text)
         except Exception as e:
             print(e)
-            try:
-                driver.find_element_by_xpath(
-                    '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[12]').click()
-            except Exception as e:
-                print(e)
-                try:
-                    driver.find_element_by_xpath(
-                        '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[10]').click()
-                except Exception as e:
-                    print(e)
-                    flag = False
+        try:
+            dates = driver.find_elements_by_css_selector(".createTime")
+            for one in dates:
+                data_lis.append(one.text)
+        except Exception as e:
+            print(e)
 
-    tem_break = deepcopy.deepcopy(totle_break_set)
+        print(phone_lis)
+        print(data_lis)
+
+        for i in range(len(phone_lis)):
+            result.append([data_lis[i], phone_lis[i]])
+        print(result)
+        try:
+            # 这儿要处理
+            driver.find_element_by_css_selector('.m-item.previous.next').click()
+        except Exception as e:
+            print(e)
+            pass
+
     print("已爬取到新手机号：{}个".format(len(result)))
     print("翻页结束,等待页数回滚中。。。")
+    tem_break = deepcopy(totle_break_set)
     pre_flag = True
     while pre_flag:
         try:
-            for i in range(10):
+            for i in range(20):
                 tem_break.pop()
-            driver.find_element_by_xpath(
-                '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[2]').click()
+            driver.find_element_by_css_selector('.m-item.previous').click()
             time.sleep(wait_time)
         except Exception as e:
             # print(e)
             pre_flag = False
             print("回滚结束")
-
 
     return result
 
@@ -146,7 +131,7 @@ def register(phone_data):
         if length <= 0:
             print("当前手机号已全被使用")
             break
-        ding_num-=1
+        ding_num -= 1
         if has_phone:
             driver.get(link)
             time.sleep(wait_time)
@@ -155,7 +140,7 @@ def register(phone_data):
                 if text.text == "开卡失败":
                     write_to_excel(link_file_path, index + 1, link_write_col, "已使用")
                     print("该卡已经被使用..{}".format(link))
-                    link_can_use_index+=1
+                    link_can_use_index += 1
                     continue
                 else:
                     write_to_excel(link_file_path, index + 1, link_write_col, "已使用")
@@ -174,7 +159,7 @@ def register(phone_data):
                         for ph_number_index in range(phone_index, len(phone_data)):
                             driver.get(link)
                             length -= 1
-                            phone_index+=1
+                            phone_index += 1
                             print("当前查询手机号索引为{}，号码为{}".format(ph_number_index, phone_data[ph_number_index][0]))
                             time.sleep(wait_time)
                             driver.find_element_by_xpath('//*[@id="app"]/div[1]/div[2]/div[1]/input').send_keys(
@@ -190,7 +175,6 @@ def register(phone_data):
                             try:
                                 tem = driver.find_element_by_xpath('/html/body/div[1]/div[1]/p[1]')
                                 if tem.text == "开卡失败":
-
                                     print("开卡失败，您已经是樊登读书好友")
 
                                     # 日期
@@ -252,7 +236,7 @@ def register(phone_data):
     # 发邮件
     send.send_test(user_list, 0)
     print("链接已经全部用完 请及时补充！")
-                # print(e)
+    # print(e)
 
 
 def main():
@@ -267,10 +251,10 @@ def main():
             now_time = time.time()
             # end_date = now_time- time_jiange
             times = datetime.datetime.fromtimestamp(now_time)
-            #time_str = "{}-{}-{} {}:{}:{}".format(times.year, times.month, times.day - 1, 0, 0, 0)
+            # time_str = "{}-{}-{} {}:{}:{}".format(times.year, times.month, times.day - 1, 0, 0, 0)
             print("第1次爬取")
             # driver.get("https://e.douyin.com/site/manage-center/user-manage")
-            driver.get("https://e.douyin.com/site/")
+            driver.get("https://feiyu.oceanengine.com/feiyu/login")
 
             print("请您进行登录及手动进行所有的筛选")
             yes = input("您是否已确认进行爬取")
@@ -313,5 +297,5 @@ def main():
 
 
 if __name__ == '__main__':
-    #主函数
+    # 主函数
     main()
