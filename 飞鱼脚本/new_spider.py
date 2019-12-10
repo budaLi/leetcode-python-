@@ -60,6 +60,7 @@ def get_phone_number(star_date, end_date):
         driver.find_element_by_xpath(
             '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[2]/div[4]/span[2]/span/span').click()
     except Exception as e:
+        print(e)
         pass
 
     # num_tem = '//*[@id="app"]/div/div[2]/div[2]/div[3]/div[3]/div[2]/div[1]/div/div[2]/table[2]/tr[{}]/td[4]/div/div/div/div'
@@ -71,6 +72,7 @@ def get_phone_number(star_date, end_date):
     phone_lis = []
     data_lis = []
     while flag:
+        time.sleep(5)
         try:
             phones = driver.find_elements_by_css_selector(".phone")
             for one in phones:
