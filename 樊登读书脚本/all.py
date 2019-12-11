@@ -19,6 +19,21 @@ time_jiange = 30  # 时间间隔 隔多长时间执行脚本一次
 start_date = datetime.datetime.strptime("2019-12-1 00:00:00", "%Y-%m-%d %H:%M:%S")  # 起始时间
 end_date = datetime.datetime.strptime("2019-12-7 18:00:00", "%Y-%m-%d %H:%M:%S")  # 结束时间
 ding_num = 5  # 链接条数报警阈值
+# 更换头部
+options = webdriver.ChromeOptions()
+mobile_emulation = {
+    "deviceMetrics": {"width": 414, "height": 736, "pixelRatio": 3.0},
+    "userAgent": "mozilla/5.0 (linux; u; android 4.1.2; zh-cn; mi-one plus build/jzo54k) applewebkit/534.30 (khtml, like gecko) version/4.0 mobile safari/534.30 micromessenger/5.0.1.352"}
+
+# 设置图片不加载
+prefs = {
+    'profile.default_content_setting_values': {
+        'images': 2
+    }
+}
+
+options.add_experimental_option("mobileEmulation", mobile_emulation)
+options.add_experimental_option('prefs', prefs)
 
 driver = webdriver.Chrome(r"C:\Users\lenovo\PycharmProjects\Spider\chromedriver.exe")
 link_file_path = r"C:\Users\lenovo\PycharmProjects\leetcode-python-\樊登读书脚本\link.xls"
@@ -168,6 +183,7 @@ def register(phone_data):
             try:
                 print("该卡可以使用:{}，正在查询可用手机号。。".format(link))
                 text = driver.find_element_by_xpath('//*[@id="app"]/div[1]/div[1]/p')
+
                 if text.text == "欢迎加入樊登读书，即刻获得":
                     flag = True
                     while flag:
@@ -272,7 +288,7 @@ def main():
             # driver.get("https://e.douyin.com/site/manage-center/user-manage")
             driver.get("https://e.douyin.com/site/")
 
-            print("请您进行登录及手动进行所有的筛选")
+            print("请您进行登录及手动进行所有的筛选并更改浏览器设置！")
             yes = input("您是否已确认进行爬取")
             # cookie= driver.get_cookies()
             # driver.get("https://e.douyin.com/site/manage-center/user-manage")
