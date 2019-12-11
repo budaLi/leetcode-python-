@@ -273,6 +273,8 @@ def register(phone_data):
 
 def main():
     crawl_count = 1
+    windows = ""
+    second_window = ''
     while 1:
 
         # time_str = datetime.datetime.strptime(time_str, "%Y-%m-%d %H:%M:%S")
@@ -280,15 +282,11 @@ def main():
         # # s="2019.12.02 13:56:20"
         # # print(datetime.datetime.strptime(s,"%Y.%m.%d %H:%M:%S")<times)
         if crawl_count == 1:
-            now_time = time.time()
-            # end_date = now_time- time_jiange
-            times = datetime.datetime.fromtimestamp(now_time)
-            #time_str = "{}-{}-{} {}:{}:{}".format(times.year, times.month, times.day - 1, 0, 0, 0)
             print("第1次爬取")
             # driver.get("https://e.douyin.com/site/manage-center/user-manage")
             driver.get("https://e.douyin.com/site/")
 
-            print("请您进行登录及手动进行所有的筛选并更改浏览器设置！")
+            print("请您进行登录及手动进行所有的筛选")
             yes = input("您是否已确认进行爬取")
             # cookie= driver.get_cookies()
             # driver.get("https://e.douyin.com/site/manage-center/user-manage")
@@ -300,28 +298,19 @@ def main():
             for wins in driver.window_handles:
                 if wins != windows:
                     driver.switch_to.window(wins)
+            second_window = driver.current_window_handle
+            y = input("是否设置完毕")
             # 测试
             # phone_data = [[phone, 0] for phone in [13945868092, 15169722520]]
             register(phone_data)
-            driver.close()
             driver.switch_to.window(windows)
 
             crawl_count += 1
         else:
             print("第{}次爬取".format(crawl_count))
-            now_time = time.time() - time_jiange
-            times = datetime.datetime.fromtimestamp(now_time)
             phone_data = get_phone_number(start_date, end_date)
-            windows = driver.current_window_handle
-            js = 'window.open("https://www.baidu.com");'
-            driver.execute_script(js)
-            for wins in driver.window_handles:
-                if wins != windows:
-                    driver.switch_to.window(wins)
-            # 测试
-            # phone_data = [[phone,0] for phone in [15099123201,17621790591]]
+            driver.switch_to.window(second_window)
             register(phone_data)
-            driver.close()
             driver.switch_to.window(windows)
             crawl_count += 1
 
