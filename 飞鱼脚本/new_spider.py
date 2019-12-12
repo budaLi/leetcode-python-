@@ -7,17 +7,19 @@ from xlutils.copy import copy
 from selenium import webdriver
 import time
 import datetime
-from sendEmail import SendEmail
+from 飞鱼脚本.sendEmail import SendEmail
 from copy import deepcopy
+import requests
 
+url = "https://feiyu.oceanengine.com/feiyu/login"
 send = SendEmail()
 user_list = ['1364826576@qq.com']
 
 phone_num = 13281890000
 wait_time = 3  # 各个阶段等待时间
 time_jiange = 30  # 时间间隔 隔多长时间执行脚本一次
-start_date = datetime.datetime.strptime("2019-12-1 00:00:00", "%Y-%m-%d %H:%M:%S")  # 起始时间
-end_date = datetime.datetime.strptime("2019-12-7 18:00:00", "%Y-%m-%d %H:%M:%S")  # 结束时间
+start_date = time.mktime(time.strptime("2019-12-1 18:00:00", "%Y-%m-%d %H:%M:%S"))  # 结束时间
+end_date = time.mktime(time.strptime("2019-12-12 18:00:00", "%Y-%m-%d %H:%M:%S"))  # 结束时间
 ding_num = 5  # 链接条数报警阈值
 
 driver = webdriver.Chrome(r"C:\Users\lenovo\PycharmProjects\Spider\chromedriver.exe")
@@ -52,50 +54,89 @@ def write_to_excel(file_path, row, col, value):
     write_to_work.save(file_path)
 
 
+def get_new_phone(start, end):
+    res = []
+    headers = {
+        "cookie": "ccid=ac428488c168899d07df951f7354ba55; msh=GqsdyEcveB1HjZLIZKT5ALDFoAE; sso_auth_status=26a7e62720484fd24d45830a4b543edb; sso_uid_tt=89b572982452ca2533fc5c49e4a3540e; toutiao_sso_user=4cd8bb9233af1784dbf3f269d15233d8; passport_auth_status=9f2216029d9ce53808046ea02135feff%2C7f9ddb5f3555a4e4db4cae3b62ed1213; sid_guard=3c3144f57c28219795bc821cf887fc79%7C1576146759%7C5184000%7CMon%2C+10-Feb-2020+10%3A32%3A39+GMT; uid_tt=e239ea11351745eb4404675817d217c5; sid_tt=3c3144f57c28219795bc821cf887fc79; sessionid=3c3144f57c28219795bc821cf887fc79; toutiao-crm-session=s%3Ab88ca4f2-1cca-11ea-adad-ac1f6b0ad100b88ca4f2-1cca-11ea-adad-ac1f6b0ad100sD3tpStsTyYsYE2aa56BtD22.jjnP%2F%2FLSX4oqXo%2FC15QML%2FFEvTN9OYGUoBHcVGkmgz0; gr_user_id=6892c2d6-d651-4a12-adc2-6c3b37e7c414; gr_session_id_9952092a9d995794=05a5816c-4d44-4447-8e5d-a813f5bd7f61; gr_cs1_05a5816c-4d44-4447-8e5d-a813f5bd7f61=advertiser_id%3A1645790969889795; gr_session_id_9952092a9d995794_05a5816c-4d44-4447-8e5d-a813f5bd7f61=true"}
+    base_url = "https://feiyu.oceanengine.com/crm/v2/api/clue/public/?_t=1576147755&page={}&page_size=20&clue_public_status=0&start_time={}&end_time={}"
+    i = 1
+    while True:
+        response = requests.get(base_url.format(i, start, end), headers=headers).json()
+        if response['data']:
+            i += 1
+            for one in response['data']:
+                # print(one['telphone'])
+                res.append(one['telphone'])
+        else:
+            break
+    return res
+
+
+
 def get_phone_number(star_date, end_date):
     print("当前已使用手机号：{}，使用数量：{}".format(totle_break_set, len(totle_break_set)))
     result = []
     # 搜索按钮
     try:
         driver.find_element_by_xpath(
-            '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[2]/div[4]/span[2]/span/span').click()
+            '//*[@id="app"]/div/div[2]/div[2]/div[3]/div[1]/div/div[2]/div[2]/div[3]').click()
     except Exception as e:
         print(e)
         pass
 
-    # num_tem = '//*[@id="app"]/div/div[2]/div[2]/div[3]/div[3]/div[2]/div[1]/div/div[2]/table[2]/tr[{}]/td[4]/div/div/div/div'
-    # date_tem = '//*[@id="app"]/div/div[2]/div[2]/div[3]/div[3]/div[2]/div[1]/div/div[1]/table[2]/tr[{}]/td[7]'
-
-
+    # num_tem = '//*[@id="app"]/div/div[2]/div[2]/div[3]/div[3]/div[2]/div[1]/div/div[2]/table[2]/tr[{}]/td[4]/div/div/div/div/div/span[1]'
+    # date_tem = '//*[@id="app"]/div/div[2]/div[2]/div[3]/div[3]/div[2]/div[1]/div/div[1]/table[2]/tr[{}]/td[7]/div/div/div/div'
+    #
+    # try:
+    #     for i in range(10):
+    #         time.sleep(2)
+    #         phone = driver.find_element_by_xpath(num_tem.format(i))
+    #         date = driver.find_element_by_xpath(date_tem.format(i))
+    #         print(phone,date)
+    # except Exception as e :
+    #     print(e,'第一次获取数据异常')
 
     flag = True
     phone_lis = []
     data_lis = []
     while flag:
-        time.sleep(5)
         try:
-            phones = driver.find_elements_by_css_selector(".phone")
+            time.sleep(5)
+            phones = driver.find_elements_by_css_selector("span.phone")
+            print("len", len(phones))
             for one in phones:
-                phone_lis.append(one.text)
+                print("text", one.text)
+                if one.text != "":
+                    if one.text not in totle_break_set:
+                        phone_lis.append(one.text)
+                        totle_break_set.add(one.text)
+                        data_lis.append("time")
+                    else:
+                        flag = False
         except Exception as e:
-            print(e)
-        try:
-            dates = driver.find_elements_by_css_selector(".createTime")
-            for one in dates:
-                data_lis.append(one.text)
-        except Exception as e:
-            print(e)
+            print("phone", e)
+        # try:
+        #     dates = driver.find_elements_by_css_selector(".createTime")
+        #     for one in dates:
+        #         if one.text!="":
+        #             # print("time",one.text)
+        #             data_lis.append(one.text)
+        # except Exception as e:
+        #     print("date",e)
 
+        if len(data_lis) < len(phone_lis):
+            for i in range(len(phone_lis) - len(data_lis)):
+                data_lis.append(time.time())
         print(phone_lis)
         print(data_lis)
 
         for i in range(len(phone_lis)):
             result.append([data_lis[i], phone_lis[i]])
-        print(result)
         try:
             # 这儿要处理
             driver.find_element_by_css_selector('.m-item.previous.next').click()
         except Exception as e:
+            flag = False
             print(e)
             pass
 
@@ -115,7 +156,6 @@ def get_phone_number(star_date, end_date):
             print("回滚结束")
 
     return result
-
 
 def register(phone_data):
     global phone_can_use_index, link_can_use_index, ding_num
@@ -155,6 +195,7 @@ def register(phone_data):
             try:
                 print("该卡可以使用:{}，正在查询可用手机号。。".format(link))
                 text = driver.find_element_by_xpath('//*[@id="app"]/div[1]/div[1]/p')
+
                 if text.text == "欢迎加入樊登读书，即刻获得":
                     flag = True
                     while flag:
@@ -177,6 +218,7 @@ def register(phone_data):
                             try:
                                 tem = driver.find_element_by_xpath('/html/body/div[1]/div[1]/p[1]')
                                 if tem.text == "开卡失败":
+
                                     print("开卡失败，您已经是樊登读书好友")
 
                                     # 日期
@@ -243,6 +285,8 @@ def register(phone_data):
 
 def main():
     crawl_count = 1
+    windows = ""
+    second_window = ''
     while 1:
 
         # time_str = datetime.datetime.strptime(time_str, "%Y-%m-%d %H:%M:%S")
@@ -250,49 +294,38 @@ def main():
         # # s="2019.12.02 13:56:20"
         # # print(datetime.datetime.strptime(s,"%Y.%m.%d %H:%M:%S")<times)
         if crawl_count == 1:
-            now_time = time.time()
-            # end_date = now_time- time_jiange
-            times = datetime.datetime.fromtimestamp(now_time)
-            # time_str = "{}-{}-{} {}:{}:{}".format(times.year, times.month, times.day - 1, 0, 0, 0)
             print("第1次爬取")
             # driver.get("https://e.douyin.com/site/manage-center/user-manage")
-            driver.get("https://feiyu.oceanengine.com/feiyu/login")
+            # driver.get(url)
 
-            print("请您进行登录及手动进行所有的筛选")
-            yes = input("您是否已确认进行爬取")
+            # print("请您进行登录及手动进行所有的筛选")
+            # yes = input("您是否已确认进行爬取")
             # cookie= driver.get_cookies()
             # driver.get("https://e.douyin.com/site/manage-center/user-manage")
-            phone_data = get_phone_number(start_date, end_date)
+            # phone_data = get_new_phone(start_date, end_date)
             # print([phone for phone in phone_data[0]])
-            windows = driver.current_window_handle
-            js = 'window.open("https://www.baidu.com");'
-            driver.execute_script(js)
-            for wins in driver.window_handles:
-                if wins != windows:
-                    driver.switch_to.window(wins)
+            # windows = driver.current_window_handle
+            # js = 'window.open("https://www.baidu.com");'
+            # driver.execute_script(js)
+            # for wins in driver.window_handles:
+            #     if wins != windows:
+            #         driver.switch_to.window(wins)
+            # second_window = driver.current_window_handle
+            # y = input("是否设置完毕")
             # 测试
-            # phone_data = [[phone, 0] for phone in [13945868092, 15169722520]]
+            phone_data = get_new_phone(start_date, end_date)
+            print("o", phone_data)
             register(phone_data)
-            driver.close()
             driver.switch_to.window(windows)
 
             crawl_count += 1
         else:
             print("第{}次爬取".format(crawl_count))
-            now_time = time.time() - time_jiange
-            times = datetime.datetime.fromtimestamp(now_time)
-            phone_data = get_phone_number(start_date, end_date)
-            windows = driver.current_window_handle
-            js = 'window.open("https://www.baidu.com");'
-            driver.execute_script(js)
-            for wins in driver.window_handles:
-                if wins != windows:
-                    driver.switch_to.window(wins)
-            # 测试
-            # phone_data = [[phone,0] for phone in [15099123201,17621790591]]
+            times = int(time.time())
+            phone_data = get_phone_number(end_date, times)
+            # driver.switch_to.window(second_window)
             register(phone_data)
-            driver.close()
-            driver.switch_to.window(windows)
+            # driver.switch_to.window(windows)
             crawl_count += 1
 
         time.sleep(time_jiange)
@@ -301,3 +334,4 @@ def main():
 if __name__ == '__main__':
     # 主函数
     main()
+    # get_new_phone_number(1,1)
