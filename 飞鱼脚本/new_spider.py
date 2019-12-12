@@ -69,6 +69,7 @@ def get_new_phone(start, end):
                 res.append(one['telphone'])
         else:
             break
+    print("新爬取手机号{}个".format(len(res)))
     return res
 
 
@@ -322,7 +323,8 @@ def main():
         else:
             print("第{}次爬取".format(crawl_count))
             times = int(time.time())
-            phone_data = get_phone_number(end_date, times)
+            phone_data = get_new_phone(end_date, times)
+            print(phone_data)
             # driver.switch_to.window(second_window)
             register(phone_data)
             # driver.switch_to.window(windows)
