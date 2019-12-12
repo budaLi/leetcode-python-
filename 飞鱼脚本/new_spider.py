@@ -6,11 +6,11 @@ import xlrd
 from xlutils.copy import copy
 from selenium import webdriver
 import time
-import datetime
 from 飞鱼脚本.sendEmail import SendEmail
 from copy import deepcopy
 import requests
 
+user_agent = "mozilla/5.0 (linux; u; android 4.1.2; zh-cn; mi-one plus build/jzo54k) applewebkit/534.30 (khtml, like gecko) version/4.0 mobile safari/534.30 micromessenger/5.0.1.352"
 url = "https://feiyu.oceanengine.com/feiyu/login"
 send = SendEmail()
 user_list = ['1364826576@qq.com']
@@ -18,7 +18,7 @@ user_list = ['1364826576@qq.com']
 phone_num = 13281890000
 wait_time = 3  # 各个阶段等待时间
 time_jiange = 30  # 时间间隔 隔多长时间执行脚本一次
-start_date = time.mktime(time.strptime("2019-12-1 18:00:00", "%Y-%m-%d %H:%M:%S"))  # 结束时间
+start_date = time.mktime(time.strptime("2019-11-1 18:00:00", "%Y-%m-%d %H:%M:%S"))  # 结束时间
 end_date = time.mktime(time.strptime("2019-12-12 18:00:00", "%Y-%m-%d %H:%M:%S"))  # 结束时间
 ding_num = 5  # 链接条数报警阈值
 
@@ -66,10 +66,15 @@ def get_new_phone(start, end):
             i += 1
             for one in response['data']:
                 # print(one['telphone'])
-                res.append(one['telphone'])
+                if one['telphone'] not in totle_break_set:
+                    timeStamp = int(one['create_time'])
+                    timeArray = time.localtime(timeStamp)
+                    otherStyleTime = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)
+                    res.append([one['telphone'], otherStyleTime])
         else:
             break
     print("新爬取手机号{}个".format(len(res)))
+    print("手机号:{}".format(res))
     return res
 
 
@@ -278,56 +283,27 @@ def register(phone_data):
             except Exception as e:
                 pass
 
-    # 发邮件
-    send.send_test(user_list, 0)
-    print("链接已经全部用完 请及时补充！")
-    # print(e)
+                # # 发邮件
+                # send.send_test(user_list, 0)
+                # print("链接已经全部用完 请及时补充！")
+                # # print(e)
 
 
 def main():
     crawl_count = 1
-    windows = ""
-    second_window = ''
     while 1:
-
-        # time_str = datetime.datetime.strptime(time_str, "%Y-%m-%d %H:%M:%S")
-        # print(times)
-        # # s="2019.12.02 13:56:20"
-        # # print(datetime.datetime.strptime(s,"%Y.%m.%d %H:%M:%S")<times)
         if crawl_count == 1:
             print("第1次爬取")
-            # driver.get("https://e.douyin.com/site/manage-center/user-manage")
-            # driver.get(url)
-
-            # print("请您进行登录及手动进行所有的筛选")
-            # yes = input("您是否已确认进行爬取")
-            # cookie= driver.get_cookies()
-            # driver.get("https://e.douyin.com/site/manage-center/user-manage")
-            # phone_data = get_new_phone(start_date, end_date)
-            # print([phone for phone in phone_data[0]])
-            # windows = driver.current_window_handle
-            # js = 'window.open("https://www.baidu.com");'
-            # driver.execute_script(js)
-            # for wins in driver.window_handles:
-            #     if wins != windows:
-            #         driver.switch_to.window(wins)
-            # second_window = driver.current_window_handle
-            # y = input("是否设置完毕")
             # 测试
             phone_data = get_new_phone(start_date, end_date)
-            print("o", phone_data)
+            y = input("是否设置完毕")
             register(phone_data)
-            driver.switch_to.window(windows)
-
             crawl_count += 1
         else:
             print("第{}次爬取".format(crawl_count))
             times = int(time.time())
             phone_data = get_new_phone(end_date, times)
-            print(phone_data)
-            # driver.switch_to.window(second_window)
             register(phone_data)
-            # driver.switch_to.window(windows)
             crawl_count += 1
 
         time.sleep(time_jiange)
