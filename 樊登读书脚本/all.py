@@ -3,21 +3,28 @@
 # @FileName: spider.py
 # @Software: PyCharm
 import xlrd
+import smtplib  # 发送邮件 连接邮件服务器
+from email.mime.text import MIMEText  # 构建邮件格式
 from xlutils.copy import copy
 from selenium import webdriver
 import time
 import datetime
-from sendEmail import SendEmail
+from configparser import ConfigParser
 import copy as deepcopy
 
-send = SendEmail()
+config_parser = ConfigParser()
+config_parser.read('config.cfg', encoding="utf-8-sig")
+config = config_parser['default']
+
+
+
 user_list = ['1364826576@qq.com']
 
 phone_num = 13281890000
 wait_time = 3  # 各个阶段等待时间
 time_jiange = 30  # 时间间隔 隔多长时间执行脚本一次
 start_date = datetime.datetime.strptime("2019-12-1 00:00:00", "%Y-%m-%d %H:%M:%S")  # 起始时间
-end_date = datetime.datetime.strptime("2019-12-7 18:00:00", "%Y-%m-%d %H:%M:%S")  # 结束时间
+end_date = datetime.datetime.strptime("2019-12-13 18:00:00", "%Y-%m-%d %H:%M:%S")  # 结束时间
 ding_num = 5  # 链接条数报警阈值
 # 更换头部
 options = webdriver.ChromeOptions()
@@ -35,9 +42,9 @@ prefs = {
 options.add_experimental_option("mobileEmulation", mobile_emulation)
 options.add_experimental_option('prefs', prefs)
 
-driver = webdriver.Chrome(r"C:\Users\lenovo\PycharmProjects\Spider\chromedriver.exe")
-link_file_path = r"C:\Users\lenovo\PycharmProjects\leetcode-python-\樊登读书脚本\link.xls"
-phone_file_path = r"C:\Users\lenovo\PycharmProjects\leetcode-python-\樊登读书脚本\phone_number.xls"
+driver = webdriver.Chrome(config['executable_path'])
+link_file_path = config['link_file_path']
+phone_file_path = config['phone_file_path']
 
 link_ecel = xlrd.open_workbook(link_file_path)
 link_tables = link_ecel.sheet_by_index(0)
@@ -49,9 +56,54 @@ phoe_tables = phone_excel.sheet_by_index(0)
 phone_get_col = 1
 phone_write_col = 2
 
-phone_can_use_index = 0
-link_can_use_index = 1
+phone_can_use_index = phoe_tables.get_rows()
+link_can_use_index = int(config['start_link_index'])
 totle_break_set = set()
+
+
+class SendEmail:
+    def __init__(self):
+        # 发件人
+        self.send_user = "李晋军" + "<1364826576@qq.com>"
+        # 登录名
+        self.login_user = '1364826576@qq.com'
+        # 这里要注意 不是qq密码 而是在邮箱里设置的发送邮箱的授权码
+        self.password = 'btfixrcdeguejfja'
+        # 发送邮件的服务器地址 qq为smtp.qq.com  163邮箱为smtp.163.com
+        self.email_host = 'smtp.qq.com'
+
+    def send_email(self, userlist, subject, content):
+        message = MIMEText(content, _subtype='plain', _charset='utf-8')
+        message['Subject'] = subject
+        message['From'] = self.send_user
+        message['To'] = ';'.join(userlist)  # 收件人列表以分号隔开
+        # 实例化邮件发送服务器
+        server = smtplib.SMTP()
+        # 连接qq邮箱服务器
+        server.connect(self.email_host)
+        # 登录服务器
+        server.login(self.login_user, self.password)
+        # 发送邮件  注意此处消息的格式应该用as_string()函数
+        server.sendmail(self.send_user, userlist, message.as_string())
+        # 关闭邮箱
+        server.close()
+
+    def send_test(self, userlist, counts):
+        """
+        发送测试结果
+        :param userlist:
+        :param passNumber:
+        :param failNumber:
+        :return:
+        """
+
+        sub = "链接剩余条数预警"
+        content = "链接剩余:{}条".format(counts)
+        self.send_email(userlist, sub, content)
+        return True
+
+
+send = SendEmail()
 
 
 def get_keywords_data(tables, row, col):
@@ -78,8 +130,10 @@ def get_phone_number(star_date, end_date):
 
     # all_data_len = driver.find_element_by_xpath('//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[1]').text.split("条")[0].split("共")[1]
     # print("总共 {} 条数据".format(all_data_len))
-    num_tem = '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/div/div/div[1]/div/table/tbody/tr[{}]/td[4]'
-    date_tem = '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/div/div/div[1]/div/table/tbody/tr[{}]/td[6]'
+    num_tem = '//*[@id="root"]/div/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/div/div/div[1]/div/table/tbody/tr[{}]/td[4]/div'
+    # num_tem = '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/div/div/div[1]/div/table/tbody/tr[{}]/td[4]'
+    date_tem = '//*[@id="root"]/div/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/div/div/div[1]/div/table/tbody/tr[{}]/td[6]/div'
+    # date_tem = '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/div/div/div[1]/div/table/tbody/tr[{}]/td[6]'
     flag = True
     while flag:
 
@@ -134,7 +188,7 @@ def get_phone_number(star_date, end_date):
             for i in range(10):
                 tem_break.pop()
             driver.find_element_by_xpath(
-                '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[2]').click()
+                '//*[@id="root"]/div/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[2]/a').click()
             time.sleep(wait_time)
         except Exception as e:
             # print(e)

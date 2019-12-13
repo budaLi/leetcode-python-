@@ -9,6 +9,12 @@ import time
 from 飞鱼脚本.sendEmail import SendEmail
 from copy import deepcopy
 import requests
+from configparser import ConfigParser
+
+config_parser = ConfigParser()
+config_parser.read('config.cfg', encoding="utf-8-sig")
+config = config_parser['default']
+
 
 user_agent = "mozilla/5.0 (linux; u; android 4.1.2; zh-cn; mi-one plus build/jzo54k) applewebkit/534.30 (khtml, like gecko) version/4.0 mobile safari/534.30 micromessenger/5.0.1.352"
 url = "https://feiyu.oceanengine.com/feiyu/login"
@@ -22,9 +28,9 @@ start_date = time.mktime(time.strptime("2019-11-1 18:00:00", "%Y-%m-%d %H:%M:%S"
 end_date = time.mktime(time.strptime("2019-12-12 18:00:00", "%Y-%m-%d %H:%M:%S"))  # 结束时间
 ding_num = 5  # 链接条数报警阈值
 
-driver = webdriver.Chrome(r"C:\Users\lenovo\PycharmProjects\Spider\chromedriver.exe")
-link_file_path = r"C:\Users\lenovo\PycharmProjects\leetcode-python-\樊登读书脚本\link.xls"
-phone_file_path = r"C:\Users\lenovo\PycharmProjects\leetcode-python-\樊登读书脚本\phone_number.xls"
+driver = webdriver.Chrome(config['executable_path'])
+link_file_path = config['link_file_path']
+phone_file_path = config['phone_file_path']
 
 link_ecel = xlrd.open_workbook(link_file_path)
 link_tables = link_ecel.sheet_by_index(0)
@@ -36,8 +42,8 @@ phoe_tables = phone_excel.sheet_by_index(0)
 phone_get_col = 1
 phone_write_col = 2
 
-phone_can_use_index = 0
-link_can_use_index = 1
+phone_can_use_index = phoe_tables.get_rows()
+link_can_use_index = int(config['start_link_index'])
 totle_break_set = set()
 
 
