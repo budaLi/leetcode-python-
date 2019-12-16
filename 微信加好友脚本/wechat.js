@@ -17,9 +17,13 @@ toast("脚本结束！！！");
 function main() {
     lis = createFile();
     //toast(lis);
+    var file = files.open("xxx.txt");
+    lis = file.readlines();
     for (var i = 0; i <= lis.length; i++) {
         if (lis[i] != " ") {
             toast(lis[i]);
+
+            //这是加好友的函数
             test(lis[i]);
         }
     }

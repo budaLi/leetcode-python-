@@ -3,13 +3,14 @@
 # @FileName: spider.py
 # @Software: PyCharm
 import xlrd
+import smtplib  # 发送邮件 连接邮件服务器
+from email.mime.text import MIMEText  # 构建邮件格式
 from xlutils.copy import copy
 from selenium import webdriver
 import time
-from 飞鱼脚本.sendEmail import SendEmail
-from copy import deepcopy
 import requests
 from configparser import ConfigParser
+import base64
 
 config_parser = ConfigParser()
 config_parser.read('config.cfg', encoding="utf-8-sig")
@@ -18,7 +19,7 @@ config = config_parser['default']
 
 user_agent = "mozilla/5.0 (linux; u; android 4.1.2; zh-cn; mi-one plus build/jzo54k) applewebkit/534.30 (khtml, like gecko) version/4.0 mobile safari/534.30 micromessenger/5.0.1.352"
 url = "https://feiyu.oceanengine.com/feiyu/login"
-send = SendEmail()
+
 user_list = ['1364826576@qq.com']
 
 phone_num = 13281890000
@@ -47,6 +48,49 @@ link_can_use_index = int(config['start_link_index'])
 totle_break_set = set()
 
 
+class SendEmail:
+    def __init__(self):
+        # 发件人
+        self.send_user = "李晋军" + "<1364826576@qq.com>"
+        # 登录名
+        self.login_user = '1364826576@qq.com'
+        # 这里要注意 不是qq密码 而是在邮箱里设置的发送邮箱的授权码
+        self.password = 'btfixrcdeguejfja'
+        # 发送邮件的服务器地址 qq为smtp.qq.com  163邮箱为smtp.163.com
+        self.email_host = 'smtp.qq.com'
+
+    def send_email(self, userlist, subject, content):
+        message = MIMEText(content, _subtype='plain', _charset='utf-8')
+        message['Subject'] = subject
+        message['From'] = self.send_user
+        message['To'] = ';'.join(userlist)  # 收件人列表以分号隔开
+        # 实例化邮件发送服务器
+        server = smtplib.SMTP()
+        # 连接qq邮箱服务器
+        server.connect(self.email_host)
+        # 登录服务器
+        server.login(self.login_user, self.password)
+        # 发送邮件  注意此处消息的格式应该用as_string()函数
+        server.sendmail(self.send_user, userlist, message.as_string())
+        # 关闭邮箱
+        server.close()
+
+    def send_test(self, userlist, counts):
+        """
+        发送测试结果
+        :param userlist:
+        :param passNumber:
+        :param failNumber:
+        :return:
+        """
+
+        sub = "链接剩余条数预警"
+        content = "链接剩余:{}条".format(counts)
+        self.send_email(userlist, sub, content)
+        return True
+
+
+send = SendEmail()
 def get_keywords_data(tables, row, col):
     actual_data = tables.cell_value(row, col)
     return actual_data
@@ -83,91 +127,6 @@ def get_new_phone(start, end):
     print("手机号:{}".format(res))
     return res
 
-
-
-def get_phone_number(star_date, end_date):
-    print("当前已使用手机号：{}，使用数量：{}".format(totle_break_set, len(totle_break_set)))
-    result = []
-    # 搜索按钮
-    try:
-        driver.find_element_by_xpath(
-            '//*[@id="app"]/div/div[2]/div[2]/div[3]/div[1]/div/div[2]/div[2]/div[3]').click()
-    except Exception as e:
-        print(e)
-        pass
-
-    # num_tem = '//*[@id="app"]/div/div[2]/div[2]/div[3]/div[3]/div[2]/div[1]/div/div[2]/table[2]/tr[{}]/td[4]/div/div/div/div/div/span[1]'
-    # date_tem = '//*[@id="app"]/div/div[2]/div[2]/div[3]/div[3]/div[2]/div[1]/div/div[1]/table[2]/tr[{}]/td[7]/div/div/div/div'
-    #
-    # try:
-    #     for i in range(10):
-    #         time.sleep(2)
-    #         phone = driver.find_element_by_xpath(num_tem.format(i))
-    #         date = driver.find_element_by_xpath(date_tem.format(i))
-    #         print(phone,date)
-    # except Exception as e :
-    #     print(e,'第一次获取数据异常')
-
-    flag = True
-    phone_lis = []
-    data_lis = []
-    while flag:
-        try:
-            time.sleep(5)
-            phones = driver.find_elements_by_css_selector("span.phone")
-            print("len", len(phones))
-            for one in phones:
-                print("text", one.text)
-                if one.text != "":
-                    if one.text not in totle_break_set:
-                        phone_lis.append(one.text)
-                        totle_break_set.add(one.text)
-                        data_lis.append("time")
-                    else:
-                        flag = False
-        except Exception as e:
-            print("phone", e)
-        # try:
-        #     dates = driver.find_elements_by_css_selector(".createTime")
-        #     for one in dates:
-        #         if one.text!="":
-        #             # print("time",one.text)
-        #             data_lis.append(one.text)
-        # except Exception as e:
-        #     print("date",e)
-
-        if len(data_lis) < len(phone_lis):
-            for i in range(len(phone_lis) - len(data_lis)):
-                data_lis.append(time.time())
-        print(phone_lis)
-        print(data_lis)
-
-        for i in range(len(phone_lis)):
-            result.append([data_lis[i], phone_lis[i]])
-        try:
-            # 这儿要处理
-            driver.find_element_by_css_selector('.m-item.previous.next').click()
-        except Exception as e:
-            flag = False
-            print(e)
-            pass
-
-    print("已爬取到新手机号：{}个".format(len(result)))
-    print("翻页结束,等待页数回滚中。。。")
-    tem_break = deepcopy(totle_break_set)
-    pre_flag = True
-    while pre_flag:
-        try:
-            for i in range(20):
-                tem_break.pop()
-            driver.find_element_by_css_selector('.m-item.previous').click()
-            time.sleep(wait_time)
-        except Exception as e:
-            # print(e)
-            pre_flag = False
-            print("回滚结束")
-
-    return result
 
 def register(phone_data):
     global phone_can_use_index, link_can_use_index, ding_num
@@ -289,11 +248,6 @@ def register(phone_data):
             except Exception as e:
                 pass
 
-                # # 发邮件
-                # send.send_test(user_list, 0)
-                # print("链接已经全部用完 请及时补充！")
-                # # print(e)
-
 
 def main():
     crawl_count = 1
@@ -316,6 +270,19 @@ def main():
 
 
 if __name__ == '__main__':
-    # 主函数
-    main()
-    # get_new_phone_number(1,1)
+
+    try:
+        code = config['code']
+        now_time = int(time.time())
+        s = str(base64.b64decode(code), "utf-8")
+        s = time.strptime(s, "%Y-%m-%d %H:%M:%S")
+        time_sti = int(time.mktime(s))  # 时间戳
+        if now_time > time_sti:
+            print("您的注册码期限已过,详情加我微信15735656005")
+            time.sleep(10)
+        else:
+            main()
+    except Exception as e:
+        # print(e)
+        print("您的注册码期限已过,详情加我微信15735656005")
+        time.sleep(10)
