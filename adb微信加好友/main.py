@@ -53,32 +53,15 @@ def adb_path():
 # https://www.cnblogs.com/yoyoketang/p/8988203.html
 class Adb:
     def __init__(self, port=None, device=None):
-        self._port = port
-        self._device = device
-
+        self._port = port  # 端口
+        self._device = device  # 设备号
         self._p = '' if (port is None) else '-P ' + str(port) + ' '
         self._s = '' if (device is None) else '-s ' + str(device) + ' '
-
-        # 指定端口 指定设备 组装adb命令
-        self._baseShell = adb_path() + 'adb ' + self._p + self._s
-        # 获取该文件(adbtools.py) 所在对文件夹路径
-        self._basePath = os.path.dirname(__file__)
-
-        # 缓存xml 不需要多此进行文件读取操作
-        self._xml = None
-        # 缓存当前查找到的nodes => type 列表 | value 字典
-        self._nodes = None
-
+        self._baseShell = adb_path() + 'adb ' + self._p + self._s  # 指定端口 指定设备 组装adb命令
+        self._basePath = os.path.dirname(__file__)  # 获取该文件(adbtools.py) 所在对文件夹路径
+        self._nodes = None  # 缓存当前查找到的nodes => type 列表 | value 字典
         self._x = None
         self._y = None
-
-    def printf(self):
-        pass
-        # print(self._port)
-        # print(self._device)
-        # print(self._p)
-        # print(self._s)
-        # print(self._baseShell)
 
     def adb_keyboard(self, event):
         """
@@ -124,120 +107,137 @@ class Adb:
         刷新获取node节点
         :return:
         """
-        if os.system(self._baseShell + 'shell uiautomator dump /sdcard/dump.xml'):
-            pass
-        if os.system(self._baseShell + 'pull /sdcard/dump.xml ' + self._basePath + '/data/dump.xml'):
-            pass
+        os.system(self._baseShell + 'shell uiautomator dump /sdcard/dump.xml')
+        os.system(self._baseShell + 'pull /sdcard/dump.xml ' + self._basePath + '/data/dump.xml')
 
-    def parse_xml(self):
+    def generate_nodes(self):
         """
-        解析xml文件获取node数据
-        :return:
-        """
-        self._xml = xmlParser.ElementTree(file=self._basePath + '/data/dump.xml')
-
-    def refresh_nodes(self):
-        """
-        刷新节点并解析xml数据
+        解析xml文件生成node数据
         :return:
         """
         self.adb_refresh()
-        self.parse_xml()
-
-    def find_nodes_by_xpath(self, xpath):
-        """
-        通过xpath寻找节点
-        :param xpath:
-        :return:
-        """
-        # 迭代器只能循环一次 故使用self._nodes作为列表保存节点
-        nodes = self._xml.iterfind(path=xpath)
-
-        self._nodes = []
+        xml = xmlParser.ElementTree(file=self._basePath + '/data/dump.xml')
+        nodes = xml.findall(path=".//node")  # 全部node节点
+        print(len(nodes))
+        tem_node = []
         for _node in nodes:
+            # print(_node.attrib)
             # elem.attrib 为字典
-            self._nodes.append(_node.attrib)
-        return self._nodes
+            tem_node.append(_node.attrib)
+        # print(len(tem_node))
+        self._nodes = tem_node
 
-    def find_nodes(self, txt, by: By, index=None):
-        _index = '' if (index is None) else '[' + str(index) + ']'
-        return self.find_nodes_by_xpath(xpath='.//node[@' + by.value + '="' + txt + '"]' + _index)
-
-    def find_nodes_by_text(self, text, index=None):
+    def find_nodes_by_resource_id(self, id):
         """
-        通过text寻找节点
-        :param text:
+        获取resource-id为id的所有元素的坐标列表
+        :param txt:
+        :return:
+        """
+        results = []
+        for node in self._nodes:
+            if node['resource-id'] == id:
+                results.append(node['bounds'])
+        return results
+
+    def find_node_by_resource_id(self, id, index=0):
+        """
+        :param txt:
+        :param by:
         :param index:
         :return:
         """
-        return self.find_nodes(text, By.text, index)
+        results = self.find_nodes_by_resource_id(id)
+        if index > len(results):
+            return results[0]
+        return results[index]
 
-    def find_nodes_by_content(self, content, index=None):
+    def find_nodes_by_text(self, txt):
         """
-        通过content寻找节点
-        :param content:
+        获取text=txt的所有元素的坐标列表
+        :param txt:
+        :return:
+        """
+        results = None
+        for node in self._nodes:
+            if node['text'] == txt:
+                results.append(node['bounds'])
+        return results
+
+    def find_node_by_text(self, txt, index=0):
+        """
+        返回找到的第index个节点的坐标 'bounds': '[0,550][1080,744]'}  左上角x y 右下角x y
+        找不到或者超出索引返回第一个
+        :param txt:
+        :param by:
         :param index:
         :return:
         """
-        return self.find_nodes(content, By.content, index)
+        results = self.find_nodes_by_text(txt)
+        if results:
+            if index > len(results):
+                return results[0]
+            return results[index]
+        return None
 
-    def get_bounds(self):
-        """
-        获取边界值
-        :return:
-        """
-        _bounds = self._nodes[0]['bounds']
-        pattern = re.compile(r'\d+')
-        return pattern.findall(_bounds)
-
-    def cal_coordinate(self, index=None):
+    def cal_coordinate(self, bounds):
         """
         计算坐标中心点
         :param index:
         :return:
         """
-        if self._nodes:
-            _index = 0 if (index is None) else index
-            # print("nodes",self._nodes,"index",_index)
-            _bounds = self._nodes[_index]['bounds']
+        tem = []
+        bounds = tem.extend(one for one in bounds)
+        x1 = float(bounds[0])
+        y1 = float(bounds[1])
+        x2 = float(bounds[2])
+        y2 = float(bounds[3])
+        self._x = (x1 + x2) / 2
+        self._y = (y1 + y2) / 2
 
-            pattern = re.compile(r'\d+')
-            _result = pattern.findall(_bounds)
-            x1 = float(_result[0])
-            y1 = float(_result[1])
-            x2 = float(_result[2])
-            y2 = float(_result[3])
+        return self._x, self._y
 
-            self._x = (x1 + x2) / 2
-            self._y = (y1 + y2) / 2
-
-            return self._x, self._y
-
-    def click(self, cal_index=None):
+    def click(self, x, y):
         """
-        计算中心点后点击坐标
+        点击坐标
         :param cal_index:
         :return:
         """
-        x, y = self.cal_coordinate(cal_index)
         self.adb_click(x, y)
 
-    def click_by_text(self, text, index=None):
-        self.find_nodes_by_text(text, index)
-        self.click(0)
+    def click_by_text(self, text, index=0):
+        """
+        通过text点击
+        :param text:
+        :param index:
+        :return:
+        """
+        bounds = self.find_node_by_text(text, index)
+        x, y = self.cal_coordinate(bounds)
+        self.click(x, y)
 
-    def click_by_content(self, content, index=None):
-        self.find_nodes_by_content(content, index)
-        self.click(0)
+    def click_by_text_after_refresh(self, text, index=0):
+        """
+        封装之前的代码 刷新节点后通过text点击
+        :param text:
+        :return:
+        """
+        self.adb_refresh()
+        self.generate_nodes()
+        bounds = self.find_node_by_text(text, index)
+        x, y = self.cal_coordinate(bounds)
+        self.click(x, y)
 
-    def click_by_text_after_refresh(self, text, index=None):
-        self.refresh_nodes()
-        self.click_by_text(text, index)
-
-    def click_by_content_after_refresh(self, content, index=None):
-        self.refresh_nodes()
-        self.click_by_content(content, index)
-
+    def click_by_id_after_refresh(self, id, index=0):
+        """
+        封装之前的代码 刷新节点后通过id点击
+        :param text:
+        :return:
+        """
+        self.adb_refresh()
+        self.generate_nodes()
+        bounds = self.find_node_by_resource_id(id, index)
+        x, y = self.cal_coordinate(bounds)
+        self.click(x, y)
 
 def get_keywords_data(tables, row, col):
     """
@@ -383,7 +383,6 @@ class Main:
         self._adb.click_by_text_after_refresh('搜索:' + phone)
         print('  ==> 点击搜索 ==>  ')
 
-        self._adb.refresh_nodes()
         if self._adb.find_nodes_by_text('查找失败'):
             print('  <== 查找失败 <==  ')
             self.push('failed', phone + '查找失败')
@@ -402,10 +401,9 @@ class Main:
         # 查找成功
         elif self._adb.find_nodes_by_text('添加到通讯录'):
             # self._adb.click(0)
-            self._adb.click_by_text_after_refresh('发送')
+            self._adb.click_by_text_after_refresh('添加到通讯录')
 
-            self._adb.refresh_nodes()
-            if self._adb.find_nodes_by_text('发送添加邀请'):
+            if self._adb.find_nodes_by_text('发送添加朋友申请'):
                 print('  <== 发送失败 <==  ')
                 self.push('failed', phone + '发送失败')
                 self._adb.adb_put_back()
@@ -431,7 +429,6 @@ class Main:
             self._adb.adb_put_back()
 
         # 清空已输入的字符
-        self._adb.refresh_nodes()
         if self._adb.find_nodes('true', By.naf):
             self._adb.click(1)
 
@@ -444,5 +441,10 @@ class Main:
 
 
 if __name__ == '__main__':
-    fun = Main()
-    fun.main()
+    # fun = Main()
+    # fun.main()
+    adb = Adb()
+    adb.adb_refresh()
+    adb.generate_nodes()
+    print(adb._nodes)
+    # print(adb.find_nodes("故里",By.text,0))
