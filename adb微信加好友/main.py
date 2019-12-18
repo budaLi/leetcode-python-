@@ -9,6 +9,7 @@
 
 from enum import Enum
 import re
+import traceback
 import os
 import xml.etree.cElementTree as xmlParser
 import xlrd
@@ -31,7 +32,7 @@ phone_excel = xlrd.open_workbook(phone_file_path)
 phoe_tables = phone_excel.sheet_by_index(0)
 phone_get_col = 1
 phone_write_col = 2
-
+weixin_or_phone_class_name = "android.widget.LinearLayout"
 
 class By(Enum):
     text = 'text'
@@ -48,6 +49,51 @@ def adb_path():
     _path = path.dirname(__file__)
     return _path + '/adb/' + os + '/platform-tools/'
 
+
+def screenshot_prepare(pagename, firstActivty):
+    """
+    打开app
+    """
+    try:
+        displayPowerState = os.popen(
+            "adb shell dumpsys power | grep 'Display Power: state=' | awk -F '=' '{print $2}'").read().strip('\n')
+        # print(displayPowerState)
+        if displayPowerState == 'OFF':
+            print("唤醒屏幕")
+            os.system('adb shell input keyevent 26')
+        else:
+            print("屏幕已开启不需要唤醒")
+        isStatusBarKeyguard = os.popen(
+            "adb shell dumpsys window policy|grep isStatusBarKeyguard | awk -F '=' ' {print $3}'").read().strip('\n')
+        # print(isStatusBarKeyguard)
+        if isStatusBarKeyguard == 'true':
+            time.sleep(2)
+            print("解锁屏保")
+            # 左右滑动才好解锁,并且延迟100ms启动
+            os.system('adb shell input swipe 200 400 800 400 100')
+            # time.sleep(1)
+            # print("输入密码")
+            # os.system('adb shell input text 95729')
+        else:
+            print("屏幕已解锁不需要再次解锁")
+        time.sleep(1)
+
+        cmd = "adb shell am start -W -n " + pagename + firstActivty
+        content = os.popen(cmd)
+
+        mFocusedActivity = os.popen(
+            "adb shell dumpsys activity | grep 'mFocusedActivity' | awk '{print $4}' | awk -F '/' '{print $1}'").read().strip(
+            '\n')
+        if mFocusedActivity == 'com.eg.android.AlipayGphone':
+            print("APP已启动，停止APP，等待重新启动")
+            os.system('adb shell am force-stop com.eg.android.AlipayGphone')
+        time.sleep(1)
+        print("启动app")
+        os.system('adb shell am start -n com.eg.android.AlipayGphone/com.eg.android.AlipayGphone.AlipayLogin activity')
+    except Exception:
+        print("screenshot_prepare error")
+        traceback.print_exc()
+        exit(-1)
 
 # adb对应命令
 # https://www.cnblogs.com/yoyoketang/p/8988203.html
@@ -115,7 +161,6 @@ class Adb:
         解析xml文件生成node数据
         :return:
         """
-        self.adb_refresh()
         xml = xmlParser.ElementTree(file=self._basePath + '/data/dump.xml')
         nodes = xml.findall(path=".//node")  # 全部node节点
         print(len(nodes))
@@ -125,7 +170,38 @@ class Adb:
             # elem.attrib 为字典
             tem_node.append(_node.attrib)
         # print(len(tem_node))
+        print(tem_node)
         self._nodes = tem_node
+
+    def find_nodes_by_class_name(self, class_name):
+        """
+        获取class为class_name的所有元素的坐标列表
+        :param txt:
+        :return:
+        """
+        self.adb_refresh()
+        self.generate_nodes()
+        results = []
+        for node in self._nodes:
+            if node['class'] == class_name:
+                results.append(node['bounds'])
+        return results
+
+    def find_node_by_class_name(self, class_name, index=0):
+        """
+        找单个节点
+        :param txt:
+        :param by:
+        :param index:
+        :return:
+        """
+
+        results = self.find_nodes_by_class_name(class_name)
+        if results:
+            if index > len(results):
+                return results[0]
+            return results[index]
+        return None
 
     def find_nodes_by_resource_id(self, id):
         """
@@ -133,11 +209,17 @@ class Adb:
         :param txt:
         :return:
         """
+        self.adb_refresh()
+        self.generate_nodes()
         results = []
         for node in self._nodes:
             if node['resource-id'] == id:
                 results.append(node['bounds'])
-        return results
+
+        if len(results) > 0:
+            return results
+        return None
+
 
     def find_node_by_resource_id(self, id, index=0):
         """
@@ -147,9 +229,11 @@ class Adb:
         :return:
         """
         results = self.find_nodes_by_resource_id(id)
-        if index > len(results):
-            return results[0]
-        return results[index]
+        if results:
+            if index > len(results):
+                return results[0]
+            return results[index]
+        return None
 
     def find_nodes_by_text(self, txt):
         """
@@ -157,10 +241,13 @@ class Adb:
         :param txt:
         :return:
         """
-        results = None
+        self.adb_refresh()
+        self.generate_nodes()
+        results = []
         for node in self._nodes:
             if node['text'] == txt:
                 results.append(node['bounds'])
+
         return results
 
     def find_node_by_text(self, txt, index=0):
@@ -172,6 +259,7 @@ class Adb:
         :param index:
         :return:
         """
+
         results = self.find_nodes_by_text(txt)
         if results:
             if index > len(results):
@@ -185,16 +273,19 @@ class Adb:
         :param index:
         :return:
         """
-        tem = []
-        bounds = tem.extend(one for one in bounds)
-        x1 = float(bounds[0])
-        y1 = float(bounds[1])
-        x2 = float(bounds[2])
-        y2 = float(bounds[3])
-        self._x = (x1 + x2) / 2
-        self._y = (y1 + y2) / 2
+        # [436,260][731,322] 字符串形式
+        try:
+            bounds = bounds.replace("[", "").replace("]", ',').split(",")
+            x1 = float(bounds[0])
+            y1 = float(bounds[1])
+            x2 = float(bounds[2])
+            y2 = float(bounds[3])
+            self._x = (x1 + x2) / 2
+            self._y = (y1 + y2) / 2
 
-        return self._x, self._y
+            return self._x, self._y
+        except Exception as e:
+            print("没有检测到该内容")
 
     def click(self, x, y):
         """
@@ -203,6 +294,10 @@ class Adb:
         :return:
         """
         self.adb_click(x, y)
+
+    def click_use_bounds(self, bounds):
+        x, y = self.cal_coordinate(bounds)
+        self.click(x,y)
 
     def click_by_text(self, text, index=0):
         """
@@ -215,14 +310,13 @@ class Adb:
         x, y = self.cal_coordinate(bounds)
         self.click(x, y)
 
+
     def click_by_text_after_refresh(self, text, index=0):
         """
         封装之前的代码 刷新节点后通过text点击
         :param text:
         :return:
         """
-        self.adb_refresh()
-        self.generate_nodes()
         bounds = self.find_node_by_text(text, index)
         x, y = self.cal_coordinate(bounds)
         self.click(x, y)
@@ -238,6 +332,18 @@ class Adb:
         bounds = self.find_node_by_resource_id(id, index)
         x, y = self.cal_coordinate(bounds)
         self.click(x, y)
+
+    def click_by_class_name_after_refresh(self, class_name, index=0):
+        """
+        封装之前的代码 刷新节点后通过class_name点击
+        :param text:
+        :return:
+        """
+
+        bounds = self.find_node_by_class_name(class_name, index)
+        x, y = self.cal_coordinate(bounds)
+        self.click(x, y)
+
 
 def get_keywords_data(tables, row, col):
     """
@@ -373,64 +479,79 @@ class Main:
                 break
             time.sleep(2)
 
+    def clean_phone(self):
+        if self._adb.find_node_by_resource_id('com.tencent.mm:id/m3'):
+            self._adb.click_by_id_after_refresh("com.tencent.mm:id/m3")
+            print("清空成功")
+            return True
+        return False
+
+
+
     def add_friends(self, phone):
         print('===== 开始查找 ===== ' + phone + ' =====')
-        self._adb.click_by_text_after_refresh('微信号/手机号')
+        # 通过classname查找 微信号/手机号
+        bounds = self._adb.find_node_by_class_name(weixin_or_phone_class_name)
+        if bounds:
+            print("查找 微信号/手机号 成功")
+        else:
+            print("将app跳转到添加好友界面")
 
+        time.sleep(2)
         # 输入号码
         self._adb.adb_input(phone)
         # 点击搜索
-        self._adb.click_by_text_after_refresh('搜索:' + phone)
+
+        search_res = "搜索:" + phone
+        self._adb.click_by_text_after_refresh(search_res)
         print('  ==> 点击搜索 ==>  ')
 
-        if self._adb.find_nodes_by_text('查找失败'):
+        if self._adb.find_node_by_text('查找失败'):
             print('  <== 查找失败 <==  ')
             self.push('failed', phone + '查找失败')
             self._adb.adb_put_back()
 
-            print(' ---- 计算切换账号次数 ----')
-            self._flag += 1
-            if int(self._sleep_flag) == self._flag:
-                print(' ---- 休眠半小时 ----')
-                time.sleep(int(self._sleep) * 60)
-                self._flag = 0
-            else:
-                print(' ---- 开始切换账号 ----')
-                self.init()
-
         # 查找成功
-        elif self._adb.find_nodes_by_text('添加到通讯录'):
+        elif self._adb.find_node_by_text('添加到通讯录'):
+
             # self._adb.click(0)
             self._adb.click_by_text_after_refresh('添加到通讯录')
 
-            if self._adb.find_nodes_by_text('发送添加朋友申请'):
+            if not self._adb.find_node_by_text('发送添加朋友申请'):
                 print('  <== 发送失败 <==  ')
                 self.push('failed', phone + '发送失败')
-                self._adb.adb_put_back()
-                self._adb.adb_put_back()
+
             else:
+                self._adb.click_by_text_after_refresh("发送")
+
                 print(' !! <== 发送成功 <==  ')
                 self.push('success', phone + '发送成功')
+                time.sleep(2)
                 self._adb.adb_put_back()
+                if self._adb.find_node_by_text('添加到通讯录'):
+                    print("操作可能太频繁被限制,建议换号或者等会再试")
+                    self._adb.adb_put_back()
 
-        elif self._adb.find_nodes_by_text('发消息'):
+
+
+        elif self._adb.find_node_by_text('发消息'):
             print('  <== 已经是好友 无需再次添加 <==  ')
             self.push('failed', phone + '已经是好友')
             self._adb.adb_put_back()
 
-        elif self._adb.find_nodes_by_text('同时拥有微信和企业微信'):
+
+        elif self._adb.find_node_by_text('同时拥有微信和企业微信'):
             print('  <== 同时拥有微信和企业微信 <==  ')
             self.push('failed', phone + '同时拥有微信和企业微信')
             self._adb.adb_put_back()
 
-        elif self._adb.find_nodes_by_text('该用户不存在') or self._adb.find_nodes_by_text('被搜帐号状态异常，无法显示'):
+        elif self._adb.find_node_by_text('该用户不存在') or self._adb.find_node_by_text('被搜帐号状态异常，无法显示'):
             print('  <== 该用户不存在 或 帐号异常 <==  ')
             self.push('failed', phone + '该用户不存在 或 帐号异常')
-            self._adb.adb_put_back()
 
         # 清空已输入的字符
-        if self._adb.find_nodes('true', By.naf):
-            self._adb.click(1)
+        self.clean_phone()
+
 
     def main(self):
         self.init()
@@ -441,10 +562,5 @@ class Main:
 
 
 if __name__ == '__main__':
-    # fun = Main()
-    # fun.main()
-    adb = Adb()
-    adb.adb_refresh()
-    adb.generate_nodes()
-    print(adb._nodes)
-    # print(adb.find_nodes("故里",By.text,0))
+    fun = Main()
+    fun.main()
