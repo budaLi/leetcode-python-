@@ -564,7 +564,7 @@ class Main:
 
         if self._adb.find_node_by_text('查找失败'):
             print('  <== 查找失败 <==  ')
-            write_to_excel(phoe_tables, phone_can_write_index, phone_write_col, "查找失败")
+            write_to_excel(phone_file_path, phone_can_write_index, phone_write_col, "查找失败")
             self._adb.adb_put_back()
 
         # 查找成功
@@ -575,13 +575,13 @@ class Main:
 
             if not self._adb.find_node_by_text('发送添加朋友申请'):
                 print('  <== 发送失败 <==  ')
-                write_to_excel(phoe_tables, phone_can_write_index, phone_write_col, "发送失败")
+                write_to_excel(phone_file_path, phone_can_write_index, phone_write_col, "发送失败")
 
             else:
                 self._adb.click_by_text_after_refresh("发送")
 
                 print(' !! <== 发送成功 <==  ')
-                write_to_excel(phoe_tables, phone_can_write_index, phone_write_col, "发送成功")
+                write_to_excel(phone_file_path, phone_can_write_index, phone_write_col, "发送成功")
                 time.sleep(2)
                 self._adb.adb_put_back()
                 if self._adb.find_node_by_text('添加到通讯录'):
@@ -592,7 +592,7 @@ class Main:
 
         elif self._adb.find_node_by_text('发消息'):
             print('  <== 已经是好友 无需再次添加 <==  ')
-            write_to_excel(phoe_tables, phone_can_write_index, phone_write_col, "已经是好友")
+            write_to_excel(phone_file_path, phone_can_write_index, phone_write_col, "已经是好友")
             self._adb.adb_put_back()
 
         # elif self._adb.find_node_by_text('同时拥有微信和企业微信'):
@@ -602,7 +602,7 @@ class Main:
 
         elif self._adb.find_node_by_text('该用户不存在') or self._adb.find_node_by_text('被搜帐号状态异常，无法显示'):
             print('  <== 该用户不存在 或 帐号异常 <==  ')
-            write_to_excel(phoe_tables, phone_can_write_index, phone_write_col, "已经是好友")
+            write_to_excel(phone_file_path, phone_can_write_index, phone_write_col, "已经是好友")
 
         # 清空已输入的字符
         self.clean_phone()
