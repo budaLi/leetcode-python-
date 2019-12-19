@@ -1,644 +1,133 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <hierarchy rotation="0">
-    <node index="0" text="" resource-id="" class="android.widget.FrameLayout" package="com.tencent.mm"
-          content-desc="当前所在页面,与月薪3000k(8)的聊天" checkable="false" checked="false" clickable="false" enabled="true"
-          focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false"
-          bounds="[0,0][1080,2148]">
-        <node index="0" text="" resource-id="" class="android.widget.FrameLayout" package="com.tencent.mm"
+    <node index="0" text="" resource-id="" class="android.widget.FrameLayout" package="com.tencent.mm" content-desc=""
+          checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false"
+          scrollable="false" long-clickable="false" password="false" selected="false" bounds="[0,0][1080,2148]">
+        <node index="0" text="" resource-id="" class="android.widget.LinearLayout" package="com.tencent.mm"
               content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
               focused="false" scrollable="false" long-clickable="false" password="false" selected="false"
               bounds="[0,0][1080,2148]">
-            <node index="0" text="" resource-id="com.tencent.mm:id/ac" class="android.widget.LinearLayout"
-                  package="com.tencent.mm" content-desc="" checkable="false" checked="false" clickable="false"
-                  enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false"
-                  password="false" selected="false" bounds="[0,0][1080,2148]">
-                <node index="0" text="" resource-id="com.tencent.mm:id/fdg" class="android.widget.FrameLayout"
+            <node index="0" text="" resource-id="" class="android.widget.FrameLayout" package="com.tencent.mm"
+                  content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
+                  focused="false" scrollable="false" long-clickable="false" password="false" selected="false"
+                  bounds="[0,96][1080,2148]">
+                <node index="0" text="" resource-id="com.tencent.mm:id/l0" class="android.view.ViewGroup"
                       package="com.tencent.mm" content-desc="" checkable="false" checked="false" clickable="false"
-                      enabled="true" focusable="true" focused="false" scrollable="false" long-clickable="false"
+                      enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false"
                       password="false" selected="false" bounds="[0,96][1080,2148]">
-                    <node index="0" text="" resource-id="com.tencent.mm:id/dj8" class="android.widget.FrameLayout"
+                    <node index="0" text="" resource-id="com.tencent.mm:id/l1" class="android.widget.FrameLayout"
                           package="com.tencent.mm" content-desc="" checkable="false" checked="false" clickable="false"
                           enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false"
-                          password="false" selected="false" bounds="[0,96][1080,2148]">
-                        <node index="0" text="" resource-id="com.tencent.mm:id/a1l" class="android.widget.LinearLayout"
+                          password="false" selected="false" bounds="[0,96][1080,226]">
+                        <node index="0" text="" resource-id="com.tencent.mm:id/l2" class="android.view.ViewGroup"
                               package="com.tencent.mm" content-desc="" checkable="false" checked="false"
-                              clickable="true" enabled="true" focusable="true" focused="false" scrollable="false"
-                              long-clickable="true" password="false" selected="false" bounds="[0,96][1080,2148]">
-                            <node index="0" text="" resource-id="com.tencent.mm:id/l1"
-                                  class="android.widget.FrameLayout" package="com.tencent.mm" content-desc=""
-                                  checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
-                                  focused="false" scrollable="false" long-clickable="false" password="false"
-                                  selected="false" bounds="[0,96][1080,226]">
-                                <node index="0" text="" resource-id="com.tencent.mm:id/l2"
-                                      class="android.view.ViewGroup" package="com.tencent.mm" content-desc=""
-                                      checkable="false" checked="false" clickable="false" enabled="true"
-                                      focusable="false" focused="false" scrollable="false" long-clickable="false"
-                                      password="false" selected="false" bounds="[0,96][1080,226]">
-                                    <node index="0" text="" resource-id="com.tencent.mm:id/lq"
-                                          class="android.widget.LinearLayout" package="com.tencent.mm" content-desc=""
-                                          checkable="false" checked="false" clickable="false" enabled="true"
-                                          focusable="false" focused="false" scrollable="false" long-clickable="false"
-                                          password="false" selected="false" bounds="[0,96][493,226]">
-                                        <node index="0" text="" resource-id="com.tencent.mm:id/lr"
-                                              class="android.widget.LinearLayout" package="com.tencent.mm"
-                                              content-desc="" checkable="false" checked="false" clickable="true"
-                                              enabled="true" focusable="true" focused="false" scrollable="false"
-                                              long-clickable="false" password="false" selected="false"
-                                              bounds="[0,96][108,226]">
-                                            <node index="0" text="" resource-id="com.tencent.mm:id/ls"
-                                                  class="android.widget.ImageView" package="com.tencent.mm"
-                                                  content-desc="返回" checkable="false" checked="false" clickable="false"
-                                                  enabled="true" focusable="false" focused="false" scrollable="false"
-                                                  long-clickable="false" password="false" selected="false"
-                                                  bounds="[0,96][108,226]"/>
-                                        </node>
-                                        <node index="1" text="" resource-id="" class="android.widget.LinearLayout"
-                                              package="com.tencent.mm" content-desc="" checkable="false" checked="false"
-                                              clickable="false" enabled="true" focusable="false" focused="false"
-                                              scrollable="false" long-clickable="false" password="false"
-                                              selected="false" bounds="[108,96][385,226]">
-                                            <node index="0" text="月薪3000k(8)" resource-id="com.tencent.mm:id/lt"
-                                                  class="android.widget.TextView" package="com.tencent.mm"
-                                                  content-desc="" checkable="false" checked="false" clickable="false"
-                                                  enabled="true" focusable="false" focused="false" scrollable="false"
-                                                  long-clickable="false" password="false" selected="false"
-                                                  bounds="[108,134][385,188]"/>
-                                        </node>
-                                        <node index="2" text="" resource-id="com.tencent.mm:id/lw"
+                              clickable="false" enabled="true" focusable="false" focused="false" scrollable="false"
+                              long-clickable="false" password="false" selected="false" bounds="[0,96][1080,226]">
+                            <node index="0" text="" resource-id="" class="android.widget.LinearLayout"
+                                  package="com.tencent.mm" content-desc="" checkable="false" checked="false"
+                                  clickable="false" enabled="true" focusable="false" focused="false" scrollable="false"
+                                  long-clickable="false" password="false" selected="false" bounds="[0,96][1080,226]">
+                                <node index="0" text="" resource-id="" class="android.widget.LinearLayout"
+                                      package="com.tencent.mm" content-desc="" checkable="false" checked="false"
+                                      clickable="false" enabled="true" focusable="false" focused="false"
+                                      scrollable="false" long-clickable="false" password="false" selected="false"
+                                      bounds="[0,96][1080,226]">
+                                    <node index="0" text="" resource-id="" class="android.widget.LinearLayout"
+                                          package="com.tencent.mm" content-desc="" checkable="false" checked="false"
+                                          clickable="false" enabled="true" focusable="false" focused="false"
+                                          scrollable="false" long-clickable="false" password="false" selected="false"
+                                          bounds="[32,118][924,204]">
+                                        <node index="0" text="" resource-id="com.tencent.mm:id/r_"
                                               class="android.widget.ImageView" package="com.tencent.mm" content-desc=""
                                               checkable="false" checked="false" clickable="false" enabled="true"
                                               focusable="false" focused="false" scrollable="false"
                                               long-clickable="false" password="false" selected="false"
-                                              bounds="[396,139][439,182]"/>
-                                        <node index="3" text="" resource-id="com.tencent.mm:id/lx"
-                                              class="android.widget.ImageView" package="com.tencent.mm" content-desc=""
-                                              checkable="false" checked="false" clickable="false" enabled="true"
-                                              focusable="false" focused="false" scrollable="false"
-                                              long-clickable="false" password="false" selected="false"
-                                              bounds="[450,139][493,182]"/>
-                                    </node>
-                                    <node index="1" text="" resource-id=""
-                                          class="android.support.v7.widget.LinearLayoutCompat" package="com.tencent.mm"
-                                          content-desc="" checkable="false" checked="false" clickable="false"
-                                          enabled="true" focusable="false" focused="false" scrollable="false"
-                                          long-clickable="false" password="false" selected="false"
-                                          bounds="[929,96][1080,226]">
-                                        <node index="0" text="" resource-id="" class="android.widget.LinearLayout"
-                                              package="com.tencent.mm" content-desc="" checkable="false" checked="false"
-                                              clickable="false" enabled="true" focusable="false" focused="false"
-                                              scrollable="false" long-clickable="false" password="false"
-                                              selected="false" bounds="[929,96][1080,226]">
-                                            <node index="0" text="" resource-id="" class="android.widget.RelativeLayout"
-                                                  package="com.tencent.mm" content-desc="" checkable="false"
-                                                  checked="false" clickable="false" enabled="true" focusable="false"
-                                                  focused="false" scrollable="false" long-clickable="false"
-                                                  password="false" selected="false" bounds="[929,96][1080,226]">
-                                                <node index="0" text="" resource-id="com.tencent.mm:id/lo"
-                                                      class="android.widget.ImageButton" package="com.tencent.mm"
-                                                      content-desc="聊天信息" checkable="false" checked="false"
-                                                      clickable="true" enabled="true" focusable="true" focused="false"
-                                                      scrollable="false" long-clickable="false" password="false"
-                                                      selected="false" bounds="[929,96][1080,226]"/>
-                                            </node>
-                                        </node>
-                                    </node>
-                                </node>
-                            </node>
-                            <node index="1" text="" resource-id="com.tencent.mm:id/apc"
-                                  class="android.widget.LinearLayout" package="com.tencent.mm" content-desc=""
-                                  checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
-                                  focused="false" scrollable="false" long-clickable="false" password="false"
-                                  selected="false" bounds="[0,226][1080,2148]">
-                                <node index="0" text="" resource-id="com.tencent.mm:id/apd"
-                                      class="android.widget.FrameLayout" package="com.tencent.mm" content-desc=""
-                                      checkable="false" checked="false" clickable="false" enabled="true"
-                                      focusable="false" focused="false" scrollable="false" long-clickable="false"
-                                      password="false" selected="false" bounds="[0,226][1080,2092]">
-                                    <node index="1" text="" resource-id="com.tencent.mm:id/apx"
-                                          class="android.widget.ImageView" package="com.tencent.mm" content-desc=""
-                                          checkable="false" checked="false" clickable="false" enabled="true"
-                                          focusable="false" focused="false" scrollable="false" long-clickable="false"
-                                          password="false" selected="false" bounds="[0,226][1080,2092]"/>
-                                    <node index="2" text="" resource-id="com.tencent.mm:id/ape"
-                                          class="android.widget.FrameLayout" package="com.tencent.mm" content-desc=""
-                                          checkable="false" checked="false" clickable="false" enabled="true"
-                                          focusable="false" focused="false" scrollable="false" long-clickable="false"
-                                          password="false" selected="false" bounds="[0,226][1080,2092]">
-                                        <node index="1" text="" resource-id="com.tencent.mm:id/ag"
-                                              class="android.widget.ListView" package="com.tencent.mm" content-desc=""
-                                              checkable="false" checked="false" clickable="false" enabled="true"
-                                              focusable="true" focused="false" scrollable="true" long-clickable="true"
-                                              password="false" selected="false" bounds="[0,226][1080,2092]">
-                                            <node index="0" text="" resource-id="" class="android.widget.RelativeLayout"
-                                                  package="com.tencent.mm" content-desc="" checkable="false"
-                                                  checked="false" clickable="false" enabled="true" focusable="false"
-                                                  focused="false" scrollable="false" long-clickable="true"
-                                                  password="false" selected="false" bounds="[0,226][1080,459]">
-                                                <node index="1" text="" resource-id="com.tencent.mm:id/ab"
-                                                      class="android.widget.LinearLayout" package="com.tencent.mm"
-                                                      content-desc="" checkable="false" checked="false"
-                                                      clickable="false" enabled="true" focusable="true" focused="false"
-                                                      scrollable="false" long-clickable="false" password="false"
-                                                      selected="false" bounds="[0,226][1080,459]">
-                                                    <node index="0" text="" resource-id=""
-                                                          class="android.widget.LinearLayout" package="com.tencent.mm"
-                                                          content-desc="" checkable="false" checked="false"
-                                                          clickable="false" enabled="true" focusable="false"
-                                                          focused="false" scrollable="false" long-clickable="false"
-                                                          password="false" selected="false" bounds="[0,226][1080,459]">
-                                                        <node index="0" text="" resource-id="com.tencent.mm:id/are"
-                                                              class="android.widget.RelativeLayout"
-                                                              package="com.tencent.mm" content-desc="" checkable="false"
-                                                              checked="false" clickable="false" enabled="true"
-                                                              focusable="false" focused="false" scrollable="false"
-                                                              long-clickable="false" password="false" selected="false"
-                                                              bounds="[16,226][156,243]">
-                                                            <node index="0" text="" resource-id=""
-                                                                  class="android.view.View" package="com.tencent.mm"
-                                                                  content-desc="" checkable="false" checked="false"
-                                                                  clickable="false" enabled="true" focusable="false"
-                                                                  focused="false" scrollable="false"
-                                                                  long-clickable="false" password="false"
-                                                                  selected="false" bounds="[16,226][156,243]"/>
-                                                            <node index="1" text="" resource-id="com.tencent.mm:id/po"
-                                                                  class="android.widget.ImageView"
-                                                                  package="com.tencent.mm" content-desc="刘文斌头像"
-                                                                  checkable="false" checked="false" clickable="true"
-                                                                  enabled="true" focusable="false" focused="false"
-                                                                  scrollable="false" long-clickable="true"
-                                                                  password="false" selected="false"
-                                                                  bounds="[16,226][156,243]"/>
-                                                            <node index="2" text="" resource-id=""
-                                                                  class="android.widget.ImageView"
-                                                                  package="com.tencent.mm" content-desc=""
-                                                                  checkable="false" checked="false" clickable="false"
-                                                                  enabled="true" focusable="false" focused="false"
-                                                                  scrollable="false" long-clickable="false"
-                                                                  password="false" selected="false"
-                                                                  bounds="[16,226][156,243]"/>
-                                                        </node>
-                                                        <node index="1" text="" resource-id=""
-                                                              class="android.widget.LinearLayout"
-                                                              package="com.tencent.mm" content-desc="" checkable="false"
-                                                              checked="false" clickable="false" enabled="true"
-                                                              focusable="false" focused="false" scrollable="false"
-                                                              long-clickable="false" password="false" selected="false"
-                                                              bounds="[156,226][508,443]">
-                                                            <node index="0" text="" resource-id="com.tencent.mm:id/av0"
-                                                                  class="android.widget.FrameLayout"
-                                                                  package="com.tencent.mm" content-desc="表情互相帮助"
-                                                                  checkable="false" checked="false" clickable="true"
-                                                                  enabled="true" focusable="true" focused="false"
-                                                                  scrollable="false" long-clickable="true"
-                                                                  password="false" selected="false"
-                                                                  bounds="[170,226][494,443]">
-                                                                <node index="0" text="" resource-id=""
-                                                                      class="android.widget.ImageView"
-                                                                      package="com.tencent.mm" content-desc=""
-                                                                      checkable="false" checked="false"
-                                                                      clickable="false" enabled="true" focusable="false"
-                                                                      focused="false" scrollable="false"
-                                                                      long-clickable="false" password="false"
-                                                                      selected="false" bounds="[170,226][494,443]"/>
-                                                            </node>
-                                                        </node>
-                                                    </node>
-                                                </node>
-                                            </node>
-                                            <node index="1" text="" resource-id="" class="android.widget.RelativeLayout"
-                                                  package="com.tencent.mm" content-desc="" checkable="false"
-                                                  checked="false" clickable="false" enabled="true" focusable="false"
-                                                  focused="false" scrollable="false" long-clickable="true"
-                                                  password="false" selected="false" bounds="[0,459][1080,713]">
-                                                <node index="0" text="" resource-id="com.tencent.mm:id/ab"
-                                                      class="android.widget.LinearLayout" package="com.tencent.mm"
-                                                      content-desc="" checkable="false" checked="false"
-                                                      clickable="false" enabled="true" focusable="true" focused="false"
-                                                      scrollable="false" long-clickable="false" password="false"
-                                                      selected="false" bounds="[0,459][1080,713]">
-                                                    <node index="0" text="" resource-id=""
-                                                          class="android.widget.LinearLayout" package="com.tencent.mm"
-                                                          content-desc="" checkable="false" checked="false"
-                                                          clickable="false" enabled="true" focusable="false"
-                                                          focused="false" scrollable="false" long-clickable="false"
-                                                          password="false" selected="false" bounds="[0,459][1080,713]">
-                                                        <node index="0" text="" resource-id="com.tencent.mm:id/are"
-                                                              class="android.widget.RelativeLayout"
-                                                              package="com.tencent.mm" content-desc="" checkable="false"
-                                                              checked="false" clickable="false" enabled="true"
-                                                              focusable="false" focused="false" scrollable="false"
-                                                              long-clickable="false" password="false" selected="false"
-                                                              bounds="[16,459][156,599]">
-                                                            <node index="0" text="" resource-id=""
-                                                                  class="android.view.View" package="com.tencent.mm"
-                                                                  content-desc="" checkable="false" checked="false"
-                                                                  clickable="false" enabled="true" focusable="false"
-                                                                  focused="false" scrollable="false"
-                                                                  long-clickable="false" password="false"
-                                                                  selected="false" bounds="[16,459][156,599]"/>
-                                                            <node index="1" text="" resource-id="com.tencent.mm:id/po"
-                                                                  class="android.widget.ImageView"
-                                                                  package="com.tencent.mm" content-desc="嘉宾头像"
-                                                                  checkable="false" checked="false" clickable="true"
-                                                                  enabled="true" focusable="false" focused="false"
-                                                                  scrollable="false" long-clickable="true"
-                                                                  password="false" selected="false"
-                                                                  bounds="[16,459][156,599]"/>
-                                                            <node index="2" text="" resource-id=""
-                                                                  class="android.widget.ImageView"
-                                                                  package="com.tencent.mm" content-desc=""
-                                                                  checkable="false" checked="false" clickable="false"
-                                                                  enabled="true" focusable="false" focused="false"
-                                                                  scrollable="false" long-clickable="false"
-                                                                  password="false" selected="false"
-                                                                  bounds="[16,459][156,599]"/>
-                                                        </node>
-                                                        <node index="1" text="" resource-id=""
-                                                              class="android.widget.LinearLayout"
-                                                              package="com.tencent.mm" content-desc="" checkable="false"
-                                                              checked="false" clickable="false" enabled="true"
-                                                              focusable="false" focused="false" scrollable="false"
-                                                              long-clickable="false" password="false" selected="false"
-                                                              bounds="[156,475][589,697]">
-                                                            <node index="0" text="" resource-id="com.tencent.mm:id/av0"
-                                                                  class="android.widget.FrameLayout"
-                                                                  package="com.tencent.mm" content-desc="表情"
-                                                                  checkable="false" checked="false" clickable="true"
-                                                                  enabled="true" focusable="true" focused="false"
-                                                                  scrollable="false" long-clickable="true"
-                                                                  password="false" selected="false"
-                                                                  bounds="[170,475][575,697]">
-                                                                <node index="0" text="" resource-id=""
-                                                                      class="android.widget.ImageView"
-                                                                      package="com.tencent.mm" content-desc=""
-                                                                      checkable="false" checked="false"
-                                                                      clickable="false" enabled="true" focusable="false"
-                                                                      focused="false" scrollable="false"
-                                                                      long-clickable="false" password="false"
-                                                                      selected="false" bounds="[170,475][575,697]"/>
-                                                            </node>
-                                                        </node>
-                                                    </node>
-                                                </node>
-                                            </node>
-                                            <node index="2" text="" resource-id="" class="android.widget.RelativeLayout"
-                                                  package="com.tencent.mm" content-desc="" checkable="false"
-                                                  checked="false" clickable="true" enabled="true" focusable="false"
-                                                  focused="false" scrollable="false" long-clickable="true"
-                                                  password="false" selected="false" bounds="[0,713][1080,1136]">
-                                                <node index="0" text="" resource-id="com.tencent.mm:id/ab"
-                                                      class="android.widget.LinearLayout" package="com.tencent.mm"
-                                                      content-desc="" checkable="false" checked="false"
-                                                      clickable="false" enabled="true" focusable="false" focused="false"
-                                                      scrollable="false" long-clickable="false" password="false"
-                                                      selected="false" bounds="[0,713][1080,1136]">
-                                                    <node index="0" text="" resource-id="com.tencent.mm:id/are"
-                                                          class="android.widget.RelativeLayout" package="com.tencent.mm"
-                                                          content-desc="" checkable="false" checked="false"
-                                                          clickable="false" enabled="true" focusable="false"
-                                                          focused="false" scrollable="false" long-clickable="false"
-                                                          password="false" selected="false" bounds="[16,713][156,853]">
-                                                        <node index="0" text="" resource-id="com.tencent.mm:id/po"
-                                                              class="android.widget.ImageView" package="com.tencent.mm"
-                                                              content-desc="胖子头像" checkable="false" checked="false"
-                                                              clickable="true" enabled="true" focusable="false"
-                                                              focused="false" scrollable="false" long-clickable="true"
-                                                              password="false" selected="false"
-                                                              bounds="[16,713][156,853]"/>
-                                                        <node index="1" text="" resource-id="" class="android.view.View"
-                                                              package="com.tencent.mm" content-desc="" checkable="false"
-                                                              checked="false" clickable="false" enabled="true"
-                                                              focusable="false" focused="false" scrollable="false"
-                                                              long-clickable="false" password="false" selected="false"
-                                                              bounds="[16,713][156,853]"/>
-                                                        <node index="2" text="" resource-id=""
-                                                              class="android.widget.ImageView" package="com.tencent.mm"
-                                                              content-desc="" checkable="false" checked="false"
-                                                              clickable="false" enabled="true" focusable="false"
-                                                              focused="false" scrollable="false" long-clickable="false"
-                                                              password="false" selected="false"
-                                                              bounds="[16,713][156,853]"/>
-                                                    </node>
-                                                    <node index="1" text="" resource-id="com.tencent.mm:id/aw3"
-                                                          class="android.widget.LinearLayout" package="com.tencent.mm"
-                                                          content-desc="" checkable="false" checked="false"
-                                                          clickable="false" enabled="true" focusable="false"
-                                                          focused="false" scrollable="false" long-clickable="false"
-                                                          password="false" selected="false"
-                                                          bounds="[156,729][575,1120]">
-                                                        <node NAF="true" index="0" text=""
-                                                              resource-id="com.tencent.mm:id/atb"
-                                                              class="android.widget.FrameLayout"
-                                                              package="com.tencent.mm" content-desc="" checkable="false"
-                                                              checked="false" clickable="true" enabled="true"
-                                                              focusable="true" focused="false" scrollable="false"
-                                                              long-clickable="true" password="false" selected="false"
-                                                              bounds="[170,729][575,1120]">
-                                                            <node index="0" text="" resource-id="com.tencent.mm:id/av0"
-                                                                  class="android.widget.ImageView"
-                                                                  package="com.tencent.mm" content-desc=""
-                                                                  checkable="false" checked="false" clickable="false"
-                                                                  enabled="true" focusable="false" focused="false"
-                                                                  scrollable="false" long-clickable="false"
-                                                                  password="false" selected="false"
-                                                                  bounds="[170,729][575,1120]"/>
-                                                            <node index="1" text="" resource-id="com.tencent.mm:id/av4"
-                                                                  class="android.widget.ImageView"
-                                                                  package="com.tencent.mm" content-desc=""
-                                                                  checkable="false" checked="false" clickable="false"
-                                                                  enabled="true" focusable="false" focused="false"
-                                                                  scrollable="false" long-clickable="false"
-                                                                  password="false" selected="false"
-                                                                  bounds="[170,729][575,1120]"/>
-                                                        </node>
-                                                    </node>
-                                                </node>
-                                            </node>
-                                            <node index="3" text="" resource-id="" class="android.widget.RelativeLayout"
-                                                  package="com.tencent.mm" content-desc="" checkable="false"
-                                                  checked="false" clickable="false" enabled="true" focusable="false"
-                                                  focused="false" scrollable="false" long-clickable="true"
-                                                  password="false" selected="false" bounds="[0,1136][1080,1609]">
-                                                <node index="0" text="下午5:42" resource-id="com.tencent.mm:id/ai"
-                                                      class="android.widget.TextView" package="com.tencent.mm"
-                                                      content-desc="" checkable="false" checked="false"
-                                                      clickable="false" enabled="true" focusable="false" focused="false"
-                                                      scrollable="false" long-clickable="false" password="false"
-                                                      selected="false" bounds="[461,1168][619,1221]"/>
-                                                <node index="1" text="" resource-id="com.tencent.mm:id/ab"
-                                                      class="android.widget.LinearLayout" package="com.tencent.mm"
-                                                      content-desc="" checkable="false" checked="false"
-                                                      clickable="false" enabled="true" focusable="true" focused="false"
-                                                      scrollable="false" long-clickable="false" password="false"
-                                                      selected="false" bounds="[0,1253][1080,1609]">
-                                                    <node index="0" text="" resource-id=""
-                                                          class="android.widget.LinearLayout" package="com.tencent.mm"
-                                                          content-desc="" checkable="false" checked="false"
-                                                          clickable="false" enabled="true" focusable="false"
-                                                          focused="false" scrollable="false" long-clickable="false"
-                                                          password="false" selected="false"
-                                                          bounds="[0,1253][1080,1609]">
-                                                        <node index="0" text="" resource-id="com.tencent.mm:id/are"
-                                                              class="android.widget.RelativeLayout"
-                                                              package="com.tencent.mm" content-desc="" checkable="false"
-                                                              checked="false" clickable="false" enabled="true"
-                                                              focusable="false" focused="false" scrollable="false"
-                                                              long-clickable="false" password="false" selected="false"
-                                                              bounds="[16,1253][156,1393]">
-                                                            <node index="0" text="" resource-id=""
-                                                                  class="android.view.View" package="com.tencent.mm"
-                                                                  content-desc="" checkable="false" checked="false"
-                                                                  clickable="false" enabled="true" focusable="false"
-                                                                  focused="false" scrollable="false"
-                                                                  long-clickable="false" password="false"
-                                                                  selected="false" bounds="[16,1253][156,1393]"/>
-                                                            <node index="1" text="" resource-id="com.tencent.mm:id/po"
-                                                                  class="android.widget.ImageView"
-                                                                  package="com.tencent.mm" content-desc="嘉宾头像"
-                                                                  checkable="false" checked="false" clickable="true"
-                                                                  enabled="true" focusable="false" focused="false"
-                                                                  scrollable="false" long-clickable="true"
-                                                                  password="false" selected="false"
-                                                                  bounds="[16,1253][156,1393]"/>
-                                                            <node index="2" text="" resource-id=""
-                                                                  class="android.widget.ImageView"
-                                                                  package="com.tencent.mm" content-desc=""
-                                                                  checkable="false" checked="false" clickable="false"
-                                                                  enabled="true" focusable="false" focused="false"
-                                                                  scrollable="false" long-clickable="false"
-                                                                  password="false" selected="false"
-                                                                  bounds="[16,1253][156,1393]"/>
-                                                        </node>
-                                                        <node index="1" text="" resource-id=""
-                                                              class="android.widget.LinearLayout"
-                                                              package="com.tencent.mm" content-desc="" checkable="false"
-                                                              checked="false" clickable="false" enabled="true"
-                                                              focusable="false" focused="false" scrollable="false"
-                                                              long-clickable="false" password="false" selected="false"
-                                                              bounds="[156,1269][508,1593]">
-                                                            <node index="0" text="" resource-id="com.tencent.mm:id/av0"
-                                                                  class="android.widget.FrameLayout"
-                                                                  package="com.tencent.mm" content-desc="表情"
-                                                                  checkable="false" checked="false" clickable="true"
-                                                                  enabled="true" focusable="true" focused="false"
-                                                                  scrollable="false" long-clickable="true"
-                                                                  password="false" selected="false"
-                                                                  bounds="[170,1269][494,1593]">
-                                                                <node index="0" text="" resource-id=""
-                                                                      class="android.widget.ImageView"
-                                                                      package="com.tencent.mm" content-desc=""
-                                                                      checkable="false" checked="false"
-                                                                      clickable="false" enabled="true" focusable="false"
-                                                                      focused="false" scrollable="false"
-                                                                      long-clickable="false" password="false"
-                                                                      selected="false" bounds="[170,1269][494,1593]"/>
-                                                            </node>
-                                                        </node>
-                                                    </node>
-                                                </node>
-                                            </node>
-                                            <node index="4" text="" resource-id="" class="android.widget.RelativeLayout"
-                                                  package="com.tencent.mm" content-desc="" checkable="false"
-                                                  checked="false" clickable="true" enabled="true" focusable="false"
-                                                  focused="false" scrollable="false" long-clickable="true"
-                                                  password="false" selected="false" bounds="[0,1609][1080,1934]">
-                                                <node index="0" text="下午5:57" resource-id="com.tencent.mm:id/ai"
-                                                      class="android.widget.TextView" package="com.tencent.mm"
-                                                      content-desc="" checkable="false" checked="false"
-                                                      clickable="false" enabled="true" focusable="false" focused="false"
-                                                      scrollable="false" long-clickable="false" password="false"
-                                                      selected="false" bounds="[461,1641][619,1694]"/>
-                                                <node index="1" text="" resource-id="com.tencent.mm:id/ab"
-                                                      class="android.widget.LinearLayout" package="com.tencent.mm"
-                                                      content-desc="" checkable="false" checked="false"
-                                                      clickable="false" enabled="true" focusable="false" focused="false"
-                                                      scrollable="false" long-clickable="false" password="false"
-                                                      selected="false" bounds="[0,1726][1080,1934]">
-                                                    <node index="0" text="" resource-id="com.tencent.mm:id/are"
-                                                          class="android.widget.RelativeLayout" package="com.tencent.mm"
-                                                          content-desc="" checkable="false" checked="false"
-                                                          clickable="false" enabled="true" focusable="false"
-                                                          focused="false" scrollable="false" long-clickable="false"
-                                                          password="false" selected="false"
-                                                          bounds="[16,1726][156,1866]">
-                                                        <node index="0" text="" resource-id="" class="android.view.View"
-                                                              package="com.tencent.mm" content-desc="" checkable="false"
-                                                              checked="false" clickable="false" enabled="true"
-                                                              focusable="false" focused="false" scrollable="false"
-                                                              long-clickable="false" password="false" selected="false"
-                                                              bounds="[16,1726][156,1866]"/>
-                                                        <node index="1" text="" resource-id="com.tencent.mm:id/po"
-                                                              class="android.widget.ImageView" package="com.tencent.mm"
-                                                              content-desc="建勋头像" checkable="false" checked="false"
-                                                              clickable="true" enabled="true" focusable="false"
-                                                              focused="false" scrollable="false" long-clickable="true"
-                                                              password="false" selected="false"
-                                                              bounds="[16,1726][156,1866]"/>
-                                                        <node index="2" text="" resource-id=""
-                                                              class="android.widget.ImageView" package="com.tencent.mm"
-                                                              content-desc="" checkable="false" checked="false"
-                                                              clickable="false" enabled="true" focusable="false"
-                                                              focused="false" scrollable="false" long-clickable="false"
-                                                              password="false" selected="false"
-                                                              bounds="[16,1726][156,1866]"/>
-                                                    </node>
-                                                    <node index="1" text="" resource-id=""
-                                                          class="android.widget.LinearLayout" package="com.tencent.mm"
-                                                          content-desc="" checkable="false" checked="false"
-                                                          clickable="false" enabled="true" focusable="false"
-                                                          focused="false" scrollable="false" long-clickable="false"
-                                                          password="false" selected="false"
-                                                          bounds="[156,1742][912,1918]">
-                                                        <node NAF="true" index="0" text=""
-                                                              resource-id="com.tencent.mm:id/pq"
-                                                              class="android.view.View" package="com.tencent.mm"
-                                                              content-desc="" checkable="false" checked="false"
-                                                              clickable="true" enabled="true" focusable="true"
-                                                              focused="false" scrollable="false" long-clickable="true"
-                                                              password="false" selected="false"
-                                                              bounds="[156,1742][912,1918]"/>
-                                                    </node>
-                                                </node>
-                                            </node>
-                                            <node index="5" text="" resource-id="" class="android.widget.RelativeLayout"
-                                                  package="com.tencent.mm" content-desc="" checkable="false"
-                                                  checked="false" clickable="true" enabled="true" focusable="false"
-                                                  focused="false" scrollable="false" long-clickable="true"
-                                                  password="false" selected="false" bounds="[0,1934][1080,2076]">
-                                                <node index="0" text="" resource-id="com.tencent.mm:id/ab"
-                                                      class="android.widget.LinearLayout" package="com.tencent.mm"
-                                                      content-desc="" checkable="false" checked="false"
-                                                      clickable="false" enabled="true" focusable="false" focused="false"
-                                                      scrollable="false" long-clickable="false" password="false"
-                                                      selected="false" bounds="[0,1934][1080,2076]">
-                                                    <node index="0" text="" resource-id="com.tencent.mm:id/are"
-                                                          class="android.widget.RelativeLayout" package="com.tencent.mm"
-                                                          content-desc="" checkable="false" checked="false"
-                                                          clickable="false" enabled="true" focusable="false"
-                                                          focused="false" scrollable="false" long-clickable="false"
-                                                          password="false" selected="false"
-                                                          bounds="[16,1934][156,2074]">
-                                                        <node index="0" text="" resource-id="" class="android.view.View"
-                                                              package="com.tencent.mm" content-desc="" checkable="false"
-                                                              checked="false" clickable="false" enabled="true"
-                                                              focusable="false" focused="false" scrollable="false"
-                                                              long-clickable="false" password="false" selected="false"
-                                                              bounds="[16,1934][156,2074]"/>
-                                                        <node index="1" text="" resource-id="com.tencent.mm:id/po"
-                                                              class="android.widget.ImageView" package="com.tencent.mm"
-                                                              content-desc="建勋头像" checkable="false" checked="false"
-                                                              clickable="true" enabled="true" focusable="false"
-                                                              focused="false" scrollable="false" long-clickable="true"
-                                                              password="false" selected="false"
-                                                              bounds="[16,1934][156,2074]"/>
-                                                        <node index="2" text="" resource-id=""
-                                                              class="android.widget.ImageView" package="com.tencent.mm"
-                                                              content-desc="" checkable="false" checked="false"
-                                                              clickable="false" enabled="true" focusable="false"
-                                                              focused="false" scrollable="false" long-clickable="false"
-                                                              password="false" selected="false"
-                                                              bounds="[16,1934][156,2074]"/>
-                                                    </node>
-                                                    <node index="1" text="" resource-id=""
-                                                          class="android.widget.LinearLayout" package="com.tencent.mm"
-                                                          content-desc="" checkable="false" checked="false"
-                                                          clickable="false" enabled="true" focusable="false"
-                                                          focused="false" scrollable="false" long-clickable="false"
-                                                          password="false" selected="false"
-                                                          bounds="[156,1950][298,2060]">
-                                                        <node NAF="true" index="0" text=""
-                                                              resource-id="com.tencent.mm:id/pq"
-                                                              class="android.view.View" package="com.tencent.mm"
-                                                              content-desc="" checkable="false" checked="false"
-                                                              clickable="true" enabled="true" focusable="true"
-                                                              focused="false" scrollable="false" long-clickable="true"
-                                                              password="false" selected="false"
-                                                              bounds="[156,1950][298,2060]"/>
-                                                    </node>
-                                                </node>
-                                            </node>
-                                        </node>
-                                    </node>
-                                </node>
-                                <node index="1" text="" resource-id="com.tencent.mm:id/apr"
-                                      class="android.widget.FrameLayout" package="com.tencent.mm" content-desc=""
-                                      checkable="false" checked="false" clickable="false" enabled="true"
-                                      focusable="false" focused="false" scrollable="false" long-clickable="false"
-                                      password="false" selected="false" bounds="[0,2092][1080,2148]">
-                                    <node index="0" text="" resource-id="com.tencent.mm:id/aq8"
-                                          class="android.widget.LinearLayout" package="com.tencent.mm" content-desc=""
-                                          checkable="false" checked="false" clickable="false" enabled="true"
-                                          focusable="false" focused="false" scrollable="false" long-clickable="false"
-                                          password="false" selected="false" bounds="[0,2092][1080,2148]">
-                                        <node index="0" text="" resource-id="com.tencent.mm:id/aq9"
+                                              bounds="[43,129][107,193]"/>
+                                        <node index="1" text="" resource-id="com.tencent.mm:id/c4j"
                                               class="android.widget.LinearLayout" package="com.tencent.mm"
                                               content-desc="" checkable="false" checked="false" clickable="false"
                                               enabled="true" focusable="false" focused="false" scrollable="false"
                                               long-clickable="false" password="false" selected="false"
-                                              bounds="[0,2092][1080,2148]">
-                                            <node index="0" text="" resource-id="" class="android.widget.LinearLayout"
+                                              bounds="[118,118][924,204]">
+                                            <node index="0" text="" resource-id="" class="android.widget.RelativeLayout"
                                                   package="com.tencent.mm" content-desc="" checkable="false"
                                                   checked="false" clickable="false" enabled="true" focusable="false"
                                                   focused="false" scrollable="false" long-clickable="false"
-                                                  password="false" selected="false" bounds="[22,2092][1080,2148]">
-                                                <node index="0" text="" resource-id="com.tencent.mm:id/aqc"
-                                                      class="android.widget.ImageButton" package="com.tencent.mm"
-                                                      content-desc="切换到按住说话" checkable="false" checked="false"
-                                                      clickable="true" enabled="true" focusable="true" focused="false"
-                                                      scrollable="false" long-clickable="false" password="false"
-                                                      selected="false" bounds="[22,2126][108,2148]"/>
-                                                <node index="1" text="" resource-id="com.tencent.mm:id/aqd"
-                                                      class="android.widget.ScrollView" package="com.tencent.mm"
+                                                  password="false" selected="false" bounds="[118,118][924,204]">
+                                                <node index="1" text="" resource-id="com.tencent.mm:id/c5j"
+                                                      class="android.widget.LinearLayout" package="com.tencent.mm"
                                                       content-desc="" checkable="false" checked="false"
-                                                      clickable="false" enabled="true" focusable="true" focused="false"
+                                                      clickable="false" enabled="true" focusable="false" focused="false"
                                                       scrollable="false" long-clickable="false" password="false"
-                                                      selected="false" bounds="[130,2114][842,2148]">
-                                                    <node NAF="true" index="0" text=""
-                                                          resource-id="com.tencent.mm:id/aqe"
+                                                      selected="false" bounds="[118,118][924,204]">
+                                                    <node index="0" text="13601014262"
+                                                          resource-id="com.tencent.mm:id/m7"
                                                           class="android.widget.EditText" package="com.tencent.mm"
                                                           content-desc="" checkable="false" checked="false"
                                                           clickable="true" enabled="true" focusable="true"
                                                           focused="false" scrollable="false" long-clickable="true"
                                                           password="false" selected="false"
-                                                          bounds="[130,2114][842,2148]"/>
+                                                          bounds="[118,118][924,204]"/>
                                                 </node>
-                                                <node index="2" text="" resource-id=""
-                                                      class="android.widget.RelativeLayout" package="com.tencent.mm"
-                                                      content-desc="" checkable="false" checked="false"
-                                                      clickable="false" enabled="true" focusable="false" focused="false"
-                                                      scrollable="false" long-clickable="false" password="false"
-                                                      selected="false" bounds="[864,2126][950,2148]">
-                                                    <node index="0" text="" resource-id="com.tencent.mm:id/aqg"
-                                                          class="android.widget.ImageButton" package="com.tencent.mm"
-                                                          content-desc="表情" checkable="false" checked="false"
-                                                          clickable="true" enabled="true" focusable="true"
-                                                          focused="false" scrollable="false" long-clickable="false"
-                                                          password="false" selected="false"
-                                                          bounds="[864,2126][950,2148]"/>
-                                                </node>
-                                                <node index="3" text="" resource-id="com.tencent.mm:id/aqi"
-                                                      class="android.widget.LinearLayout" package="com.tencent.mm"
-                                                      content-desc="" checkable="false" checked="false"
-                                                      clickable="false" enabled="true" focusable="false" focused="false"
-                                                      scrollable="false" long-clickable="false" password="false"
-                                                      selected="false" bounds="[950,2094][1080,2148]">
-                                                    <node index="0" text="" resource-id=""
-                                                          class="android.widget.RelativeLayout" package="com.tencent.mm"
-                                                          content-desc="" checkable="false" checked="false"
-                                                          clickable="false" enabled="true" focusable="false"
-                                                          focused="false" scrollable="false" long-clickable="false"
-                                                          password="false" selected="false"
-                                                          bounds="[950,2094][1080,2148]">
-                                                        <node index="0" text="" resource-id="com.tencent.mm:id/aqk"
-                                                              class="android.widget.ImageButton"
-                                                              package="com.tencent.mm" content-desc="更多功能按钮，已折叠"
-                                                              checkable="false" checked="false" clickable="true"
-                                                              enabled="true" focusable="true" focused="false"
-                                                              scrollable="false" long-clickable="false" password="false"
-                                                              selected="false" bounds="[972,2126][1058,2148]"/>
-                                                    </node>
-                                                </node>
+                                                <node NAF="true" index="2" text="" resource-id="com.tencent.mm:id/m3"
+                                                      class="android.widget.ImageButton" package="com.tencent.mm"
+                                                      content-desc="" checkable="false" checked="false" clickable="true"
+                                                      enabled="true" focusable="true" focused="false" scrollable="false"
+                                                      long-clickable="false" password="false" selected="false"
+                                                      bounds="[849,129][913,193]"/>
                                             </node>
+                                        </node>
+                                    </node>
+                                    <node index="1" text="取消" resource-id="com.tencent.mm:id/b1p"
+                                          class="android.widget.TextView" package="com.tencent.mm" content-desc=""
+                                          checkable="false" checked="false" clickable="true" enabled="true"
+                                          focusable="true" focused="false" scrollable="false" long-clickable="false"
+                                          password="false" selected="false" bounds="[924,130][1080,192]"/>
+                                </node>
+                            </node>
+                        </node>
+                    </node>
+                    <node index="1" text="" resource-id="android:id/content" class="android.widget.FrameLayout"
+                          package="com.tencent.mm" content-desc="" checkable="false" checked="false" clickable="false"
+                          enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false"
+                          password="false" selected="false" bounds="[0,226][1080,2148]">
+                        <node index="0" text="" resource-id="com.tencent.mm:id/dj8" class="android.widget.FrameLayout"
+                              package="com.tencent.mm" content-desc="" checkable="false" checked="false"
+                              clickable="false" enabled="true" focusable="false" focused="false" scrollable="false"
+                              long-clickable="false" password="false" selected="false" bounds="[0,226][1080,2148]">
+                            <node index="0" text="" resource-id="com.tencent.mm:id/c4y"
+                                  class="android.widget.FrameLayout" package="com.tencent.mm" content-desc=""
+                                  checkable="false" checked="false" clickable="true" enabled="true" focusable="true"
+                                  focused="false" scrollable="false" long-clickable="false" password="false"
+                                  selected="false" bounds="[0,226][1080,2148]">
+                                <node index="0" text="" resource-id="com.tencent.mm:id/c4z"
+                                      class="android.widget.ListView" package="com.tencent.mm" content-desc=""
+                                      checkable="false" checked="false" clickable="false" enabled="true"
+                                      focusable="true" focused="false" scrollable="false" long-clickable="false"
+                                      password="false" selected="false" bounds="[0,226][1080,2148]">
+                                    <node index="0" text="" resource-id="" class="android.widget.RelativeLayout"
+                                          package="com.tencent.mm" content-desc="" checkable="false" checked="false"
+                                          clickable="true" enabled="true" focusable="false" focused="false"
+                                          scrollable="false" long-clickable="false" password="false" selected="false"
+                                          bounds="[0,226][1080,399]">
+                                        <node index="0" text="" resource-id="com.tencent.mm:id/s4"
+                                              class="android.widget.LinearLayout" package="com.tencent.mm"
+                                              content-desc="" checkable="false" checked="false" clickable="false"
+                                              enabled="true" focusable="false" focused="false" scrollable="false"
+                                              long-clickable="false" password="false" selected="false"
+                                              bounds="[0,226][1080,399]">
+                                            <node index="0" text="" resource-id="com.tencent.mm:id/tb"
+                                                  class="android.widget.ImageView" package="com.tencent.mm"
+                                                  content-desc="" checkable="false" checked="false" clickable="false"
+                                                  enabled="true" focusable="false" focused="false" scrollable="false"
+                                                  long-clickable="false" password="false" selected="false"
+                                                  bounds="[43,247][173,377]"/>
+                                            <node index="1" text="搜索:13601014262" resource-id="com.tencent.mm:id/o_"
+                                                  class="android.widget.TextView" package="com.tencent.mm"
+                                                  content-desc="" checkable="false" checked="false" clickable="false"
+                                                  enabled="true" focusable="false" focused="false" scrollable="false"
+                                                  long-clickable="false" password="false" selected="false"
+                                                  bounds="[216,281][1080,343]"/>
                                         </node>
                                     </node>
                                 </node>
