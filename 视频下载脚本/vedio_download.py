@@ -37,7 +37,12 @@ def video_downloader(vedio_path, vedio_name, video_url):
 
 
 if __name__ == "__main__":
-    vedio_path = r'C:\Users\lenovo\PycharmProjects\ArticalProject\ArticalProject\utls\视频'
-    vedio_name = "1.mp4"
-    url = 'https://v-cdn.zjol.com.cn/293589.mp4?userId=b2388088-da01-4020-b6f7-7b6e76d4c1ee'
-    video_downloader(vedio_path, vedio_name, url)
+    vedio_path = r'C:\Users\lenovo\PycharmProjects\leetcode-python-\视频下载脚本'
+    flag = True
+    i = 1
+    while flag:
+        vedio_name = "{}.ts".format(i)
+        url = 'https://xuecdn2.aliyunedu.net/courselesson-22/20190606022823-ge16f2o98fcokoos-conv/e_20190606022823-ge16f2o98fcokoos-conv_hd_seg_{}.ts'.format(
+            i)
+        video_downloader(vedio_path, vedio_name, url)
+        i += 1
