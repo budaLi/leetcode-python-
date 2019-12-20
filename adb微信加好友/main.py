@@ -2,9 +2,9 @@
 # -*- coding:utf-8 -*-
 
 """
- @author: valor
+ @author: libuda
  @file: main.py
- @time: 2018/11/5 15:59
+ @time: 2019/12/5 15:59
 """
 
 import traceback
@@ -105,6 +105,52 @@ class Adb:
         self._nodes = None  # 缓存当前查找到的nodes => type 列表 | value 字典
         self._x = None
         self._y = None
+
+    def get_phone_resolution(self):
+        """
+        获取设备分辨率
+        :return:
+        """
+        displayPowerState = os.popen(
+            "adb shell wm size").read().strip()  # Physical size: 1080x2244
+        state = str(displayPowerState).split(" ")[-1]
+        width, heidht = state.strip().split("x")
+        return int(width), int(heidht)
+
+    def get_center(self):
+        """
+        获取设备中心点
+        :return:
+        """
+        width, height = self.get_phone_resolution()
+        return width / 2, height / 2
+
+    def swipe(self, start=None, end=None):
+        """
+        滑动屏幕 默认从屏幕底部往上滑
+        :param start:
+        :param end:
+        :return:
+        """
+        if start is None:
+            start = self.get_center()
+        x1, y1 = start
+        if end is None:
+            end = x1, y1 - int(y1 / 2)
+        x2, y2 = end
+        cmd = self._baseShell + "shell input swipe " + str(x1) + " " + str(y1) + " " + str(x2) + " " + str(y2)
+        print(cmd)
+        os.system(cmd)
+
+    def show_current_pk(self):
+        """
+        展示当前所在app的包名
+        :return:
+        """
+        displayPowerState = os.popen(
+            "adb shell dumpsys  window windows |findstr -i current").read().strip()  # 读出来这种 mAwake=truemScreenOnEarly=true mScreenOnFully=true  字节类型
+        state = str(displayPowerState).split(" ")[-1]
+        return state
 
     def adb_keyboard(self, event):
         """
@@ -555,6 +601,7 @@ class Main:
 
     def add_friends(self, phone):
         # 输入号码
+        phone = str(int(phone))
         self._adb.adb_input(phone)
         # 点击搜索
 
@@ -607,6 +654,33 @@ class Main:
         # 清空已输入的字符
         self.clean_phone()
 
+    def fuck(self):
+        """
+        发99乘法表   点进输入框  随便输入一个字符 出现“发送”两个字就可以用此函数了
+        :return:
+        """
+        bounds = self._adb.find_node_by_text("发送")
+        while 1:
+            for i in range(1, 9):
+                for j in range(1, i):
+                    tem = str(i) + "*" + str(j) + "=" + str(i * j)
+                    print(tem)
+                    self._adb.adb_input(tem)
+                    self._adb.click_use_bounds(bounds)
+
+    def Imsorry(self):
+        """
+        道歉  使用同上
+        :return:
+        """
+        bounds = self._adb.find_node_by_text("发送")
+        i = 1
+        tem = "Im.Sorry.DuDu"
+        while 1:
+            self._adb.adb_input(tem)
+            self._adb.click_use_bounds(bounds)
+            i +=1
+
 
     def main(self):
         #读取手机号数据
@@ -616,15 +690,15 @@ class Main:
             self.add_friends(phone)
 
     def test(self):
-
-        # 唤醒屏幕
-        self._adb.wake_up_the_screen()
-        # 解锁 此处只能滑动解锁
-        self._adb.unlock()
-        # 启动微信
-        self._adb.start_wechat()
-        # 判断微信是否启动
-        self._adb.check_wechat_is_start()
+        global phone_can_write_index
+        # # 唤醒屏幕
+        # self._adb.wake_up_the_screen()
+        # # 解锁 此处只能滑动解锁
+        # self._adb.unlock()
+        # # 启动微信
+        # self._adb.start_wechat()
+        # # 判断微信是否启动
+        # self._adb.check_wechat_is_start()
         # 添加好友
         self._adb.click_add_friend()
         # 点击那两个 微信号/手机号
@@ -633,10 +707,11 @@ class Main:
         phone_datas = [get_keywords_data(phoe_tables, i, phone_get_col) for i in
                        range(1, phoe_tables.nrows)]
         for phone in phone_datas:
+
             self.add_friends(phone)
+            phone_can_write_index +=1
 
 
 if __name__ == '__main__':
     fun = Main()
-    # fun.main()
     fun.test()
