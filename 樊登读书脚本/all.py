@@ -1,6 +1,6 @@
 # @Time    : 2019/12/2 11:17
 # @Author  : Libuda
-# @FileName: spider.py
+# @FileName: 加密spider.py
 # @Software: PyCharm
 import xlrd
 import smtplib  # 发送邮件 连接邮件服务器
@@ -149,15 +149,16 @@ def get_phone_number(star_date, end_date):
                     flag = False
                     break
                 else:
-                    if res_dic['phone_number'] not in totle_break_set:
-                        totle_break_set.add(res_dic['phone_number'])
+                    if (res_dic['phone_number'],res_dic['date']) not in totle_break_set:
+                        totle_break_set.add((res_dic['phone_number'],res_dic['date']))
+                        result.append([res_dic['phone_number'], res_dic['date']])
                         # print("已获取手机号：{}".format(res_dic['phone_number']))
                     else:
                         flag = False
                         break
                         # pass
 
-                result.append([res_dic['phone_number'], res_dic['date']])
+
             except Exception as e :
                 # print(e)
                 flag = False
@@ -165,19 +166,20 @@ def get_phone_number(star_date, end_date):
         try:
             #这儿要处理
             driver.find_element_by_css_selector('.ant-pagination-next > a').click()
+            time.sleep(wait_time)
         except Exception as e:
             print(e)
-            try:
-                driver.find_element_by_xpath(
-                    '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[12]').click()
-            except Exception as e:
-                print(e)
-                try:
-                    driver.find_element_by_xpath(
-                        '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[10]').click()
-                except Exception as e:
-                    print(e)
-                    flag = False
+            # try:
+            #     driver.find_element_by_xpath(
+            #         '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[12]').click()
+            # except Exception as e:
+            #     print(e)
+            #     try:
+            #         driver.find_element_by_xpath(
+            #             '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[10]').click()
+            #     except Exception as e:
+            #         print(e)
+            #         flag = False
 
     tem_break = deepcopy.deepcopy(totle_break_set)
     print("已爬取到新手机号：{}个".format(len(result)))
@@ -187,8 +189,9 @@ def get_phone_number(star_date, end_date):
         try:
             for i in range(10):
                 tem_break.pop()
-            driver.find_element_by_xpath(
-                '//*[@id="root"]/div/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[2]/a').click()
+            driver.find_element_by_css_selector('.ant-pagination-prev > a').click()
+            # driver.find_element_by_xpath(
+            #     '//*[@id="root"]/div/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[2]/a').click()
             time.sleep(wait_time)
         except Exception as e:
             # print(e)

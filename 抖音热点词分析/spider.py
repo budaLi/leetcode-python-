@@ -1,6 +1,6 @@
 # @Time    : 2019/11/19 17:41
 # @Author  : Libuda
-# @FileName: spider.py
+# @FileName: 加密spider.py
 # @Software: PyCharm
 
 import time
@@ -11,7 +11,7 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('--disable-gpu')
 chrome_options.add_argument('window-size=1200,1100')
-driver = webdriver.Chrome(optinons=chrome_options,
+driver = webdriver.Chrome(chrome_options=chrome_options,
                           executable_path=r'C:\Users\lenovo\PycharmProjects\Spider\chromedriver.exe')
 driver.get("https://www.iesdouyin.com/share/billboard/")
 time.sleep(5)

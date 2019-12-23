@@ -1,6 +1,6 @@
 # @Time    : 2019/12/2 11:17
 # @Author  : Libuda
-# @FileName: spider.py
+# @FileName: 加密spider.py
 # @Software: PyCharm
 import xlrd
 import smtplib  # 发送邮件 连接邮件服务器
@@ -15,7 +15,6 @@ import base64
 config_parser = ConfigParser()
 config_parser.read('config.cfg', encoding="utf-8-sig")
 config = config_parser['default']
-
 
 user_agent = "mozilla/5.0 (linux; u; android 4.1.2; zh-cn; mi-one plus build/jzo54k) applewebkit/534.30 (khtml, like gecko) version/4.0 mobile safari/534.30 micromessenger/5.0.1.352"
 url = "https://feiyu.oceanengine.com/feiyu/login"
@@ -123,6 +122,11 @@ def get_new_phone(start, end):
                     res.append([one['telphone'], otherStyleTime])
         else:
             break
+    start = time.localtime(start)
+    start = time.strftime("%Y-%m-%d %H:%M:%S", start)
+    end = time.localtime(end)
+    end = time.strftime("%Y-%m-%d %H:%M:%S", end)
+    print("当前时间段为:{}---{}".format(start, end))
     print("新爬取手机号{}个".format(len(res)))
     print("手机号:{}".format(res))
     return res

@@ -1,6 +1,6 @@
 # @Time    : 2019/11/20 15:40
 # @Author  : Libuda
-# @FileName: spider.py
+# @FileName: 加密spider.py
 # @Software: PyCharm
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys

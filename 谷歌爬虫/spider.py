@@ -1,6 +1,6 @@
 # @Time    : 2019/11/13 18:14
 # @Author  : Libuda
-# @FileName: spider.py
+# @FileName: 加密spider.py
 # @Software: PyCharm
 import json
 import requests
