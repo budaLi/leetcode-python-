@@ -253,6 +253,7 @@ def main():
     crawl_count = 1
     while 1:
         if crawl_count == 1:
+            global end_date
             print("第1次爬取")
             # 测试
             phone_data = get_new_phone(start_date, end_date)
@@ -263,6 +264,7 @@ def main():
             print("第{}次爬取".format(crawl_count))
             times = int(time.time())
             phone_data = get_new_phone(end_date, times)
+            end_date = times
             register(phone_data)
             crawl_count += 1
 
