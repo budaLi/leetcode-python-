@@ -104,24 +104,37 @@ def write_to_excel(file_path, row, col, value):
 
 
 def get_new_phone(start, end):
+
     res = []
     headers = {
         "cookie": "ccid=ac428488c168899d07df951f7354ba55; msh=GqsdyEcveB1HjZLIZKT5ALDFoAE; sso_auth_status=26a7e62720484fd24d45830a4b543edb; sso_uid_tt=89b572982452ca2533fc5c49e4a3540e; toutiao_sso_user=4cd8bb9233af1784dbf3f269d15233d8; passport_auth_status=9f2216029d9ce53808046ea02135feff%2C7f9ddb5f3555a4e4db4cae3b62ed1213; sid_guard=3c3144f57c28219795bc821cf887fc79%7C1576146759%7C5184000%7CMon%2C+10-Feb-2020+10%3A32%3A39+GMT; uid_tt=e239ea11351745eb4404675817d217c5; sid_tt=3c3144f57c28219795bc821cf887fc79; sessionid=3c3144f57c28219795bc821cf887fc79; toutiao-crm-session=s%3Ab88ca4f2-1cca-11ea-adad-ac1f6b0ad100b88ca4f2-1cca-11ea-adad-ac1f6b0ad100sD3tpStsTyYsYE2aa56BtD22.jjnP%2F%2FLSX4oqXo%2FC15QML%2FFEvTN9OYGUoBHcVGkmgz0; gr_user_id=6892c2d6-d651-4a12-adc2-6c3b37e7c414; gr_session_id_9952092a9d995794=05a5816c-4d44-4447-8e5d-a813f5bd7f61; gr_cs1_05a5816c-4d44-4447-8e5d-a813f5bd7f61=advertiser_id%3A1645790969889795; gr_session_id_9952092a9d995794_05a5816c-4d44-4447-8e5d-a813f5bd7f61=true"}
     base_url = "https://feiyu.oceanengine.com/crm/v2/api/clue/public/?_t=1576147755&page={}&page_size=20&clue_public_status=0&start_time={}&end_time={}"
     i = 1
     while True:
-        response = requests.get(base_url.format(i, start, end), headers=headers).json()
-        if response['data']:
-            i += 1
-            for one in response['data']:
-                # print(one['telphone'])
-                if one['telphone'] not in totle_break_set:
+        try:
+            response = requests.get(base_url.format(i, start, end), headers=headers).json()
+            if response['data']:
+                i += 1
+                for one in response['data']:
+                    # print(one['telphone'])
+                    # if one['telphone'] not in totle_break_set:
                     timeStamp = int(one['create_time'])
                     timeArray = time.localtime(timeStamp)
                     otherStyleTime = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)
                     res.append([one['telphone'], otherStyleTime])
-        else:
-            break
+            else:
+                break
+        except Exception as e:
+            print(e)
+            starts = time.localtime(start)
+            starts = time.strftime("%Y-%m-%d %H:%M:%S", starts)
+            ends = time.localtime(end)
+            ends = time.strftime("%Y-%m-%d %H:%M:%S", ends)
+            print("网络可能异常...将在{}秒后对本时间段重新进行爬取 当前时间段为：{}----{}".format(time_jiange, starts, ends))
+            time.sleep(time_jiange)
+            return get_new_phone(start, end)
+
+
     start = time.localtime(start)
     start = time.strftime("%Y-%m-%d %H:%M:%S", start)
     end = time.localtime(end)
