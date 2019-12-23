@@ -16,16 +16,14 @@ config_parser = ConfigParser()
 config_parser.read('config.cfg', encoding="utf-8-sig")
 config = config_parser['default']
 
+user_list = ['1410000000@qq.com', '95499954@qq.com']
 
-
-user_list = ['1364826576@qq.com']
-
-phone_num = 13281890000
+phone_num = 13628398278
 wait_time = 3  # 各个阶段等待时间
-time_jiange = 30  # 时间间隔 隔多长时间执行脚本一次
-start_date = datetime.datetime.strptime("2019-12-1 00:00:00", "%Y-%m-%d %H:%M:%S")  # 起始时间
-end_date = datetime.datetime.strptime("2019-12-13 18:00:00", "%Y-%m-%d %H:%M:%S")  # 结束时间
-ding_num = 5  # 链接条数报警阈值
+time_jiange = 300  # 时间间隔 隔多长时间执行脚本一次
+start_date = datetime.datetime.strptime("2019-12-17 00:00:00", "%Y-%m-%d %H:%M:%S")  # 起始时间
+end_date = datetime.datetime.strptime("2019-12-31 00:00:00", "%Y-%m-%d %H:%M:%S")  # 结束时间
+ding_num = 100  # 链接条数报警阈值
 # 更换头部
 options = webdriver.ChromeOptions()
 mobile_emulation = {
@@ -124,7 +122,7 @@ def get_phone_number(star_date, end_date):
     # 搜索按钮
     try:
         driver.find_element_by_xpath(
-            '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[2]/div[4]/span[2]/span/span').click()
+            '//*[@id="root"]/div/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[2]/div[4]/span[2]/span/span').click()
     except Exception as e:
         pass
 
@@ -144,54 +142,62 @@ def get_phone_number(star_date, end_date):
                 res_dic['phone_number'] = driver.find_element_by_xpath(num_tem.format(i)).text
                 res_dic['date'] = datetime.datetime.strptime(driver.find_element_by_xpath(date_tem.format(i)).text,
                                                              "%Y.%m.%d %H:%M:%S")
-
                 if res_dic['date'] < star_date or res_dic['date'] > end_date:
                     flag = False
                     break
                 else:
-                    if res_dic['phone_number'] not in totle_break_set:
-                        totle_break_set.add(res_dic['phone_number'])
+                    if (res_dic['phone_number'], res_dic['date']) not in totle_break_set:
+                        totle_break_set.add((res_dic['phone_number'], res_dic['date']))
+                        result.append([res_dic['phone_number'], res_dic['date']])
                         # print("已获取手机号：{}".format(res_dic['phone_number']))
                     else:
                         flag = False
                         break
-                        # pass
 
-                result.append([res_dic['phone_number'], res_dic['date']])
             except Exception as e :
-                # print(e)
+                print(e)
                 flag = False
                 break
         try:
-            #这儿要处理
             driver.find_element_by_css_selector('.ant-pagination-next > a').click()
         except Exception as e:
-            print(e)
-            try:
-                driver.find_element_by_xpath(
-                    '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[12]').click()
-            except Exception as e:
-                print(e)
-                try:
-                    driver.find_element_by_xpath(
-                        '//*[@id="root"]/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[10]').click()
-                except Exception as e:
-                    print(e)
-                    flag = False
+            # time.sleep(wait_time)
+            driver.find_element_by_css_selector('.ant-pagination-next > a').click()
+            flag = False
+            # print(e)
+            # try:
+            #     driver.find_element_by_xpath('//*[@id="root"]/div/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[12]/a').click()
+            # except Exception as e:
+            #     print(e)
+            #     try:
+            #         driver.find_element_by_xpath(
+            #              '//*[@id="root"]/div/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[11]/a').click()
+            #     except Exception as e:
+            #         print(e)
+            #         try:
+            #             driver.find_element_by_xpath(
+            #                 '//*[@id="root"]/div/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[10]/a'
+            #                 '//*[@id="root"]/div/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[10]/a').click()
+            #         except Exception as e:
+            #             # print(e)
+            #             flag = False
 
     tem_break = deepcopy.deepcopy(totle_break_set)
     print("已爬取到新手机号：{}个".format(len(result)))
+    print(result)
     print("翻页结束,等待页数回滚中。。。")
     pre_flag = True
     while pre_flag:
         try:
             for i in range(10):
                 tem_break.pop()
-            driver.find_element_by_xpath(
-                '//*[@id="root"]/div/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[2]/a').click()
+            # driver.find_element_by_xpath(
+            #     '//*[@id="root"]/div/div[2]/div[1]/div/div/div[3]/div[1]/div[2]/div[3]/div/div/div/div/div/ul/li[2]/a').click()
+            driver.find_element_by_css_selector(".ant-pagination-prev > a").click()
             time.sleep(wait_time)
         except Exception as e:
-            # print(e)
+            print(e)
+            driver.find_element_by_css_selector(".ant-pagination-prev > a").click()
             pre_flag = False
             print("回滚结束")
 
@@ -320,8 +326,8 @@ def register(phone_data):
                 pass
 
     # 发邮件
-    send.send_test(user_list, 0)
-    print("链接已经全部用完 请及时补充！")
+                # send.send_test(user_list, 0)
+                # print("链接已经全部用完 请及时补充！")
                 # print(e)
 
 
@@ -330,22 +336,13 @@ def main():
     windows = ""
     second_window = ''
     while 1:
-
-        # time_str = datetime.datetime.strptime(time_str, "%Y-%m-%d %H:%M:%S")
-        # print(times)
-        # # s="2019.12.02 13:56:20"
-        # # print(datetime.datetime.strptime(s,"%Y.%m.%d %H:%M:%S")<times)
         if crawl_count == 1:
             print("第1次爬取")
-            # driver.get("https://e.douyin.com/site/manage-center/user-manage")
             driver.get("https://e.douyin.com/site/")
 
             print("请您进行登录及手动进行所有的筛选")
             yes = input("您是否已确认进行爬取")
-            # cookie= driver.get_cookies()
-            # driver.get("https://e.douyin.com/site/manage-center/user-manage")
             phone_data = get_phone_number(start_date, end_date)
-            # print([phone for phone in phone_data[0]])
             windows = driver.current_window_handle
             js = 'window.open("https://www.baidu.com");'
             driver.execute_script(js)
@@ -354,8 +351,6 @@ def main():
                     driver.switch_to.window(wins)
             second_window = driver.current_window_handle
             y = input("是否设置完毕")
-            # 测试
-            # phone_data = [[phone, 0] for phone in [13945868092, 15169722520]]
             register(phone_data)
             driver.switch_to.window(windows)
 
