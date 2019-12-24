@@ -141,7 +141,7 @@ def get_new_phone(start, end):
     end = time.strftime("%Y-%m-%d %H:%M:%S", end)
     print("当前时间段为:{}---{}".format(start, end))
     print("新爬取手机号{}个".format(len(res)))
-    totle += res
+    totle += len(res)
     print("手机号:{}".format(res))
     print("当前共爬取手机号：{}个".format(totle))
     return res
@@ -268,6 +268,8 @@ def register(phone_data):
             except Exception as e:
                 pass
 
+    print("当前链接总数：{}，已使用链接数：{}".format(link_tables.nrows - 1, totle_link))
+
 
 def main():
     crawl_count = 1
@@ -280,7 +282,6 @@ def main():
             phone_data = get_new_phone(start_date, end_date)
             y = input("是否设置完毕")
             register(phone_data)
-            print("当前已使用链接数：{}".format(totle_link))
             crawl_count += 1
             print("=" * 30)
         else:
@@ -290,7 +291,6 @@ def main():
             phone_data = get_new_phone(end_date, times)
             end_date = times
             register(phone_data)
-            print("当前已使用链接数：{}".format(totle_link))
             crawl_count += 1
             print("=" * 30)
 

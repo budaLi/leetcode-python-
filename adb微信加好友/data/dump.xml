@@ -1,134 +1,435 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <hierarchy rotation="0">
-    <node index="0" text="" resource-id="" class="android.widget.FrameLayout" package="com.tencent.mm" content-desc=""
-          checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false"
-          scrollable="false" long-clickable="false" password="false" selected="false" bounds="[0,0][1080,2148]">
-        <node index="0" text="" resource-id="" class="android.widget.LinearLayout" package="com.tencent.mm"
+    <node index="0" text="" resource-id="" class="android.widget.FrameLayout" package="com.android.systemui"
+          content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
+          focused="false" scrollable="false" long-clickable="false" password="false" selected="false"
+          bounds="[0,0][1080,2148]">
+        <node index="0" text="" resource-id="com.android.systemui:id/scrim_in_front" class="android.view.View"
+              package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false"
+              enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false"
+              password="false" selected="false" bounds="[0,0][1080,2148]"/>
+        <node index="1" text="" resource-id="com.android.systemui:id/scrim_behind" class="android.view.View"
+              package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false"
+              enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false"
+              password="false" selected="false" bounds="[0,0][1080,2148]"/>
+        <node index="2" text="" resource-id="" class="android.widget.FrameLayout" package="com.android.systemui"
               content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
               focused="false" scrollable="false" long-clickable="false" password="false" selected="false"
-              bounds="[0,0][1080,2148]">
-            <node index="0" text="" resource-id="" class="android.widget.FrameLayout" package="com.tencent.mm"
-                  content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
-                  focused="false" scrollable="false" long-clickable="false" password="false" selected="false"
-                  bounds="[0,96][1080,2148]">
-                <node index="0" text="" resource-id="com.tencent.mm:id/l0" class="android.view.ViewGroup"
-                      package="com.tencent.mm" content-desc="" checkable="false" checked="false" clickable="false"
-                      enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false"
-                      password="false" selected="false" bounds="[0,96][1080,2148]">
-                    <node index="0" text="" resource-id="com.tencent.mm:id/l1" class="android.widget.FrameLayout"
-                          package="com.tencent.mm" content-desc="" checkable="false" checked="false" clickable="false"
-                          enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false"
-                          password="false" selected="false" bounds="[0,96][1080,226]">
-                        <node index="0" text="" resource-id="com.tencent.mm:id/l2" class="android.view.ViewGroup"
-                              package="com.tencent.mm" content-desc="" checkable="false" checked="false"
-                              clickable="false" enabled="true" focusable="false" focused="false" scrollable="false"
-                              long-clickable="false" password="false" selected="false" bounds="[0,96][1080,226]">
-                            <node index="0" text="" resource-id="" class="android.widget.LinearLayout"
-                                  package="com.tencent.mm" content-desc="" checkable="false" checked="false"
-                                  clickable="false" enabled="true" focusable="false" focused="false" scrollable="false"
-                                  long-clickable="false" password="false" selected="false" bounds="[0,96][1080,226]">
-                                <node index="0" text="" resource-id="" class="android.widget.LinearLayout"
-                                      package="com.tencent.mm" content-desc="" checkable="false" checked="false"
+              bounds="[0,0][1080,2148]"/>
+        <node index="3" text="" resource-id="com.android.systemui:id/notification_panel"
+              class="android.widget.FrameLayout" package="com.android.systemui" content-desc="" checkable="false"
+              checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false"
+              long-clickable="false" password="false" selected="false" bounds="[0,0][1080,2148]">
+            <node index="0" text="" resource-id="com.android.systemui:id/notification_container_parent"
+                  class="android.widget.FrameLayout" package="com.android.systemui" content-desc="" checkable="false"
+                  checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false"
+                  long-clickable="false" password="false" selected="false" bounds="[0,0][1080,2148]">
+                <node index="0" text="" resource-id="com.android.systemui:id/qs_frame"
+                      class="android.widget.FrameLayout" package="com.android.systemui" content-desc=""
+                      checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
+                      focused="false" scrollable="false" long-clickable="false" password="false" selected="false"
+                      bounds="[0,0][1080,2148]"/>
+                <node index="1" text="" resource-id="com.android.systemui:id/notification_stack_scroller"
+                      class="android.widget.ScrollView" package="com.android.systemui" content-desc="" checkable="false"
+                      checked="false" clickable="false" enabled="true" focusable="false" focused="false"
+                      scrollable="false" long-clickable="false" password="false" selected="false"
+                      bounds="[12,12][1068,2148]"/>
+            </node>
+            <node index="1" text="" resource-id="com.android.systemui:id/hw_keyguard_bottom_area"
+                  class="android.widget.RelativeLayout" package="com.android.systemui" content-desc="" checkable="false"
+                  checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false"
+                  long-clickable="false" password="false" selected="false" bounds="[0,0][1080,2148]">
+                <node index="0" text="" resource-id="com.android.systemui:id/front_content"
+                      class="android.widget.RelativeLayout" package="com.android.systemui" content-desc=""
+                      checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
+                      focused="false" scrollable="false" long-clickable="false" password="false" selected="false"
+                      bounds="[0,0][1080,2148]">
+                    <node index="0" text="" resource-id="com.android.systemui:id/bottom_container"
+                          class="android.widget.FrameLayout" package="com.android.systemui" content-desc=""
+                          checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
+                          focused="false" scrollable="false" long-clickable="false" password="false" selected="false"
+                          bounds="[0,0][1080,2148]">
+                        <node index="0" text="" resource-id="com.android.systemui:id/magazine_detail_view"
+                              class="android.widget.LinearLayout" package="com.android.systemui" content-desc=""
+                              checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
+                              focused="false" scrollable="false" long-clickable="false" password="false"
+                              selected="false" bounds="[0,409][1080,2148]">
+                            <node index="0" text="" resource-id="com.android.systemui:id/magazine_description_view"
+                                  class="android.widget.LinearLayout" package="com.android.systemui" content-desc=""
+                                  checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
+                                  focused="false" scrollable="false" long-clickable="false" password="false"
+                                  selected="false" bounds="[48,1817][412,2148]">
+                                <node index="0" text="正在充电 74%" resource-id="com.android.systemui:id/charging_ownerinfo"
+                                      class="android.widget.TextView" package="com.android.systemui" content-desc=""
+                                      checkable="false" checked="false" clickable="false" enabled="true"
+                                      focusable="false" focused="false" scrollable="false" long-clickable="false"
+                                      password="false" selected="true" bounds="[57,1817][296,1870]"/>
+                                <node index="1" text="" resource-id="" class="android.widget.LinearLayout"
+                                      package="com.android.systemui" content-desc="" checkable="false" checked="false"
                                       clickable="false" enabled="true" focusable="false" focused="false"
                                       scrollable="false" long-clickable="false" password="false" selected="false"
-                                      bounds="[0,96][1080,226]">
-                                    <node index="0" text="" resource-id="" class="android.widget.LinearLayout"
-                                          package="com.tencent.mm" content-desc="" checkable="false" checked="false"
-                                          clickable="false" enabled="true" focusable="false" focused="false"
-                                          scrollable="false" long-clickable="false" password="false" selected="false"
-                                          bounds="[32,118][924,204]">
-                                        <node index="0" text="" resource-id="com.tencent.mm:id/r_"
-                                              class="android.widget.ImageView" package="com.tencent.mm" content-desc=""
-                                              checkable="false" checked="false" clickable="false" enabled="true"
-                                              focusable="false" focused="false" scrollable="false"
+                                      bounds="[48,1870][412,2148]">
+                                    <node index="0" text=""
+                                          resource-id="com.android.systemui:id/keyguard_status_view_face_palm"
+                                          class="android.widget.GridLayout" package="com.android.systemui"
+                                          content-desc="" checkable="false" checked="false" clickable="false"
+                                          enabled="true" focusable="false" focused="false" scrollable="false"
+                                          long-clickable="false" password="false" selected="false"
+                                          bounds="[48,1870][412,2148]">
+                                        <node index="0" text=""
+                                              resource-id="com.android.systemui:id/keyguard_clock_view"
+                                              class="android.widget.LinearLayout" package="com.android.systemui"
+                                              content-desc="" checkable="false" checked="false" clickable="false"
+                                              enabled="true" focusable="true" focused="false" scrollable="false"
                                               long-clickable="false" password="false" selected="false"
-                                              bounds="[43,129][107,193]"/>
-                                        <node index="1" text="" resource-id="com.tencent.mm:id/c4j"
-                                              class="android.widget.LinearLayout" package="com.tencent.mm"
+                                              bounds="[48,1870][412,2123]">
+                                            <node index="0" text="" resource-id="com.android.systemui:id/hw_clock_view"
+                                                  class="android.widget.RelativeLayout" package="com.android.systemui"
+                                                  content-desc="" checkable="false" checked="false" clickable="false"
+                                                  enabled="true" focusable="false" focused="false" scrollable="false"
+                                                  long-clickable="false" password="false" selected="false"
+                                                  bounds="[51,1870][412,2123]">
+                                                <node index="0" text=""
+                                                      resource-id="com.android.systemui:id/clock_parent"
+                                                      class="android.widget.FrameLayout" package="com.android.systemui"
+                                                      content-desc="" checkable="false" checked="false"
+                                                      clickable="false" enabled="true" focusable="true" focused="true"
+                                                      scrollable="false" long-clickable="false" password="false"
+                                                      selected="false" bounds="[51,1870][412,2123]">
+                                                    <node index="0" text="7:33"
+                                                          resource-id="com.android.systemui:id/clock_text"
+                                                          class="android.widget.TextView" package="com.android.systemui"
+                                                          content-desc="" checkable="false" checked="false"
+                                                          clickable="false" enabled="true" focusable="false"
+                                                          focused="false" scrollable="false" long-clickable="false"
+                                                          password="false" selected="false"
+                                                          bounds="[51,1870][412,2123]"/>
+                                                </node>
+                                            </node>
+                                        </node>
+                                        <node index="1" text="" resource-id="com.android.systemui:id/keyguard_date_view"
+                                              class="android.widget.LinearLayout" package="com.android.systemui"
                                               content-desc="" checkable="false" checked="false" clickable="false"
                                               enabled="true" focusable="false" focused="false" scrollable="false"
                                               long-clickable="false" password="false" selected="false"
-                                              bounds="[118,118][924,204]">
-                                            <node index="0" text="" resource-id="" class="android.widget.RelativeLayout"
-                                                  package="com.tencent.mm" content-desc="" checkable="false"
+                                              bounds="[57,2099][405,2148]">
+                                            <node index="0" text="" resource-id="" class="android.widget.LinearLayout"
+                                                  package="com.android.systemui" content-desc="" checkable="false"
                                                   checked="false" clickable="false" enabled="true" focusable="false"
                                                   focused="false" scrollable="false" long-clickable="false"
-                                                  password="false" selected="false" bounds="[118,118][924,204]">
-                                                <node index="1" text="" resource-id="com.tencent.mm:id/c5j"
-                                                      class="android.widget.LinearLayout" package="com.tencent.mm"
+                                                  password="false" selected="false" bounds="[57,2099][405,2148]">
+                                                <node index="0" text="12月24日星期二"
+                                                      resource-id="com.android.systemui:id/date_view"
+                                                      class="android.widget.TextView" package="com.android.systemui"
                                                       content-desc="" checkable="false" checked="false"
                                                       clickable="false" enabled="true" focusable="false" focused="false"
                                                       scrollable="false" long-clickable="false" password="false"
-                                                      selected="false" bounds="[118,118][924,204]">
-                                                    <node index="0" text="13601014262"
-                                                          resource-id="com.tencent.mm:id/m7"
-                                                          class="android.widget.EditText" package="com.tencent.mm"
-                                                          content-desc="" checkable="false" checked="false"
-                                                          clickable="true" enabled="true" focusable="true"
-                                                          focused="false" scrollable="false" long-clickable="true"
-                                                          password="false" selected="false"
-                                                          bounds="[118,118][924,204]"/>
-                                                </node>
-                                                <node NAF="true" index="2" text="" resource-id="com.tencent.mm:id/m3"
-                                                      class="android.widget.ImageButton" package="com.tencent.mm"
-                                                      content-desc="" checkable="false" checked="false" clickable="true"
-                                                      enabled="true" focusable="true" focused="false" scrollable="false"
-                                                      long-clickable="false" password="false" selected="false"
-                                                      bounds="[849,129][913,193]"/>
+                                                      selected="false" bounds="[57,2099][405,2148]"/>
                                             </node>
+                                            <node index="1" text="己亥年冬月廿九"
+                                                  resource-id="com.android.systemui:id/local_calendar_view"
+                                                  class="android.widget.TextView" package="com.android.systemui"
+                                                  content-desc="" checkable="false" checked="false" clickable="false"
+                                                  enabled="true" focusable="false" focused="false" scrollable="false"
+                                                  long-clickable="false" password="false" selected="false"
+                                                  bounds="[0,0][0,0]"/>
                                         </node>
                                     </node>
-                                    <node index="1" text="取消" resource-id="com.tencent.mm:id/b1p"
-                                          class="android.widget.TextView" package="com.tencent.mm" content-desc=""
-                                          checkable="false" checked="false" clickable="true" enabled="true"
-                                          focusable="true" focused="false" scrollable="false" long-clickable="false"
-                                          password="false" selected="false" bounds="[924,130][1080,192]"/>
                                 </node>
                             </node>
                         </node>
                     </node>
-                    <node index="1" text="" resource-id="android:id/content" class="android.widget.FrameLayout"
-                          package="com.tencent.mm" content-desc="" checkable="false" checked="false" clickable="false"
-                          enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false"
-                          password="false" selected="false" bounds="[0,226][1080,2148]">
-                        <node index="0" text="" resource-id="com.tencent.mm:id/dj8" class="android.widget.FrameLayout"
-                              package="com.tencent.mm" content-desc="" checkable="false" checked="false"
-                              clickable="false" enabled="true" focusable="false" focused="false" scrollable="false"
-                              long-clickable="false" password="false" selected="false" bounds="[0,226][1080,2148]">
-                            <node index="0" text="" resource-id="com.tencent.mm:id/c4y"
-                                  class="android.widget.FrameLayout" package="com.tencent.mm" content-desc=""
-                                  checkable="false" checked="false" clickable="true" enabled="true" focusable="true"
+                    <node index="1" text="" resource-id="com.android.systemui:id/lock_indication"
+                          class="android.widget.RelativeLayout" package="com.android.systemui" content-desc=""
+                          checkable="false" checked="false" clickable="true" enabled="true" focusable="true"
+                          focused="false" scrollable="false" long-clickable="false" password="false" selected="false"
+                          bounds="[0,144][1080,227]">
+                        <node index="0" text="" resource-id="com.android.systemui:id/lock_icon"
+                              class="android.widget.ImageView" package="com.android.systemui" content-desc="解锁"
+                              checkable="false" checked="false" clickable="false" enabled="true" focusable="true"
+                              focused="false" scrollable="false" long-clickable="false" password="false"
+                              selected="false" bounds="[433,163][478,208]"/>
+                        <node index="1" text="上滑解锁" resource-id="com.android.systemui:id/hw_keyguard_indication_text"
+                              class="android.widget.TextView" package="com.android.systemui" content-desc=""
+                              checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
+                              focused="false" scrollable="false" long-clickable="false" password="false"
+                              selected="false" bounds="[490,159][646,212]"/>
+                    </node>
+                    <node index="4" text="" resource-id="com.android.systemui:id/camera_container"
+                          class="android.widget.RelativeLayout" package="com.android.systemui" content-desc=""
+                          checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
+                          focused="false" scrollable="false" long-clickable="false" password="false" selected="false"
+                          bounds="[900,2064][1080,2148]">
+                        <node index="0" text="" resource-id="com.android.systemui:id/camera_imageview"
+                              class="android.widget.ImageView" package="com.android.systemui"
+                              content-desc="相机，双指滑动屏幕打开相机。" checkable="false" checked="false" clickable="false"
+                              enabled="true" focusable="true" focused="false" scrollable="false" long-clickable="false"
+                              password="false" selected="false" bounds="[972,2142][1044,2148]"/>
+                    </node>
+                </node>
+            </node>
+        </node>
+        <node index="4" text="" resource-id="com.android.systemui:id/backdrop" class="android.widget.FrameLayout"
+              package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false"
+              enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false"
+              password="false" selected="false" bounds="[0,0][1080,2148]">
+            <node index="0" text="" resource-id="com.android.systemui:id/keyguard_lock_screen_panel"
+                  class="android.widget.FrameLayout" package="com.android.systemui" content-desc="" checkable="false"
+                  checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false"
+                  long-clickable="false" password="false" selected="false" bounds="[0,0][1080,2148]"/>
+            <node index="1" text="" resource-id="com.android.systemui:id/backdrop_back"
+                  class="android.support.v4.view.ViewPager" package="com.android.systemui" content-desc=""
+                  checkable="false" checked="false" clickable="false" enabled="true" focusable="true" focused="false"
+                  scrollable="true" long-clickable="false" password="false" selected="false" bounds="[0,0][1080,2148]">
+                <node index="1" text="" resource-id="" class="android.widget.FrameLayout" package="com.android.systemui"
+                      content-desc="" checkable="false" checked="false" clickable="false" enabled="true"
+                      focusable="false" focused="false" scrollable="false" long-clickable="false" password="false"
+                      selected="false" bounds="[0,0][1080,2148]">
+                    <node index="0" text="" resource-id="com.android.systemui:id/magazine_img"
+                          class="android.widget.ImageView" package="com.android.systemui" content-desc=""
+                          checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
+                          focused="false" scrollable="false" long-clickable="false" password="false" selected="false"
+                          bounds="[0,0][1080,2148]"/>
+                </node>
+            </node>
+            <node index="2" text="" resource-id="com.android.systemui:id/wallpaper_mask"
+                  class="android.widget.RelativeLayout" package="com.android.systemui" content-desc="" checkable="false"
+                  checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false"
+                  long-clickable="false" password="false" selected="false" bounds="[0,0][1080,2148]">
+                <node index="0" text="" resource-id="com.android.systemui:id/mask_statusbar"
+                      class="android.widget.ImageView" package="com.android.systemui" content-desc="" checkable="false"
+                      checked="false" clickable="false" enabled="true" focusable="false" focused="false"
+                      scrollable="false" long-clickable="false" password="false" selected="false"
+                      bounds="[0,0][1080,360]"/>
+                <node index="1" text="" resource-id="com.android.systemui:id/mask_bottom"
+                      class="android.widget.ImageView" package="com.android.systemui" content-desc="" checkable="false"
+                      checked="false" clickable="false" enabled="true" focusable="false" focused="false"
+                      scrollable="false" long-clickable="false" password="false" selected="false"
+                      bounds="[0,1505][1080,2148]"/>
+            </node>
+        </node>
+        <node index="5" text="" resource-id="com.android.systemui:id/keyguard_header"
+              class="android.widget.RelativeLayout" package="com.android.systemui" content-desc="" checkable="false"
+              checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false"
+              long-clickable="false" password="false" selected="false" bounds="[0,0][1080,96]">
+            <node index="0" text="" resource-id="com.android.systemui:id/status_bar_contents"
+                  class="android.widget.LinearLayout" package="com.android.systemui" content-desc="" checkable="false"
+                  checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false"
+                  long-clickable="false" password="false" selected="false" bounds="[0,0][1080,96]">
+                <node index="0" text="" resource-id="com.android.systemui:id/status_bar_contents_parent"
+                      class="android.widget.RelativeLayout" package="com.android.systemui" content-desc=""
+                      checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
+                      focused="false" scrollable="false" long-clickable="false" password="false" selected="false"
+                      bounds="[0,0][1080,96]">
+                    <node index="0" text="" resource-id="com.android.systemui:id/operator_name_container"
+                          class="android.widget.LinearLayout" package="com.android.systemui" content-desc=""
+                          checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
+                          focused="false" scrollable="false" long-clickable="false" password="false" selected="false"
+                          bounds="[48,0][142,96]">
+                        <node index="0" text=""
+                              resource-id="com.android.systemui:id/msim_status_bar_operators_card_one_id"
+                              class="android.widget.LinearLayout" package="com.android.systemui" content-desc=""
+                              checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
+                              focused="false" scrollable="false" long-clickable="false" password="false"
+                              selected="false" bounds="[48,16][142,48]">
+                            <node index="0" text="中国联通" resource-id="com.android.systemui:id/operator_name"
+                                  class="android.widget.TextView" package="com.android.systemui" content-desc=""
+                                  checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
                                   focused="false" scrollable="false" long-clickable="false" password="false"
-                                  selected="false" bounds="[0,226][1080,2148]">
-                                <node index="0" text="" resource-id="com.tencent.mm:id/c4z"
-                                      class="android.widget.ListView" package="com.tencent.mm" content-desc=""
+                                  selected="false" bounds="[48,16][142,48]"/>
+                        </node>
+                        <node index="1" text=""
+                              resource-id="com.android.systemui:id/msim_status_bar_operators_card_two_id"
+                              class="android.widget.LinearLayout" package="com.android.systemui" content-desc=""
+                              checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
+                              focused="false" scrollable="false" long-clickable="false" password="false"
+                              selected="false" bounds="[48,48][142,80]">
+                            <node index="0" text="中国移动" resource-id="com.android.systemui:id/operator_name"
+                                  class="android.widget.TextView" package="com.android.systemui" content-desc=""
+                                  checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
+                                  focused="false" scrollable="false" long-clickable="false" password="false"
+                                  selected="false" bounds="[48,48][142,80]"/>
+                        </node>
+                    </node>
+                    <node index="1" text="" resource-id="com.android.systemui:id/system_icon_area_fixed"
+                          class="android.widget.LinearLayout" package="com.android.systemui" content-desc=""
+                          checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
+                          focused="false" scrollable="false" long-clickable="false" password="false" selected="false"
+                          bounds="[142,0][264,96]">
+                        <node index="1" text="" resource-id="com.android.systemui:id/signal_cluster"
+                              class="android.widget.LinearLayout" package="com.android.systemui" content-desc=""
+                              checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
+                              focused="false" scrollable="false" long-clickable="false" password="false"
+                              selected="false" bounds="[142,27][264,69]">
+                            <node index="0" text="" resource-id="com.android.systemui:id/signal_cluster_container"
+                                  class="android.widget.LinearLayout" package="com.android.systemui" content-desc=""
+                                  checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
+                                  focused="false" scrollable="false" long-clickable="false" password="false"
+                                  selected="false" bounds="[142,27][264,69]">
+                                <node index="0" text="" resource-id="" class="android.widget.FrameLayout"
+                                      package="com.android.systemui" content-desc="" checkable="false" checked="false"
+                                      clickable="false" enabled="true" focusable="false" focused="false"
+                                      scrollable="false" long-clickable="false" password="false" selected="false"
+                                      bounds="[142,27][264,69]">
+                                    <node index="0" text="" resource-id="com.android.systemui:id/mobile_combo"
+                                          class="android.widget.LinearLayout" package="com.android.systemui"
+                                          content-desc="" checkable="false" checked="false" clickable="false"
+                                          enabled="true" focusable="false" focused="false" scrollable="false"
+                                          long-clickable="false" password="false" selected="false"
+                                          bounds="[142,27][264,69]">
+                                        <node index="0" text="" resource-id="" class="android.widget.LinearLayout"
+                                              package="com.android.systemui" content-desc="4G 手机信号满格。" checkable="false"
+                                              checked="false" clickable="false" enabled="true" focusable="false"
+                                              focused="false" scrollable="false" long-clickable="false" password="false"
+                                              selected="false" bounds="[142,27][203,69]">
+                                            <node index="0" text="" resource-id="" class="android.widget.FrameLayout"
+                                                  package="com.android.systemui" content-desc="" checkable="false"
+                                                  checked="false" clickable="false" enabled="true" focusable="false"
+                                                  focused="false" scrollable="false" long-clickable="false"
+                                                  password="false" selected="false" bounds="[142,27][203,69]">
+                                                <node index="0" text="" resource-id=""
+                                                      class="android.widget.FrameLayout" package="com.android.systemui"
+                                                      content-desc="" checkable="false" checked="false"
+                                                      clickable="false" enabled="true" focusable="false" focused="false"
+                                                      scrollable="false" long-clickable="false" password="false"
+                                                      selected="false" bounds="[142,27][203,69]">
+                                                    <node index="0" text=""
+                                                          resource-id="com.android.systemui:id/mobile_signal_type"
+                                                          class="android.widget.ImageView"
+                                                          package="com.android.systemui" content-desc=""
+                                                          checkable="false" checked="false" clickable="false"
+                                                          enabled="true" focusable="false" focused="false"
+                                                          scrollable="false" long-clickable="false" password="false"
+                                                          selected="false" bounds="[142,27][203,69]"/>
+                                                    <node index="1" text=""
+                                                          resource-id="com.android.systemui:id/mobile_signal"
+                                                          class="android.widget.ImageView"
+                                                          package="com.android.systemui" content-desc=""
+                                                          checkable="false" checked="false" clickable="false"
+                                                          enabled="true" focusable="false" focused="false"
+                                                          scrollable="false" long-clickable="false" password="false"
+                                                          selected="false" bounds="[142,27][203,69]"/>
+                                                </node>
+                                                <node index="1" text=""
+                                                      resource-id="com.android.systemui:id/mobile_data"
+                                                      class="android.widget.FrameLayout" package="com.android.systemui"
+                                                      content-desc="" checkable="false" checked="false"
+                                                      clickable="false" enabled="true" focusable="false" focused="false"
+                                                      scrollable="false" long-clickable="false" password="false"
+                                                      selected="false" bounds="[142,27][203,69]">
+                                                    <node index="0" text=""
+                                                          resource-id="com.android.systemui:id/mobile_inout"
+                                                          class="android.widget.ImageView"
+                                                          package="com.android.systemui" content-desc=""
+                                                          checkable="false" checked="false" clickable="false"
+                                                          enabled="true" focusable="false" focused="false"
+                                                          scrollable="false" long-clickable="false" password="false"
+                                                          selected="false" bounds="[142,27][203,69]"/>
+                                                </node>
+                                            </node>
+                                        </node>
+                                        <node index="1" text="" resource-id="" class="android.widget.LinearLayout"
+                                              package="com.android.systemui" content-desc="GPRS 手机信号满格。"
+                                              checkable="false" checked="false" clickable="false" enabled="true"
+                                              focusable="false" focused="false" scrollable="false"
+                                              long-clickable="false" password="false" selected="false"
+                                              bounds="[203,27][264,69]">
+                                            <node index="0" text="" resource-id="" class="android.widget.FrameLayout"
+                                                  package="com.android.systemui" content-desc="" checkable="false"
+                                                  checked="false" clickable="false" enabled="true" focusable="false"
+                                                  focused="false" scrollable="false" long-clickable="false"
+                                                  password="false" selected="false" bounds="[203,27][264,69]">
+                                                <node index="1" text="" resource-id=""
+                                                      class="android.widget.FrameLayout" package="com.android.systemui"
+                                                      content-desc="" checkable="false" checked="false"
+                                                      clickable="false" enabled="true" focusable="false" focused="false"
+                                                      scrollable="false" long-clickable="false" password="false"
+                                                      selected="false" bounds="[203,27][264,69]">
+                                                    <node index="0" text=""
+                                                          resource-id="com.android.systemui:id/mobile_signal_type"
+                                                          class="android.widget.ImageView"
+                                                          package="com.android.systemui" content-desc=""
+                                                          checkable="false" checked="false" clickable="false"
+                                                          enabled="true" focusable="false" focused="false"
+                                                          scrollable="false" long-clickable="false" password="false"
+                                                          selected="false" bounds="[203,27][264,69]"/>
+                                                    <node index="1" text=""
+                                                          resource-id="com.android.systemui:id/mobile_signal"
+                                                          class="android.widget.ImageView"
+                                                          package="com.android.systemui" content-desc=""
+                                                          checkable="false" checked="false" clickable="false"
+                                                          enabled="true" focusable="false" focused="false"
+                                                          scrollable="false" long-clickable="false" password="false"
+                                                          selected="false" bounds="[203,27][264,69]"/>
+                                                </node>
+                                            </node>
+                                        </node>
+                                    </node>
+                                </node>
+                            </node>
+                        </node>
+                    </node>
+                    <node index="3" text="" resource-id="com.android.systemui:id/system_icons_super_container"
+                          class="android.widget.LinearLayout" package="com.android.systemui" content-desc=""
+                          checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
+                          focused="false" scrollable="false" long-clickable="false" password="false" selected="false"
+                          bounds="[312,0][1032,96]">
+                        <node index="0" text="" resource-id="com.android.systemui:id/system_icons_container"
+                              class="android.widget.FrameLayout" package="com.android.systemui" content-desc=""
+                              checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
+                              focused="false" scrollable="false" long-clickable="false" password="false"
+                              selected="false" bounds="[868,0][1032,96]">
+                            <node index="0" text="" resource-id="com.android.systemui:id/system_icons"
+                                  class="android.widget.LinearLayout" package="com.android.systemui" content-desc=""
+                                  checkable="false" checked="false" clickable="false" enabled="true" focusable="false"
+                                  focused="false" scrollable="false" long-clickable="false" password="false"
+                                  selected="false" bounds="[868,0][1032,96]">
+                                <node index="0" text="" resource-id="com.android.systemui:id/statusIcons"
+                                      class="android.widget.LinearLayout" package="com.android.systemui" content-desc=""
                                       checkable="false" checked="false" clickable="false" enabled="true"
-                                      focusable="true" focused="false" scrollable="false" long-clickable="false"
-                                      password="false" selected="false" bounds="[0,226][1080,2148]">
-                                    <node index="0" text="" resource-id="" class="android.widget.RelativeLayout"
-                                          package="com.tencent.mm" content-desc="" checkable="false" checked="false"
-                                          clickable="true" enabled="true" focusable="false" focused="false"
-                                          scrollable="false" long-clickable="false" password="false" selected="false"
-                                          bounds="[0,226][1080,399]">
-                                        <node index="0" text="" resource-id="com.tencent.mm:id/s4"
-                                              class="android.widget.LinearLayout" package="com.tencent.mm"
+                                      focusable="false" focused="false" scrollable="false" long-clickable="false"
+                                      password="false" selected="false" bounds="[868,0][961,96]">
+                                    <node index="0" text="" resource-id="" class="android.widget.ImageView"
+                                          package="com.android.systemui" content-desc="已设置闹钟。" checkable="false"
+                                          checked="false" clickable="false" enabled="true" focusable="false"
+                                          focused="false" scrollable="false" long-clickable="false" password="false"
+                                          selected="false" bounds="[868,17][910,79]"/>
+                                    <node index="1" text="" resource-id="" class="android.widget.ImageView"
+                                          package="com.android.systemui" content-desc="振铃器振动。" checkable="false"
+                                          checked="false" clickable="false" enabled="true" focusable="false"
+                                          focused="false" scrollable="false" long-clickable="false" password="false"
+                                          selected="false" bounds="[910,17][961,79]"/>
+                                </node>
+                                <node index="1" text="" resource-id="com.android.systemui:id/battery"
+                                      class="android.widget.LinearLayout" package="com.android.systemui" content-desc=""
+                                      checkable="false" checked="false" clickable="false" enabled="true"
+                                      focusable="false" focused="false" scrollable="false" long-clickable="false"
+                                      password="false" selected="false" bounds="[961,26][1032,70]">
+                                    <node index="0" text="" resource-id="" class="android.widget.FrameLayout"
+                                          package="com.android.systemui" content-desc="" checkable="false"
+                                          checked="false" clickable="false" enabled="true" focusable="false"
+                                          focused="false" scrollable="false" long-clickable="false" password="false"
+                                          selected="false" bounds="[961,27][1032,70]">
+                                        <node index="0" text="" resource-id="com.android.systemui:id/battery_border"
+                                              class="android.widget.ImageView" package="com.android.systemui"
+                                              content-desc="正在充电，已完成百分之74。" checkable="false" checked="false"
+                                              clickable="false" enabled="true" focusable="false" focused="false"
+                                              scrollable="false" long-clickable="false" password="false"
+                                              selected="false" bounds="[961,27][1032,70]"/>
+                                        <node index="1" text=""
+                                              resource-id="com.android.systemui:id/battery_inside_charge_level"
+                                              class="android.widget.ImageView" package="com.android.systemui"
                                               content-desc="" checkable="false" checked="false" clickable="false"
                                               enabled="true" focusable="false" focused="false" scrollable="false"
                                               long-clickable="false" password="false" selected="false"
-                                              bounds="[0,226][1080,399]">
-                                            <node index="0" text="" resource-id="com.tencent.mm:id/tb"
-                                                  class="android.widget.ImageView" package="com.tencent.mm"
-                                                  content-desc="" checkable="false" checked="false" clickable="false"
-                                                  enabled="true" focusable="false" focused="false" scrollable="false"
-                                                  long-clickable="false" password="false" selected="false"
-                                                  bounds="[43,247][173,377]"/>
-                                            <node index="1" text="搜索:13601014262" resource-id="com.tencent.mm:id/o_"
-                                                  class="android.widget.TextView" package="com.tencent.mm"
-                                                  content-desc="" checkable="false" checked="false" clickable="false"
-                                                  enabled="true" focusable="false" focused="false" scrollable="false"
-                                                  long-clickable="false" password="false" selected="false"
-                                                  bounds="[216,281][1080,343]"/>
-                                        </node>
+                                              bounds="[961,27][1032,70]"/>
+                                        <node index="2" text=""
+                                              resource-id="com.android.systemui:id/battery_inside_charge"
+                                              class="android.widget.ImageView" package="com.android.systemui"
+                                              content-desc="" checkable="false" checked="false" clickable="false"
+                                              enabled="true" focusable="false" focused="false" scrollable="false"
+                                              long-clickable="false" password="false" selected="false"
+                                              bounds="[961,27][1032,70]"/>
                                     </node>
                                 </node>
                             </node>
@@ -137,9 +438,5 @@
                 </node>
             </node>
         </node>
-        <node index="1" text="" resource-id="android:id/statusBarBackground" class="android.view.View"
-              package="com.tencent.mm" content-desc="" checkable="false" checked="false" clickable="false"
-              enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false"
-              password="false" selected="false" bounds="[0,0][1080,96]"/>
     </node>
 </hierarchy>

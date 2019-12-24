@@ -26,7 +26,7 @@ phone_excel = xlrd.open_workbook(phone_file_path)
 phoe_tables = phone_excel.sheet_by_index(0)
 phone_get_col = 1  # 读取手机号的列
 phone_write_col = 2  # 写入手机号的列
-wait_time = 20  # 等待间隔
+wait_time = 40  # 等待间隔
 phone_can_write_index = 1  # 从哪一行开始记录手机号
 
 
@@ -99,8 +99,8 @@ class Adb:
         self._device = device  # 设备号
         self._p = '' if (port is None) else '-P ' + str(port) + ' '
         self._s = '' if (device is None) else '-s ' + str(device) + ' '
-        self._baseShell = adb_path() + 'adb ' + self._p + self._s  # 指定端口 指定设备 组装adb命令
         self._basePath = os.path.dirname(__file__)  # 获取该文件(adbtools.py) 所在对文件夹路径
+        self._baseShell = adb_path() + 'adb ' + self._p + self._s  # 指定端口 指定设备 组装adb命令
         self._nodes = None  # 缓存当前查找到的nodes => type 列表 | value 字典
         self._x = None
         self._y = None
@@ -138,7 +138,6 @@ class Adb:
             end = x1, y1 - int(y1 / 2)
         x2, y2 = end
         cmd = self._baseShell + "shell input swipe " + str(x1) + " " + str(y1) + " " + str(x2) + " " + str(y2)
-        print(cmd)
         os.system(cmd)
 
     def show_current_pk(self):
@@ -165,8 +164,11 @@ class Adb:
         :return:
         """
         # print(self._basePath)
+
+        # os.system(self._baseShell+"shell dumpsys window policy | findstr mScreenOnFully")
+
         displayPowerState = os.popen(
-            "adb shell dumpsys window policy | findstr mScreenOnFully ").read().strip()  # 读出来这种 mAwake=truemScreenOnEarly=true mScreenOnFully=true  字节类型
+            " bash shell dumpsys window policy | findstr mScreenOnFully ").read().strip()  # 读出来这种 mAwake=truemScreenOnEarly=true mScreenOnFully=true  字节类型
         # print("134",displayPowerState)
         state = str(displayPowerState).split(" ")[1].split("=")[1]
         if state == 'true':
@@ -187,11 +189,19 @@ class Adb:
         :return:
         """
         displayPowerState = os.popen(
-            'adb shell dumpsys window policy |findstr isStatusBarKeyguard').read().strip()  # 读出来这种 mAwake=truemScreenOnEarly=true mScreenOnFully=true  字节类型
+            self._baseShell + 'shell dumpsys window policy |findstr isStatusBarKeyguard').read().strip()  # 读出来这种 mAwake=truemScreenOnEarly=true mScreenOnFully=true  字节类型
         state = str(displayPowerState).split(" ")[-1].split("=")[-1]
         if state == 'true':
             return True
         return False
+
+    def return_home(self):
+        """
+        返回桌面
+        :return:
+        """
+        self.adb_keyboard(3)
+
 
     def unlock(self):
         """
@@ -261,6 +271,7 @@ class Adb:
         解析xml文件生成node数据
         :return:
         """
+        # print("file_path",self._basePath + '/data/dump.xml')
         xml = xmlParser.ElementTree(file=self._basePath + '/data/dump.xml')
         nodes = xml.findall(path=".//node")  # 全部node节点
         tem_node = []
@@ -400,17 +411,23 @@ class Adb:
             self.click_by_id_after_refresh("com.tencent.mm:id/rb")
         except Exception:
             pass
-        self.click_by_text_after_refresh("添加朋友")
+        try:
+            self.click_by_text_after_refresh("添加朋友")
+        except Exception:
+            pass
 
     def click_wechat_and_friend(self):
         """
         点击那两个 微信号/手机号
         :return:
         """
-        bounds1 = self.find_node_by_resource_id("com.tencent.mm:id/dlc")
-        self.click_use_bounds(bounds1)
-        bounds2 = self.find_node_by_resource_id("com.tencent.mm:id/c4j")
-        self.click_use_bounds(bounds2)
+        try:
+            bounds1 = self.find_node_by_resource_id("com.tencent.mm:id/dlc")
+            self.click_use_bounds(bounds1)
+            bounds2 = self.find_node_by_resource_id("com.tencent.mm:id/c4j")
+            self.click_use_bounds(bounds2)
+        except Exception:
+            pass
 
     def click_use_bounds(self, bounds):
         x, y = self.cal_coordinate(bounds)
@@ -536,62 +553,67 @@ class Main:
         return False
 
     def add_friends(self, phone):
-
-        phone = str(int(phone))
-        print("当前手机号：{}".format(phone))
-        self._adb.adb_input(phone)
-        # 点击搜索
-
-        search_res = "搜索:" + phone
-        self._adb.click_by_text_after_refresh(search_res)
-        print('  ==> 点击搜索 ==>  ')
-
-        if self._adb.find_node_by_text('该用户不存在') or self._adb.find_node_by_text('被搜帐号状态异常，无法显示'):
-            print('  <== 该用户不存在 或 帐号异常 <==  ')
-            write_to_excel(phone_file_path, phone_can_write_index, phone_write_col, "该用户不存在")
-
-        # 查找成功
-        elif self._adb.find_node_by_text('添加到通讯录'):
-
-            # self._adb.click(0)
-            self._adb.click_by_text_after_refresh('添加到通讯录')
-
-            if self._adb.find_node_by_text('发消息'):
-                print('  <==  发送成功  <==  ')
-                write_to_excel(phone_file_path, phone_can_write_index, phone_write_col, " 发送成功 ")
-                self._adb.adb_put_back()
-            else:
-                self._adb.click_by_text_after_refresh("发送")
-
-                print(' !! <== 发送成功 <==  ')
-                write_to_excel(phone_file_path, phone_can_write_index, phone_write_col, "发送成功")
-                time.sleep(3)
-                self._adb.adb_put_back()
-                if self._adb.find_node_by_text('添加到通讯录'):
-                    print("操作可能太频繁被限制,建议换号或者等会再试")
-                    self._adb.adb_put_back()
-
-
-
-        elif self._adb.find_node_by_text('发消息'):
-            print('  <== 已经是好友 无需再次添加 <==  ')
-            write_to_excel(phone_file_path, phone_can_write_index, phone_write_col, "已经是好友")
-            self._adb.adb_put_back()
-
-        # elif self._adb.find_node_by_text('同时拥有微信和企业微信'):
-        #     print('  <== 同时拥有微信和企业微信 <==  ')
-        #     self.push('failed', phone + '同时拥有微信和企业微信')
-        #     self._adb.adb_put_back()
-
-        # elif self._adb.find_node_by_text('该用户不存在') or self._adb.find_node_by_text('被搜帐号状态异常，无法显示'):
-        #     print('  <== 该用户不存在 或 帐号异常 <==  ')
-        #     write_to_excel(phone_file_path, phone_can_write_index, phone_write_col, "该用户不存在")
-
-        # 清空已输入的字符
-        self.clean_phone()
         try:
+            self._adb.return_home()
+            print("返回桌面")
+            self._adb.start_wechat()
+            print("启动微信")
+            phone = str(int(phone))
+            print("当前手机号：{}".format(phone))
+            self._adb.adb_input(phone)
+            # 点击搜索
+            search_res = "搜索:" + phone
+            self._adb.click_by_text_after_refresh(search_res)
+            print('  ==> 点击搜索 ==>  ')
+
+            if self._adb.find_node_by_text('该用户不存在') or self._adb.find_node_by_text('被搜帐号状态异常，无法显示'):
+                print('  <== 该用户不存在 或 帐号异常 <==  ')
+                write_to_excel(phone_file_path, phone_can_write_index, phone_write_col, "该用户不存在")
+
+            # 查找成功
+            elif self._adb.find_node_by_text('添加到通讯录'):
+
+                # self._adb.click(0)
+                self._adb.click_by_text_after_refresh('添加到通讯录')
+
+                if self._adb.find_node_by_text('发消息'):
+                    print('  <==  发送成功  <==  ')
+                    write_to_excel(phone_file_path, phone_can_write_index, phone_write_col, " 发送成功 ")
+                    self._adb.adb_put_back()
+                else:
+                    self._adb.click_by_text_after_refresh("发送")
+
+                    print(' !! <== 发送成功 <==  ')
+                    write_to_excel(phone_file_path, phone_can_write_index, phone_write_col, "发送成功")
+                    time.sleep(3)
+                    self._adb.adb_put_back()
+                    if self._adb.find_node_by_text('添加到通讯录'):
+                        print("操作可能太频繁被限制,建议换号或者等会再试")
+                        self._adb.adb_put_back()
+
+
+
+            elif self._adb.find_node_by_text('发消息'):
+                print('  <== 已经是好友 无需再次添加 <==  ')
+                write_to_excel(phone_file_path, phone_can_write_index, phone_write_col, "已经是好友")
+                self._adb.adb_put_back()
+
+            # elif self._adb.find_node_by_text('同时拥有微信和企业微信'):
+            #     print('  <== 同时拥有微信和企业微信 <==  ')
+            #     self.push('failed', phone + '同时拥有微信和企业微信')
+            #     self._adb.adb_put_back()
+
+            # elif self._adb.find_node_by_text('该用户不存在') or self._adb.find_node_by_text('被搜帐号状态异常，无法显示'):
+            #     print('  <== 该用户不存在 或 帐号异常 <==  ')
+            #     write_to_excel(phone_file_path, phone_can_write_index, phone_write_col, "该用户不存在")
+
+            # 清空已输入的字符
             self.clean_phone()
-        except:
+            try:
+                self.clean_phone()
+            except:
+                pass
+        except Exception:
             pass
 
     def fuck(self):
@@ -631,7 +653,8 @@ class Main:
         #读取手机号数据
         phone_datas = [get_keywords_data(phoe_tables, i, phone_get_col) for i in
                        range(1, phoe_tables.nrows)]
-        for phone in phone_datas:
+        for index, phone in enumerate(phone_datas):
+            print("手机号总数：{}，当前已添加至第{}个号码".format(len(phone_datas), index + 1))
             try:
                 self._adb.wake_up_the_screen()
                 print("唤醒屏幕")
@@ -639,6 +662,8 @@ class Main:
                 time.sleep(2)
                 self._adb.unlock()
                 print("解锁成功")
+                self._adb.return_home()
+                print("返回桌面")
                 self._adb.start_wechat()
                 print("启动微信")
                 self._adb.click_add_friend()
@@ -659,16 +684,33 @@ class Main:
         间断时间较短
         :return:
         """
+        try:
+            self._adb.wake_up_the_screen()
+            print("唤醒屏幕")
+            # # # 解锁 此处只能滑动解锁
+            time.sleep(2)
+            self._adb.unlock()
+            print("解锁成功")
+            self._adb.return_home()
+            print("返回桌面")
+            self._adb.start_wechat()
+            print("启动微信")
+            self._adb.click_add_friend()
+            print("点击加号")
+            self._adb.click_wechat_and_friend()
+            print("点击那两个 微信号/手机号")
+        except:
+            pass
+
         global phone_can_write_index
         self._adb.click_add_friend()
         # 点击那两个 微信号/手机号
         self._adb.click_wechat_and_friend()
         phone_datas = [get_keywords_data(phoe_tables, i, phone_get_col) for i in
                        range(1, phoe_tables.nrows)]
-        for phone in phone_datas:
-
+        for index, phone in enumerate(phone_datas):
+            print("手机号总数：{}，当前已添加至第{}个号码".format(len(phone_datas), index + 1))
             self.add_friends(phone)
-            time.sleep(wait_time)
             phone_can_write_index +=1
         y = input("{}个电话号码已加完，是否关闭程序".format(len(phone_datas)))
         if y:
@@ -677,7 +719,9 @@ class Main:
 
 if __name__ == '__main__':
     fun = Main()
-    chose = input("请选择运行模式 ：1.长时间间隔模式，2:短时间间隔模式(此模式下建议等待时间为1s 保持屏幕亮了就可以)")
+    chose = input("请选择运行模式 :")
+    print("1.长时间间隔模式，2:短时间间隔模式(此模式下建议等待时间为1s 保持屏幕亮了就可以)")
+    print("请注意：两个模式都需要确保手机屏幕在熄灭状态下启动！！")
     if chose == "1":
         fun.main()
     if chose == "2":
