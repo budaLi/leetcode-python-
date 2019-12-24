@@ -45,8 +45,8 @@ phone_write_col = 2
 
 phone_can_use_index = phoe_tables.get_rows()
 link_can_use_index = int(config['start_link_index'])
-totle_break_set = set()
-
+totle = 0
+totle_link = 0
 
 class SendEmail:
     def __init__(self):
@@ -105,7 +105,7 @@ def write_to_excel(file_path, row, col, value):
 
 
 def get_new_phone(start, end):
-
+    global totle
     res = []
     headers = {
         "cookie": "ccid=ac428488c168899d07df951f7354ba55; msh=GqsdyEcveB1HjZLIZKT5ALDFoAE; sso_auth_status=26a7e62720484fd24d45830a4b543edb; sso_uid_tt=89b572982452ca2533fc5c49e4a3540e; toutiao_sso_user=4cd8bb9233af1784dbf3f269d15233d8; passport_auth_status=9f2216029d9ce53808046ea02135feff%2C7f9ddb5f3555a4e4db4cae3b62ed1213; sid_guard=3c3144f57c28219795bc821cf887fc79%7C1576146759%7C5184000%7CMon%2C+10-Feb-2020+10%3A32%3A39+GMT; uid_tt=e239ea11351745eb4404675817d217c5; sid_tt=3c3144f57c28219795bc821cf887fc79; sessionid=3c3144f57c28219795bc821cf887fc79; toutiao-crm-session=s%3Ab88ca4f2-1cca-11ea-adad-ac1f6b0ad100b88ca4f2-1cca-11ea-adad-ac1f6b0ad100sD3tpStsTyYsYE2aa56BtD22.jjnP%2F%2FLSX4oqXo%2FC15QML%2FFEvTN9OYGUoBHcVGkmgz0; gr_user_id=6892c2d6-d651-4a12-adc2-6c3b37e7c414; gr_session_id_9952092a9d995794=05a5816c-4d44-4447-8e5d-a813f5bd7f61; gr_cs1_05a5816c-4d44-4447-8e5d-a813f5bd7f61=advertiser_id%3A1645790969889795; gr_session_id_9952092a9d995794_05a5816c-4d44-4447-8e5d-a813f5bd7f61=true"}
@@ -141,12 +141,14 @@ def get_new_phone(start, end):
     end = time.strftime("%Y-%m-%d %H:%M:%S", end)
     print("当前时间段为:{}---{}".format(start, end))
     print("新爬取手机号{}个".format(len(res)))
+    totle += res
     print("手机号:{}".format(res))
+    print("当前共爬取手机号：{}个".format(totle))
     return res
 
 
 def register(phone_data):
-    global phone_can_use_index, link_can_use_index, ding_num
+    global phone_can_use_index, link_can_use_index, ding_num, totle_link
     phone_excel = xlrd.open_workbook(phone_file_path)
     phoe_tables = phone_excel.sheet_by_index(0)
     phone_can_use_index = phoe_tables.nrows
@@ -164,6 +166,7 @@ def register(phone_data):
         ding_num -= 1
         if has_phone:
             driver.get(link)
+            totle_link += 1
             time.sleep(wait_time)
             try:
                 text = driver.find_element_by_xpath("/html/body/div[1]/div[1]/p[1]")
@@ -271,19 +274,25 @@ def main():
     while 1:
         if crawl_count == 1:
             global end_date
+            print("=" * 30)
             print("第1次爬取")
             # 测试
             phone_data = get_new_phone(start_date, end_date)
             y = input("是否设置完毕")
             register(phone_data)
+            print("当前已使用链接数：{}".format(totle_link))
             crawl_count += 1
+            print("=" * 30)
         else:
+            print("=" * 30)
             print("第{}次爬取".format(crawl_count))
             times = int(time.time())
             phone_data = get_new_phone(end_date, times)
             end_date = times
             register(phone_data)
+            print("当前已使用链接数：{}".format(totle_link))
             crawl_count += 1
+            print("=" * 30)
 
         time.sleep(time_jiange)
 
