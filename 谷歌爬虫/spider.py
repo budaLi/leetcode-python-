@@ -17,7 +17,7 @@ https://cse.google.com/cse/all
 
 class GoogleSpider(object):
     def __init__(self):
-        self.url = "https://www.googleapis.com/customsearch/v1?key=xxx&q=2019%E5%A4%A7%E5%81%A5%E5%BA%B7%E8%AE%BA%E5%9D%9B&cx=xxxx&start={}&num=10&lr=lang_zh-CN"
+        self.url = "https://www.googleapis.com/customsearch/v1?key=hwLcbydExkVmgrHzv1nYKg&q=2019%E5%A4%A7%E5%81%A5%E5%BA%B7%E8%AE%BA%E5%9D%9B&cx=xxxx&start={}&num=10&lr=lang_zh-CN"
         self.headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
         }
@@ -73,10 +73,11 @@ class GoogleSpider(object):
         i = 1
         while True:
             url = self.url.format(i)
-            print(i)
+            print(url)
             # 解析url
             page = self.get_page_from_url(url)
             # 获取+保存数据
+            print(page)
             data_list = self.get_data_from_page(page)
             # 保存数据为csv
             self.save_data(data_list)
