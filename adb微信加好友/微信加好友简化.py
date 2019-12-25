@@ -13,7 +13,6 @@ import xlrd
 from platform import system
 from enum import Enum
 from os import path
-from xlutils.copy import copy
 import time
 from configparser import ConfigParser
 import pandas as pd
@@ -29,7 +28,7 @@ phone_excel = xlrd.open_workbook(phone_file_path)
 phoe_tables = phone_excel.sheet_by_index(0)
 phone_get_col = 1  # 读取手机号的列
 phone_write_col = 2  # 写入手机号的列
-wait_time = 40  # 等待间隔
+wait_time = 20  # 等待间隔
 phone_can_write_index = 1  # 从哪一行开始记录手机号
 all_sleep = 1  # 各个操作等待时间
 
@@ -489,35 +488,6 @@ class Adb:
         x, y = self.cal_coordinate(bounds)
         self.click(x, y)
 
-
-def get_keywords_data(tables, row, col):
-    """
-    从excel中读取数据
-    :param tables:
-    :param row:
-    :param col:
-    :return:
-    """
-    actual_data = tables.cell_value(row, col)
-    return actual_data
-
-
-def write_to_excel(file_path, row, col, value):
-    """
-    往excel中写入数据
-    :param file_path:
-    :param row:
-    :param col:
-    :param value:
-    :return:
-    """
-    work_book = xlrd.open_workbook(file_path, formatting_info=False)
-    write_to_work = copy(work_book)
-    sheet_data = write_to_work.get_sheet(0)
-    sheet_data.write(row, col, str(value))
-    write_to_work.save(file_path)
-
-
 class Main:
     def __init__(self, port=None, device=None):
         self._adb = Adb(port, device)
@@ -577,13 +547,13 @@ class Main:
             self._adb.click_by_text_after_refresh(search_res)
             print('  ==> 点击搜索 ==>  ')
 
-            # 不存在  返回1
+            # 不存在
             if self._adb.find_node_by_text('该用户不存在') or self._adb.find_node_by_text('被搜帐号状态异常，无法显示'):
                 print('  <== 该用户不存在 或 帐号异常 <==  ')
                 self._adb.exit()
                 return "用户不存在"
 
-            # 查找成功  返回2
+            # 查找成功
             elif self._adb.find_node_by_text('添加到通讯录'):
 
                 # self._adb.click(0)
@@ -603,7 +573,7 @@ class Main:
                 self._adb.exit()
                 return "发送成功"
 
-            # 已经是好友 返回3
+            # 已经是好友
             elif self._adb.find_node_by_text('发消息'):
                 print('  <== 已经是好友 无需再次添加 <==  ')
                 self._adb.exit()
@@ -626,31 +596,28 @@ class Main:
         :return:
         """
         df = pd.read_excel(phone_file_path)
-        writer = pd.ExcelWriter(phone_file_path, cell_overwrite_ok=True)
-        dataframe = DataFrame()
+
         test_data = []
         for i in df.index.values:  # 获取行号的索引，并对其进行遍历：
             # 根据i来获取每一行指定的数据 并利用to_dict转成字典
             row_data = df.loc[i, ['date', 'phone']].to_dict()
             test_data.append(row_data)
         print("Excel获取到的数据是：{0}".format(test_data))
+        tem = deepcopy(test_data)
         for index, data in enumerate(test_data):
-            tem = deepcopy(test_data)
+            writer = pd.ExcelWriter(phone_file_path, cell_overwrite_ok=True)
+            dataframe = DataFrame()
             phone = str(int(data['phone']))
             print("*" * 50)
             print("手机号总数：{}，当前已添加至第{}个号码:{}".format(len(test_data), index + 1, phone))
             res = self.add_friends_for_main(phone)
-            tem.pop(index)
-            if len(tem) > 0:
-                dataframe = dataframe.append(DataFrame(tem))
-                dataframe.to_excel(writer, index=0)
-                writer.save()
-            else:
+            tem.pop()
+            if len(tem) <= 0:
                 tem = [{"date": "", "phone": ""}]
-                dataframe = dataframe.append(DataFrame(tem))
-                dataframe.to_excel(writer, index=0)
-                writer.save()
-                break
+
+            dataframe = dataframe.append(DataFrame(tem))
+            dataframe.to_excel(writer, index=0)
+            writer.save()
 
             print("当前剩余手机号：{}个".format(len(tem)))
             print("*" * 50)
