@@ -11,7 +11,7 @@ import os
 import xml.etree.cElementTree as xmlParser
 import xlrd
 from platform import system
-from enum import Enum
+import subprocess
 from os import path
 import time
 from configparser import ConfigParser
@@ -33,10 +33,12 @@ phone_can_write_index = 1  # 从哪一行开始记录手机号
 all_sleep = 1  # 各个操作等待时间
 
 
-class By(Enum):
-    text = 'text'
-    content = 'content-desc'
-    naf = 'NAF'
+def logger(msg):
+    """
+    日志信息
+    """
+    now = time.ctime()
+    print("[%s] %s" % (now, msg))
 
 
 def adb_path():
@@ -55,43 +57,43 @@ def screenshot_prepare(pagename, firstActivty):
     """
     try:
         displayPowerState = os.popen(
-            "adb shell dumpsys power | grep 'Display Power: state=' | awk -F '=' '{print $2}'").read().strip()
-        # print(displayPowerState)
+            "adb shell dumpsys power | grep 'Display Power: state=' | awk -F '=' '{logger $2}'").read().strip()
+        # logger(displayPowerState)
         if displayPowerState == 'OFF':
-            print("唤醒屏幕")
+            logger("唤醒屏幕")
             os.system('adb shell input keyevent 26')
         else:
-            print("屏幕已开启不需要唤醒")
+            logger("屏幕已开启不需要唤醒")
         isStatusBarKeyguard = os.popen(
-            "adb shell dumpsys window policy|grep isStatusBarKeyguard | awk -F '=' ' {print $3}'").read().strip('\n')
-        # print(isStatusBarKeyguard)
+            "adb shell dumpsys window policy|grep isStatusBarKeyguard | awk -F '=' ' {logger $3}'").read().strip('\n')
+        # logger(isStatusBarKeyguard)
         if isStatusBarKeyguard == 'true':
             time.sleep(2)
-            print("解锁屏保")
+            logger("解锁屏保")
             # 左右滑动才好解锁,并且延迟100ms启动
             os.system('adb shell input swipe 200 400 800 400 100')
             # time.sleep(1)
-            # print("输入密码")
+            # logger("输入密码")
             # os.system('adb shell input text 95729')
         else:
-            print("屏幕已解锁不需要再次解锁")
+            logger("屏幕已解锁不需要再次解锁")
         time.sleep(1)
 
         cmd = "adb shell am start -W -n " + pagename + firstActivty
         content = os.popen(cmd)
 
         mFocusedActivity = os.popen(
-            "adb shell dumpsys activity | grep 'mFocusedActivity' | awk '{print $4}' | awk -F '/' '{print $1}'").read().strip(
+            "adb shell dumpsys activity | grep 'mFocusedActivity' | awk '{logger $4}' | awk -F '/' '{logger $1}'").read().strip(
             '\n')
         if mFocusedActivity == 'com.eg.android.AlipayGphone':
-            print("APP已启动，停止APP，等待重新启动")
+            logger("APP已启动，停止APP，等待重新启动")
             os.system('adb shell am force-stop com.eg.android.AlipayGphone')
         time.sleep(1)
-        print("启动app")
+        logger("启动app")
         os.system('adb shell am start -n com.eg.android.AlipayGphone/com.eg.android.AlipayGphone.AlipayLogin activity')
     except Exception:
-        print("screenshot_prepare error")
-        traceback.print_exc()
+        logger("screenshot_prepare error")
+        traceback.logger_exc()
         exit(-1)
 
 
@@ -167,13 +169,13 @@ class Adb:
         判断屏幕状态 亮为True
         :return:
         """
-        # print(self._basePath)
+        # logger(self._basePath)
 
         # os.system(self._baseShell+"shell dumpsys window policy | findstr mScreenOnFully")
 
         displayPowerState = os.popen(
             " bash shell dumpsys window policy | findstr mScreenOnFully ").read().strip()  # 读出来这种 mAwake=truemScreenOnEarly=true mScreenOnFully=true  字节类型
-        # print("134",displayPowerState)
+        # logger("134",displayPowerState)
         state = str(displayPowerState).split(" ")[1].split("=")[1]
         if state == 'true':
             return True
@@ -214,14 +216,17 @@ class Adb:
         # if self.check_screen_lock():
         # self.adb_keyboard(82)
         self.swipe([500, 500], [500, 1500])
-        print('解锁中')
+        logger('解锁中')
 
     def start_wechat(self):
         """
         启动微信
         :return:
         """
-        os.system(self._baseShell + "shell am start com.tencent.mm/com.tencent.mm.ui.LauncherUI")
+        try:
+            os.system(self._baseShell + "shell am start com.tencent.mm/com.tencent.mm.ui.LauncherUI")
+        except Exception:
+            logger("微信无法启动")
 
     def check_wechat_is_start(self):
         """
@@ -274,20 +279,23 @@ class Adb:
         刷新获取node节点
         :return:
         """
-        os.system(self._baseShell + 'shell uiautomator dump /sdcard/dump.xml')
-        os.system(self._baseShell + 'pull /sdcard/dump.xml ' + self._basePath + '/data/dump.xml')
+        cmd1 = self._baseShell + 'shell uiautomator dump /sdcard/dump.xml'
+        cmd2 = self._baseShell + 'pull /sdcard/dump.xml ' + self._basePath + '/data/dump.xml'
+
+        os.system(cmd1)
+        os.system(cmd2)
 
     def generate_nodes(self):
         """
         解析xml文件生成node数据
         :return:
         """
-        # print("file_path",self._basePath + '/data/dump.xml')
+        # logger("file_path",self._basePath + '/data/dump.xml')
         xml = xmlParser.ElementTree(file=self._basePath + '/data/dump.xml')
         nodes = xml.findall(path=".//node")  # 全部node节点
         tem_node = []
         for _node in nodes:
-            # print(_node.attrib)
+            # logger(_node.attrib)
             # elem.attrib 为字典
             tem_node.append(_node.attrib)
         self._nodes = tem_node
@@ -403,7 +411,7 @@ class Adb:
 
             return self._x, self._y
         except Exception as e:
-            print("没有检测到该内容")
+            logger("没有检测到该内容")
 
     def click(self, x, y):
         """
@@ -505,7 +513,7 @@ class Main:
 
     # 输出添加结果到内存 或 文件
     def push(self, key, value):
-        print("保存到文件")
+        logger("保存到文件")
 
     def init(self):
         pass
@@ -521,35 +529,35 @@ class Main:
         """
         if self._adb.find_node_by_resource_id('com.tencent.mm:id/m3'):
             self._adb.click_by_id_after_refresh("com.tencent.mm:id/m3")
-            print("清空成功")
+            logger("清空成功")
             return True
         return False
 
     def add_friends_for_main(self, phone):
         try:
             self._adb.start_wechat()
-            print("启动微信")
+            logger("启动微信")
             time.sleep(all_sleep)
 
             self._adb.click_add_friend()
-            print("点击加号")
-            time.sleep(all_sleep)
+            logger("点击加号")
+            time.sleep(2)
 
             self._adb.click_wechat_and_friend()
-            print("点击那两个 微信号/手机号")
+            logger("点击那两个 微信号/手机号")
             time.sleep(all_sleep)
 
             phone = str(int(phone))
-            print("当前手机号：{}".format(phone))
+            logger("当前手机号：{}".format(phone))
             self._adb.adb_input(phone)
             # 点击搜索
             search_res = "搜索:" + phone
             self._adb.click_by_text_after_refresh(search_res)
-            print('  ==> 点击搜索 ==>  ')
+            logger('  ==> 点击搜索 ==>  ')
 
             # 不存在
             if self._adb.find_node_by_text('该用户不存在') or self._adb.find_node_by_text('被搜帐号状态异常，无法显示'):
-                print('  <== 该用户不存在 或 帐号异常 <==  ')
+                logger('  <== 该用户不存在 或 帐号异常 <==  ')
                 self._adb.exit()
                 return "用户不存在"
 
@@ -560,22 +568,22 @@ class Main:
                 self._adb.click_by_text_after_refresh('添加到通讯录')
 
                 if self._adb.find_node_by_text('发消息'):
-                    print('  <==  发送成功  <==  ')
+                    logger('  <==  发送成功  <==  ')
                     self._adb.adb_put_back()
                 else:
                     self._adb.click_by_text_after_refresh("发送")
 
-                    print(' !! <== 发送成功 <==  ')
+                    logger(' !! <== 发送成功 <==  ')
                     time.sleep(3)
                     if self._adb.find_node_by_text('添加到通讯录'):
-                        print("操作可能太频繁被限制,建议换号或者等会再试")
+                        logger("操作可能太频繁被限制,建议换号或者等会再试")
                         self._adb.adb_put_back()
                 self._adb.exit()
                 return "发送成功"
 
             # 已经是好友
             elif self._adb.find_node_by_text('发消息'):
-                print('  <== 已经是好友 无需再次添加 <==  ')
+                logger('  <== 已经是好友 无需再次添加 <==  ')
                 self._adb.exit()
                 return "已经是好友"
 
@@ -585,7 +593,7 @@ class Main:
 
 
         except Exception as e:
-            print(e, "出现异常操作，将重新进行本次加好友")
+            logger("出现异常:{}，将重新进行本次加好友".format(e))
             self._adb.exit()
             self._adb.start_wechat()
             return self.add_friends_for_main(phone)
@@ -602,14 +610,14 @@ class Main:
             # 根据i来获取每一行指定的数据 并利用to_dict转成字典
             row_data = df.loc[i, ['date', 'phone']].to_dict()
             test_data.append(row_data)
-        print("Excel获取到的数据是：{0}".format(test_data))
+        logger("Excel获取到的数据是：{0}".format(test_data))
         tem = deepcopy(test_data)
         for index, data in enumerate(test_data):
             writer = pd.ExcelWriter(phone_file_path, cell_overwrite_ok=True)
             dataframe = DataFrame()
             phone = str(int(data['phone']))
-            print("*" * 50)
-            print("手机号总数：{}，当前已添加至第{}个号码:{}".format(len(test_data), index + 1, phone))
+            logger("*" * 50)
+            logger("手机号总数：{}，当前已添加至第{}个号码:{}".format(len(test_data), index + 1, phone))
             res = self.add_friends_for_main(phone)
             tem.pop()
             if len(tem) <= 0:
@@ -619,8 +627,8 @@ class Main:
             dataframe.to_excel(writer, index=0)
             writer.save()
 
-            print("当前剩余手机号：{}个".format(len(tem)))
-            print("*" * 50)
+            logger("当前剩余手机号：{}个".format(len(tem)))
+            logger("*" * 50)
             if res == "发送成功":
                 time.sleep(wait_time)
         y = input("{}个电话号码已加完，是否关闭程序".format(len(test_data)))
@@ -630,7 +638,7 @@ class Main:
 
 if __name__ == '__main__':
     fun = Main()
-    print("*" * 50)
-    print("请确保屏幕已经在微信界面")
-    print("*" * 50)
+    logger("*" * 50)
+    logger("请确保屏幕已经在微信界面")
+    logger("*" * 50)
     fun.main()
