@@ -36,6 +36,8 @@ def Solution(m):
             m[i][j]+=min(m[i-1][j],m[i][j-1])
 
     return m[endx][endy]
+
+
 """
 动态规划 只需要循环一次  到右下角的最小值=min(左边,上边)+自己的值
 4 1 1 1         4  5  6  7
