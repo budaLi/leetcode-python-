@@ -24,12 +24,13 @@ def Solution(data):
                 "当位置1和位置2交换后 需要从2开始找最近一个比他小的A交换"
                 data[index], data[index + 1] = data[index + 1], data[index]
                 tem = index + 1  # 记录当前进行到哪一个字符 "B"
-                while index < lenght:
-                    if data[index] == "A":
-                        data[tem + 1] = "B"
-                        data[index] = data[tem]
+                while tem < lenght:
+                    if data[tem] == "A":
+                        data[index + 1] = "A"
+                        data[tem] = "B"
                         break
-                    index += 1
+                    tem += 1
+                index += 1
 
 
 
@@ -47,6 +48,6 @@ def Solution(data):
     return "".join(data)
 
 
-tem = "ABABAB"
+tem = "AABAB"
 res = Solution(tem)
 print(res)
