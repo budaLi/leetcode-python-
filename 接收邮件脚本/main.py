@@ -60,9 +60,10 @@ class down_email():
                 result.append(content)
         return ",".join(result)
 
-    def run_ing(self):
-        str_day = str(datetime.date.today())  # 日期赋值
-        print("获取时间：{}".format(str_day))
+    def run_ing(self, users, second):
+
+        str_day = str(datetime.datetime.now() - datetime.timedelta(seconds=second + 30))  # 日期赋值
+        # print("获取时间：{}".format(str_day))
         # 连接到POP3服务器,有些邮箱服务器需要ssl加密，可以使用poplib.POP3_SSL
         try:
             telnetlib.Telnet(self.pop3_server, 995)
@@ -73,7 +74,7 @@ class down_email():
         # server.set_debuglevel(1) # 可以打开或关闭调试信息
 
         # 打印POP3服务器的欢迎文字:
-        print("身份验证成功，下面为测试输出：{}".format(self.server.getwelcome().decode('utf-8')))
+        # print("身份验证成功，下面为测试输出：{}".format(self.server.getwelcome().decode('utf-8')))
         # 身份认证:
         self.server.user(self.user)
         self.server.pass_(self.password)
@@ -91,32 +92,30 @@ class down_email():
 
             # for i in range(1, index + 1):# 顺序遍历邮件
             resp, lines, octets = self.server.retr(i)
+
             # lines存储了邮件的原始文本的每一行,
             # 邮件的原始文本:
-            msg_content = b'\r\n'.join(lines).decode('utf-8')
-            # 解析邮件:
-            msg = Parser().parsestr(msg_content)
-            # 获取邮件的发件人，收件人， 抄送人,主题
-            # hdr, addr = parseaddr(msg.get('From'))
-            # From = self.decode_str(hdr)
-            # hdr, addr = parseaddr(msg.get('To'))
-            # To = self.decode_str(hdr)
+            try:
+                msg_content = b'\r\n'.join(lines).decode('utf-8')
+                # 解析邮件:
+                msg = Parser().parsestr(msg_content)
+            except Exception:
+                pass
+
 
             # 方法2：from or Form均可
             From = parseaddr(msg.get('from'))[1]
             To = parseaddr(msg.get('To'))[1]
             Cc = parseaddr(msg.get_all('Cc'))[1]  # 抄送人
             Subject = self.decode_str(msg.get('Subject'))
-            print('发件人:%s,收件人:%s,抄送人:%s,主题:%s' % (From, To, Cc, Subject))
-            # 获取邮件时间,格式化收件时间
             date1 = time.strptime(msg.get("Date")[0:24], '%a, %d %b %Y %H:%M:%S')
+
             # 邮件时间格式转换
-            date2 = time.strftime("%Y-%m-%d", date1)
-            if date2 < str_day:
-                break  # 倒叙用break
-                # continue # 顺叙用continue
-            else:
-                # 获取内容
+            date2 = time.strftime("%Y-%m-%d %H:%M:%S", date1)
+
+            if From in users and date2 >= str_day:
+                print("\n")
+                print('发件人:%s,收件人:%s,抄送人:%s,主题:%s，发件时间：%s' % (From, To, Cc, Subject, date2))
                 content = self.get_att(msg, str_day)
                 print("邮件正文:{} \n".format(content))
         # 可以根据邮件索引号直接从服务器删除邮件:
@@ -126,18 +125,20 @@ class down_email():
 
 
 if __name__ == '__main__':
-    try:
-        # 输入邮件地址, 口令和POP3服务器地址:
+
+    # 收件人邮箱及密码
         user = '15735656005@163.com'
-        # 此处密码是授权码,用于登录第三方邮件客户端
         password = 'zslswmz1'
+
+    # 指定发件人
+    users = ['WebStockWh8@wenhua.com.cn', '3405987953@qq.com', '1364826576@qq.com']
+    # 刷新时间间隔
+    time_s = 10
+
         eamil_server = 'pop.163.com'
 
+
         email_class = down_email(user=user, password=password, eamil_server=eamil_server)
-        email_class.run_ing()
-
-    except Exception as e:
-        import traceback
-
-        ex_msg = '{exception}'.format(exception=traceback.format_exc())
-        print(ex_msg)
+    while 1:
+        email_class.run_ing(users, time_s)
+        time.sleep(time_s)
