@@ -62,10 +62,11 @@ class ReciveEmail():
             # print("这是未解析正文", content)
             charset = self.guess_charset(msg)
             if charset:
-                # print("编码格式",charset)
+                # 信号编码
                 content = content.decode("unicode-escape")
-                # print("这是正文", content)
-                # content = content.decode("utf-8")
+
+                # 自己发测试
+                # content = content.decode(charset)
         return content
 
     # 字符编码转换
@@ -145,6 +146,10 @@ class ReciveEmail():
                     # print("\n")
                     # print('发件人:%s,收件人:%s,抄送人:%s,主题:%s' % (From, To, Cc, Subject))
                     content = self.get_att(msg)
+                    try:
+                        content = trans_content(content)
+                    except:
+                        pass
                     # print("邮件正文:{} \n".format(content))
                     return content
 
@@ -161,14 +166,24 @@ class ReciveEmail():
 
 def trans_content(coontent):
     # res_tem =
-    content = "模组名: 沪铅主连_1分钟_金肯特纳(1)" \
-              "模型名: 金肯特纳合约名: 沪铅主连   " \
-              "周期: 1分钟14:57:58 [运行日志]14:57:58(本机时间): " \
-              "信号30 平仓盈亏 -300 <合计 -1000>"
 
     # partten = re.compile(r"模组名.* $")
     # res = re.findall(partten,content)
     # print(res)
+    cotent = coontent.split("\n")
+    moxingming = cotent[1].split(":")[1]
+    heyueming = cotent[2].strip().split("合约名")[1].split("周期")[0].replace(":", "")
+    shijian = cotent[3].split("信号")[0].split(" ")[0]
+    res1 = cotent[3].split("信号")[1].split(" ")[1]
+    if res1 == "平仓盈亏":
+        res2 = cotent[3].split("信号")[1].split(" ")[2]
+    else:
+        res1 = "现价:" + ",".join(cotent[3].split("信号")[1].split(" ")[1].split(",")[1:2])
+        res2 = ",".join(cotent[3].split("信号")[1].split(" ")[1].split(",")[2:4])
+    message = "[运行日志]模型名:{}\n合约名:{}\n{} {} {}".format(moxingming, heyueming, shijian, res1, res2)
+    # message = config['message'].format(moxingming,heyueming,shijian,res1,res2)
+    return message
+
 
 
 def get_rev():
@@ -178,11 +193,14 @@ def get_rev():
 
 
 if __name__ == '__main__':
-    trans_content(1)
-    # reciveemail= get_rev()
-    # while 1:
-    #     try:
-    #         content = reciveemail.run_ing()
-    #         print(content)
-    #     except Exception as e:
-    #         print("运行错误",e)
+    # content = "模组名: 沪铅主连_1分钟_金肯特纳(1) \n模型名: 金肯特纳  \n 合约名:沪铅主连 周期: 1分钟 \n14:57:58 [运行日志]14:57:58(本机时间): 信号30 平仓盈亏 -300 <合计 -1000>"
+    # content2 = "模组名: 沪铅主连_1分钟_金肯特纳(1) \n模型名: 金肯特纳  \n 合约名:沪铅主连 周期: 1分钟 \n14:57:58 [运行日志]14:57:58(本机时间): 信号30 成交(cu2004,45300,买,开,1,xxxx)"
+    # trans_content(content)
+    # trans_content(content2)
+    reciveemail = get_rev()
+    while 1:
+        try:
+            content = reciveemail.run_ing()
+            print(content)
+        except Exception as e:
+            print("运行错误", e)

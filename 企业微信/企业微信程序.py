@@ -66,11 +66,12 @@ if __name__ == '__main__':
     wx = WeChat()
 
     # 程序运行时间在白天8:55 到 11:30  下午1:30 到  3:01
-    DAY_START = dtime(8, 55)
-    DAY_END = dtime(11, 30)
 
-    NIGHT_START = dtime(13, 30)
-    NIGHT_END = dtime(23, 59)
+    DAY_START = dtime(int(config['DAY_START'].split(",")[0]), int(config['DAY_START'].split(",")[1]))
+    DAY_END = dtime(int(config['DAY_END'].split(",")[0]), int(config['DAY_END'].split(",")[1]))
+
+    NIGHT_START = dtime(int(config['NIGHT_START'].split(",")[0]), int(config['NIGHT_START'].split(",")[1]))
+    NIGHT_END = dtime(int(config['NIGHT_END'].split(",")[0]), int(config['NIGHT_END'].split(",")[1]))
 
     # 接收邮件
     rev = get_rev()
@@ -79,6 +80,7 @@ if __name__ == '__main__':
         current_time = datetime.now().time()
         if DAY_START <= current_time <= DAY_END or (NIGHT_START <= current_time <= NIGHT_END):
             # 判断时候在可运行时间内
+            time.sleep(int(config['sleep']))
             logger("等待接收邮件中")
             try:
                 content = rev.run_ing()
@@ -88,5 +90,5 @@ if __name__ == '__main__':
             except Exception as e:
                 print("运行错误", e)
         else:
-            time.sleep(2)
+            time.sleep(int(config['sleep']))
             logger("其他时间段  其他任务执行中")
