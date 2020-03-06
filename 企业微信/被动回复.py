@@ -1,10 +1,3 @@
-# @Time    : 2020/3/4 16:17
-# @Author  : Libuda
-# @FileName: 被动回复.py
-# @Software: PyCharm
-# !/usr/bin/env python
-# -*- encoding:utf-8 -*-
-
 """ 对企业微信发送给企业后台的消息加解密示例代码.
 @copyright: Copyright (c) 1998-2014 Tencent Inc.
 """
@@ -19,7 +12,8 @@ from Crypto.Cipher import AES
 import xml.etree.cElementTree as ET
 import socket
 
-import 企业微信.ierror as ierror
+from 企业微信 import ierror
+
 
 """
 关于Crypto.Cipher模块，ImportError: No module named 'Crypto'解决方案
