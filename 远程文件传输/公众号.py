@@ -22,17 +22,27 @@ def echo(message):
     if ret:
         # 先看本地res中是否已经有开卡结果
         # res 中数据格式  手机号:13699679997,开卡结果:开卡失败,剩余链接数:10
-        with open("res.txt") as f:
+        with open("res.txt", encoding='utf-8') as f:
             res = f.readlines()
             for one in res:
-                ph = one.rstrip().strip(",")[0].split(":")[1]
+                print(one)
+                ph = one.rstrip().split(",")[0]
+                ph = ph.split(":")[1]
                 if ph == message:
                     # 如果有此号码直接返回其开卡结果
                     return one
         # res中没有则写入phone 待开卡
+        with open("phone.txt") as f:
+            data = f.readlines()
+            for one in data:
+                one = one.strip()
+                if one == message:
+                    # 如果有此号码直接返回其开卡结果
+                    return "请耐心等候，正在查询您的开卡结果"
+
         with open("phone.txt", 'a') as f:
             f.write(message + "\n")
-        return "请耐心等候，正在查询您的开卡状态，为开卡将自动为您开卡"
+        return "请耐心等候，正在查询您的开卡状态，未开卡将自动为您开卡"
     try:
         with open(message + ".txt", encoding="utf-8") as f:
             data = ".".join(f.readlines())

@@ -4,7 +4,6 @@
 # @Software: PyCharm
 
 import time
-import paramiko
 
 from 远程文件传输.register import register
 
@@ -28,11 +27,10 @@ while 1:
             s = "手机号:{},开卡结果:{},剩余链接数:{}".format(str(phone), res, lenght)
             print(s)
             f.write(s + "\n")
-        with open("old_phone.txt", 'w') as f:
+
+        # a表示追加
+        with open("old_phone.txt", 'a') as f:
             # 领卡后存入old_phone
             f.write(phone + "\n")
 
     time.sleep(time_sleep)
-
-# 关闭连接
-# transport.close()

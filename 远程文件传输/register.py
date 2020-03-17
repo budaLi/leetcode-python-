@@ -144,6 +144,7 @@ def register(phone):
                         writer.save()
                         return res, len(link_data_tem)
                 except Exception as e:
+                    print(e)
                     time.sleep(wait_time)
                     try:
                         if driver.find_element_by_xpath('/html/body/div[1]/div/h1').text == "领取成功！":
@@ -158,8 +159,8 @@ def register(phone):
                             writer.save()
                             return res, len(link_data_tem)
                     except Exception as e:
-                        print("此电话号码有问题")
-                        res = "此电话号码有问题"
+                        print(e)
+                        res = e
                         if len(link_data_tem) <= 0:
                             link_data_tem = [{"id": "", "link": ""}]
 
