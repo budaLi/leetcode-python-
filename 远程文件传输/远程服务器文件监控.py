@@ -1,6 +1,6 @@
 # @Time    : 2020/3/15 15:37
 # @Author  : Libuda
-# @FileName: 文件监控.py
+# @FileName: 远程服务器文件监控.py
 # @Software: PyCharm
 
 import time
@@ -32,12 +32,12 @@ while 1:
         data = f.readlines()
 
     for i in range(lines, len(data)):  # 获取新手机号的索引
-        phone = data[i]
+        phone = data[i].strip()
         print("获取手机号：{},等待开卡中。。".format(phone))
         # 去开卡
         res, lenght = register(phone)
         with open("res.txt", "a") as f:
-            s = "手机号:{},开卡结果:{},剩余链接数:{}".format(phone, res, lenght)
+            s = "手机号:{},开卡结果:{},剩余链接数:{}".format(str(phone), res, lenght)
             print(s)
             f.write(s + "\n")
 
