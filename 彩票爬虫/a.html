@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="application/javascript">
+    var dataUser = [];
+    var dataCount = [];
+
+    function rand(a) {
+        let time = (new Date()).getTime() - 3600 * 1000 * a;
+        let value = Math.random() * 100;
+        return {
+            name: updateTime(time),
+            value: [
+                [updateTime(time),
+                    value
+                ]
+        }
+    };
+
+    function updateTime(timestamp) {
+        let time;
+        if (timestamp != null && timestamp != "" && timestamp != 0) {
+            time = timestamp + "";
+        }
+        let date = new Date(timestamp);
+        let Y = date.getFullYear() + '-';
+        let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+        let D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
+        let h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+        let m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes() + ':');
+        let s = date.getSeconds();
+        return Y + M + D + h + m + s;
+    }
+
+    for (let i = 0; i < 10; i++) {
+        dataUser.push(rand(i));
+        dataCount.push(rand(i));
+    }
+
+    var option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross',
+                label: {
+                    backgroundColor: '#6a7985'
+                }
+            }
+        },
+        legend: {
+            data: ['在线人数', '访问次数'],
+            right: '60px'
+        },
+        grid: {
+            x: 50,
+            y: 25,
+            x2: 50,
+            y2: 30,
+            // borderWidth:1
+        },
+        dataZoom: [
+            {
+                type: 'slider',//图表下方的伸缩条
+                show: false,  //是否显示
+                realtime: true,  //
+                start: 0,  //伸缩条开始位置（1-100），可以随时更改
+                end: 100,  //伸缩条结束位置（1-100），可以随时更改
+                xAxisIndex: [0],
+                filterMode: 'none'
+            }],
+        xAxis: [
+            {
+                type: 'time',
+                boundaryGap: false,
+                // data: [/*'周一','周二','周三','周四','周五','周六','周日'*/],
+                splitLine: {
+                    show: false
+                },
+                splitNumber: 12,
+                axisLine: {
+                    lineStyle: {
+                        color: '#FFF'
+                    }
+                },
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '人',
+                nameGap: 6,
+                splitLine: {
+                    show: false
+                }
+            },
+            {
+                type: 'value',
+                name: '次',
+                nameGap: 6,
+                splitLine: {
+                    show: false
+                }
+            }
+        ],
+        series: [
+            {
+                name: '在线人数',
+                type: 'line',
+                color: '#0EDF99',
+                smooth: true,
+                showSymbol: false,
+                areaStyle: {
+                    color: {
+                        type: 'linear',
+                        x: 0,
+                        y: 0,
+                        x2: 0,
+                        y2: 1,
+                        colorStops: [{
+                            offset: 0, color: 'rgb(66,255,251,1)' // 0% 处的颜色
+                        }, {
+                            offset: 1, color: 'rgb(66,255,251,0)' // 100% 处的颜色
+                        }],
+                        global: false // 缺省为 false
+                    }
+                },
+                data: dataUser
+            },
+            {
+                name: '访问次数',
+                type: 'line',
+                color: '#42FFFB',
+                smooth: true,
+                showSymbol: false,
+                yAxisIndex: 1,
+                areaStyle: {
+                    color: {
+                        type: 'linear',
+                        x: 0,
+                        y: 0,
+                        x2: 0,
+                        y2: 1,
+                        colorStops: [{
+                            offset: 0, color: 'rgb(10,195,248,1)' // 0% 处的颜色
+                        }, {
+                            offset: 1, color: 'rgb(10,195,248,0)' // 100% 处的颜色
+                        }],
+                        global: false // 缺省为 false
+                    }
+                },
+                data: dataCount
+            }
+        ]
+    };
+
+    let startNum = 0;
+    let endNum = 40;
+
+    setInterval(function () {
+        startNum = startNum + 0.1;
+        endNum = endNum + 0.1;
+        if (endNum >= 100) {
+            startNum = 0;
+            endNum = 40;
+        }
+        myChart.dispatchAction({
+            type: 'dataZoom',
+            // 开始位置的百分比，0 - 100
+            start: startNum,
+            // 结束位置的百分比，0 - 100
+            end: endNum
+        });
+    }, 200);
+</script>
+</html>

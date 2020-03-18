@@ -10,7 +10,7 @@ import xlrd
 from xlutils.copy import copy
 
 base_url = "https://pk10tv.com/pks/getPksHistoryList.do?date={}&lotCode=xyft"
-start_date = datetime.datetime(2020, 3, 15)  # 起始时间
+start_date = datetime.datetime(2020, 2, 18)  # 起始时间
 end_date = datetime.datetime(2020, 3, 18)  # 结束时间
 txt_name = "res.csv"  # 保存csv的路径
 # 时间间隔 每隔一天爬一次就可以
@@ -32,7 +32,7 @@ def write_to_excel(file_path, row, col, value):
     write_to_work.save(file_path)
 
 
-# 表头
+
 with open(txt_name, 'a+', newline='') as f:
     writer = csv.writer(f)
     row_item = ["" for _ in range(3)]
@@ -42,6 +42,7 @@ with open(txt_name, 'a+', newline='') as f:
     writer.writerow(row_item)
 
 while start_date <= end_date:
+    print("start:{}".format(start_date))
     url = base_url.format(start_date.strftime("%Y-%m-%d"))
     response = requests.get(url).text
     response = json.loads(response)
@@ -53,7 +54,6 @@ while start_date <= end_date:
             continue
         with open(txt_name, 'a', newline='') as f:
             writer = csv.writer(f)
-            # 需要写入多少列就循环多少次
             row_item = ["" for _ in range(3)]
             row_item[0] = one['preDrawTime']
             row_item[1] = one['preDrawIssue']
