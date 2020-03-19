@@ -6,16 +6,18 @@
 </head>
 <body>
 <script src="echarts.min.js"></script>
+<script src="jquery.min.js"></script>
 <div id="main" style="width: 100%;height:500px;"></div>
 
 <script>
     var myChart = echarts.init(document.getElementById('main'));
 
-    var date = [];
+    var time_date = [];
     var randomData = [];
 
     for (var i = 0; i < 30; i++) {
-        date.push('第' + (i + 1) + '天');
+        d = new Date();
+        time_date.push(d.getMinutes());
         randomData.push(Math.floor(Math.random() * 10));
     }
 
@@ -23,7 +25,7 @@
     var option = {
         xAxis: {
             type: 'category',
-            data: date
+            data: time_date
         },
         yAxis: {
             type: 'value'
@@ -37,22 +39,43 @@
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
 
-    var len = date.length;
+    var len = time_date.length;
 
     setInterval(function () {
+        $.ajax({
+            type: "GET",
+            url: "https://pk10tv.com/pks/getPksHistoryList.do?date=2020-3-18&lotCode=xyft",
+            dataType: "json",
+            success: function (data) {
+                new_data = data['result']['data'];
+                // console.log(new_data);
+
+                time_date.push(new_data[new_data.length - 1]['preDrawCode']);
+                console.log(new_data[new_data.length - 1]['preDrawCode']);
+                // for (var i = 0; i <new_data.length ; i++) {
+                //  time_date.push(new_data[i]);
+                //    console.log(new_data[i]['preDrawCode'])
+                // }
+
+            },
+            error: function (error) {
+                // time_date.push(1);
+                console.log(error)
+            }
+        });
         randomData.push(Math.floor(Math.random() * 10));
         randomData.shift();
-        date.push(len++);
-        date.shift();
+        time_date.push(len++);
+        time_date.shift();
         myChart.setOption({
             xAxis: {
-                data: date
+                data: time_date
             },
             series: [{
                 data: randomData
             }]
         });
-    }, 2000)
+    }, 5000)
 </script>
 
 
