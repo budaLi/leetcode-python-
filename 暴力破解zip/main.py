@@ -1,6 +1,6 @@
 # @Time    : 2020/1/10 16:10
 # @Author  : Libuda
-# @FileName: main.py
+# @FileName: 远程服务器文件监控.py
 # @Software: PyCharm
 import time
 from typing import List

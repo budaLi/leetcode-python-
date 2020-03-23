@@ -1,6 +1,6 @@
 # @Time    : 2019/12/12 15:54
 # @Author  : Libuda
-# @FileName: main.py
+# @FileName: 远程服务器文件监控.py
 # @Software: PyCharm
 import itchat
 

@@ -27,7 +27,11 @@ while 1:
     with open("phone.txt") as f:
         lines = len(f.readlines())  # 存储原来手机号的个数
 
-    sftp.get("/home/fddsgzh/phone.txt", "phone.txt")
+    try:
+        sftp.get("/home/fddsgzh/phone.txt", "phone.txt")
+    except Exception:
+        pass
+
     with open("phone.txt") as f:  # 新文件
         data = f.readlines()
 

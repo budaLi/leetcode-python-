@@ -3,7 +3,7 @@
 
 """
  @author: libuda
- @file: main.py
+ @file: 远程服务器文件监控.py
  @time: 2019/12/5 15:59
 """
 import traceback

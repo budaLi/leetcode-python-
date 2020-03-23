@@ -1,6 +1,6 @@
 # @Time    : 2019/11/13 11:31
 # @Author  : Libuda
-# @FileName: main.py
+# @FileName: 远程服务器文件监控.py
 # @Software: PyCharm
 import os
 from configparser import ConfigParser

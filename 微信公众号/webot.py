@@ -6,10 +6,10 @@ import requests
 from werobot import WeRoBot
 import xlrd
 from xlutils.copy import copy
-from check_link import get_keywords_data
+from 微信公众号.check_link import get_keywords_data
 
-appID = 'wxf74f52d6e57f9e0e'
-appsecret = 'c63f351e9a9041d03da9370948de1f16'
+appID = 'wxcf14ed85674052e6'
+appsecret = '4059313e50fbb08599f4426c23f3b559'
 token = 'asdfghgfdsaasdfggfdsasdf'
 robot = WeRoBot(token=token)
 
@@ -39,6 +39,7 @@ def get_access_token():
     get_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={}&secret={}'.format(appID,
                                                                                                                appsecret)
     response = requests.get(get_url).json()
+    print(response)
     if 'errcode' in response:
         return False
     elif 'access_token' in response:
@@ -113,6 +114,7 @@ def hello(message):
 
 
 if __name__ == '__main__':
-    robot.config['HOST'] = '0.0.0.0'
+    # print(get_access_token())
+    robot.config['HOST'] = '127.0.0.1'
     robot.config['PORT'] = 80
     robot.run()

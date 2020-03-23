@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/github分享微信公众号/new" charset="GBK" />
     <file url="file://$PROJECT_DIR$/python开发/export_record.log" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/彩票爬虫/res.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/暴力破解zip/1.txt" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/远程文件传输/old_phone.txt" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/远程文件传输/phone.txt" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/远程文件传输/res.txt" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/阿里阅读量统计/res.csv" charset="GBK" />
   </component>
 </project>

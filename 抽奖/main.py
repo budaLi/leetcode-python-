@@ -1,6 +1,6 @@
 # @Time    : 2020/2/23 23:04
 # @Author  : Libuda
-# @FileName: main.py
+# @FileName: 远程服务器文件监控.py
 # @Software: PyCharm
 import random
 
@@ -15,5 +15,5 @@ except Exception:
 if isinstance(chose, int):
     index = 0
     for ix in range(chose):
-        print("第{}次抽奖结果:{}".format(ix, dict[random.randint(0, 4)]))
+        print("第{}次抽奖结果:{}".format(ix, dict[random.randint(0, 7)]))
 exit = input("输入任意键退出本次抽奖")

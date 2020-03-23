@@ -9,6 +9,10 @@ from 企业微信.邮件接收程序 import logger
 from 企业微信.config import get_config
 from 企业微信.spider import spider
 
+# from 邮件接收程序 import logger
+# from config import get_config
+# from spider import spider
+
 config = get_config()
 
 
@@ -70,6 +74,8 @@ if __name__ == '__main__':
 
     # 接收内容
     l, res = spider()
+    res = res
+    # print(res)
     # while 1:
     #     new_l, new_res = spider()
     #     if res!=new_res:
@@ -84,13 +90,19 @@ if __name__ == '__main__':
 
         # logger("检测新闻中")
         try:
+
             new_l, new_res = spider()
-            if new_res and res != new_res:
-                logger("{}".format(new_res))
-                res = new_res
-                wx.send_data(new_res)
+            new_res = new_res[::-1]
+            # print(new_res)
+            for one in new_res:
+                if one != res[-1]:
+                    logger("{}".format(one))
+                    wx.send_data(one)
+                else:
+                    break
             else:
-                logger("{},新闻：{}".format(time.ctime(), l))
+                logger("{},新闻长度：{}".format(time.ctime(), l))
+            res = new_res
             time.sleep(int(config['sleep']))
         except Exception as e:
             print("运行错误", e)

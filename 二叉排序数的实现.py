@@ -227,9 +227,9 @@ tree12.data,tree12.parent,tree12.lchild,tree12.rchild=(0,tree11,None,None)
 #广度优先
 # width_first_show(tree1)
 
-# inorder(tree1)    #中序
-# preorder(tree1)   #先序
-# lasorder(tree1)   #后序
+inorder(tree1)  # 中序
+preorder(tree1)  # 先序
+lasorder(tree1)  # 后序
 
 # deletenode(tree1,6)
 # inorder(tree1)

@@ -22,14 +22,14 @@ def Solution(m):
     for i in range(1,endx+1):
         m[i][0]+=m[i-1][0]
 
-    for one in m:
-        print(one)
+    # for one in m:
+    #     print(one)
     #更新第一行的元素
     for j in range(1,endy+1):
         m[0][j]+=m[0][j-1]
 
-    for one in m:
-        print(one)
+    # for one in m:
+    #     print(one)
 
     for i in range(1,endx+1):
         for j in range(1,endy+1):

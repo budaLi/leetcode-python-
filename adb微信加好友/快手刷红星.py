@@ -9,7 +9,7 @@ adb = Adb()
 
 try:
     while 1:
-        adb.click_by_text_after_refresh("去浏览")
+        # adb.click_by_text_after_refresh("去浏览")
         time.sleep(3)
         adb.swipe()
         time.sleep(3)

@@ -15,11 +15,11 @@
     var time_date = [];
     var randomData = [];
 
-    for (var i = 0; i < 30; i++) {
-        d = new Date();
-        time_date.push(d.getMinutes());
-        randomData.push(Math.floor(Math.random() * 10));
-    }
+    // for (var i = 0; i < 30; i++) {
+    //     d = new Date();
+    //     time_date.push(d.getMinutes());
+    //     // randomData.push(Math.floor(Math.random() * 10));
+    // }
 
     // 指定图表的配置项和数据
     var option = {
@@ -39,7 +39,9 @@
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
 
-    var len = time_date.length;
+    // var len = time_date.length;
+
+
 
     setInterval(function () {
         $.ajax({
@@ -48,10 +50,26 @@
             dataType: "json",
             success: function (data) {
                 new_data = data['result']['data'];
-                // console.log(new_data);
 
-                time_date.push(new_data[new_data.length - 1]['preDrawCode']);
-                console.log(new_data[new_data.length - 1]['preDrawCode']);
+                //只要最近10期的i
+                for (var i = 0; i < 20; i++) {
+                    code_res = new_data[i]['preDrawCode'];
+                    date_res = new_data[i]['preDrawTime'];
+                    first_code = code_res.split(",")[0];
+                    randomData.unshift(first_code);
+                    time_date.unshift(date_res);
+                }
+                console.log(time_date);
+                console.log(randomData);
+                // code_res = new_data[new_data.length - 1]['preDrawCode'];
+                // date_res = new_data[new_data.length - 1]['preDrawTime'];
+                // first_code = code_res.split(",")[0];
+                // randomData.push(first_code);
+                // time_date.push(date_res);
+
+                // console.log(date_res,first_code);
+                // time_date.push(new_data[new_data.length - 1]['preDrawCode']);
+                // console.log(new_data[new_data.length - 1]['preDrawCode']);
                 // for (var i = 0; i <new_data.length ; i++) {
                 //  time_date.push(new_data[i]);
                 //    console.log(new_data[i]['preDrawCode'])
@@ -63,9 +81,9 @@
                 console.log(error)
             }
         });
-        randomData.push(Math.floor(Math.random() * 10));
+        // randomData.push(Math.floor(Math.random() * 10));
         randomData.shift();
-        time_date.push(len++);
+        // time_date.push(len++);
         time_date.shift();
         myChart.setOption({
             xAxis: {
@@ -75,6 +93,11 @@
                 data: randomData
             }]
         });
+
+
+        //清空
+        time_date = [];
+        randomData = [];
     }, 5000)
 </script>
 

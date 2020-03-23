@@ -6,32 +6,13 @@ import requests
 import datetime
 import csv
 import json
-import xlrd
-from xlutils.copy import copy
 
 base_url = "https://pk10tv.com/pks/getPksHistoryList.do?date={}&lotCode=xyft"
-start_date = datetime.datetime(2020, 2, 18)  # 起始时间
-end_date = datetime.datetime(2020, 3, 18)  # 结束时间
+start_date = datetime.datetime(2020, 3, 18)  # 起始时间
+end_date = datetime.datetime(2020, 3, 20)  # 结束时间
 txt_name = "res.csv"  # 保存csv的路径
 # 时间间隔 每隔一天爬一次就可以
 delta_date = datetime.timedelta(hours=24)
-
-
-# start_stamp = start_date
-# end_stamp = start_date
-def get_keywords_data(tables, row, col):
-    actual_data = tables.cell_value(row, col)
-    return actual_data
-
-
-def write_to_excel(file_path, row, col, value):
-    work_book = xlrd.open_workbook(file_path, formatting_info=False)
-    write_to_work = copy(work_book)
-    sheet_data = write_to_work.get_sheet(0)
-    sheet_data.write(row, col, str(value))
-    write_to_work.save(file_path)
-
-
 
 with open(txt_name, 'a+', newline='') as f:
     writer = csv.writer(f)

@@ -17,8 +17,8 @@ def Solution(data):
     data = list(data)
 
     while index < lenght:
-        print(data)
         if data[index] > data[index + 1]:
+            print("".join(data))
             if ord(data[index]) - ord(data[index + 1]) == 1:
                 "ABABAB—> AABBAB "
                 "当位置1和位置2交换后 需要从2开始找最近一个比他小的A交换"
@@ -31,9 +31,6 @@ def Solution(data):
                         break
                     tem += 1
                 index += 1
-
-
-
             else:
                 "CAAAAB 这种情况 需要找到最近的一个B进行交换 变成BCAAAA这种"
                 tem = index  # 记录当前进行到哪一个字符 "C"
@@ -48,6 +45,6 @@ def Solution(data):
     return "".join(data)
 
 
-tem = "AABAB"
+tem = "AABABAABBC"
 res = Solution(tem)
-print(res)
+# print(res)

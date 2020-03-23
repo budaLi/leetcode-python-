@@ -10,11 +10,13 @@ base_url = "https://newsapi.eastmoney.com/kuaixun/v1/getlist_106_ajaxResult_50_1
 
 def spider():
     try:
+        res = []
         url = base_url.format(int(time.time() * 1000))
         response = requests.get(url).text
         totle_res = eval(response.replace("var ajaxResult=", ""))
-        lis_res = totle_res['LivesList']
-        res = lis_res[0]['digest']
+        lis_res = totle_res['LivesList'][:10]
+        for one in lis_res:
+            res.append(one['digest'])
         return (len(lis_res), res)
     except Exception as e:
         return (0, None)

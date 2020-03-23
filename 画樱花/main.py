@@ -1,6 +1,6 @@
 # @Time    : 2020/3/2 9:10
 # @Author  : Libuda
-# @FileName: main.py
+# @FileName: 远程服务器文件监控.py
 # @Software: PyCharm
 import turtle as T
 import random
