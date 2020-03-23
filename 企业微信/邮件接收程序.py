@@ -1,6 +1,6 @@
 # @Time    : 2020/2/28 13:30
 # @Author  : Libuda
-# @FileName: main.py
+# @FileName: 远程服务器文件监控.py
 # @Software: PyCharm
 # -*- coding: utf-8 -*-
 
