@@ -5,13 +5,13 @@ import time
 import requests
 import json
 from datetime import datetime
-from 企业微信.邮件接收程序 import logger
-from 企业微信.config import get_config
-from 企业微信.spider import spider
+# from 企业微信.邮件接收程序 import logger
+# from 企业微信.config import get_config
+# from 企业微信.spider import spider
 
-# from 邮件接收程序 import logger
-# from config import get_config
-# from spider import spider
+from 邮件接收程序 import logger
+from config import get_config
+from spider import spider
 
 config = get_config()
 
@@ -71,7 +71,7 @@ class WeChat:
 
 if __name__ == '__main__':
     wx = WeChat()
-
+    totol_dic = set()
     # 接收内容
     l, res = spider()
     res = res
@@ -84,25 +84,25 @@ if __name__ == '__main__':
     #     else:
     #         print("{},新闻：{}".format(time.ctime(),l))
     #     time.sleep(300)
+    for one in res:
+        totol_dic.add(one)
+
 
     while 1:
         current_time = datetime.now().time()
 
         # logger("检测新闻中")
         try:
-
             new_l, new_res = spider()
-            new_res = new_res[::-1]
-            # print(new_res)
-            for one in new_res:
-                if one != res[-1]:
-                    logger("{}".format(one))
-                    wx.send_data(one)
-                else:
-                    break
-            else:
-                logger("{},新闻长度：{}".format(time.ctime(), l))
-            res = new_res
+
+            if new_res:
+                for one in new_res:
+                    if one not in totol_dic:
+                        logger("{}".format(one))
+                        wx.send_data(one)
+                        totol_dic.add(one)
+                    else:
+                        break
             time.sleep(int(config['sleep']))
         except Exception as e:
-            print("运行错误", e)
+            logger("运行错误.{}".format(e))
