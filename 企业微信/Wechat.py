@@ -141,8 +141,71 @@ class WeChat:
             return response["access_token"]
         return response['errmsg']
 
+    def create_menu(self):
+        """
+        创建菜单
+        :return:
+        """
+        request_url = "https://qyapi.weixin.qq.com/cgi-bin/menu/create?access_token={}&agentid={}".format(
+            self.get_access_token(), self.AGENTID)
+        request_data = {
+            "button": [
+                {
+                    "name": "扫码",
+                    "sub_button": [
+                        {
+                            "type": "scancode_waitmsg",
+                            "name": "扫码带提示",
+                            "key": "rselfmenu_0_0",
+                            "sub_button": []
+                        },
+                        {
+                            "type": "scancode_push",
+                            "name": "扫码推事件",
+                            "key": "rselfmenu_0_1",
+                            "sub_button": []
+                        },
+                    ]
+                },
+                {
+                    "name": "发图",
+                    "sub_button": [
+                        {
+                            "type": "pic_sysphoto",
+                            "name": "系统拍照发图",
+                            "key": "rselfmenu_1_0",
+                            "sub_button": []
+                        },
+                        {
+                            "type": "pic_photo_or_album",
+                            "name": "拍照或者相册发图",
+                            "key": "rselfmenu_1_1",
+                            "sub_button": []
+                        },
+                        {
+                            "type": "pic_weixin",
+                            "name": "微信相册发图",
+                            "key": "rselfmenu_1_2",
+                            "sub_button": []
+                        }
+                    ]
+                },
+                {
+                    "name": "发送位置",
+                    "type": "location_select",
+                    "key": "rselfmenu_2_0"
+                }
+            ]
+        }
+
+        # 传入的data需要是json格式
+        response = requests.post(request_url, data=json.dumps(request_data)).json()
+        if response['errmsg'] == "ok":
+            return response
+        return response['errmsg']
+
 
 if __name__ == '__main__':
     wx = WeChat()
-    res = wx.get_user_id_by_phone("15735656005")
+    res = wx.create_menu()
     print(res)
