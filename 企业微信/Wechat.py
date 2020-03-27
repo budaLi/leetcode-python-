@@ -104,7 +104,7 @@ class WeChat:
         respone = respone.json()  # 当返回的数据是json串的时候直接用.json即可将respone转换成字典
         return respone["errmsg"]
 
-    def send_image(self, media_id):
+    def send_image(self, media_id, touser):
         """
         发送图片
         :param media_id: 图片media_id  可通过upload_image()获取
@@ -112,14 +112,14 @@ class WeChat:
         """
         send_url = self.send_url.format(self.get_access_token())
         send_values = {
-            "touser": self.TOUSER,
+            "touser": touser,
             "msgtype": "image",
             "agentid": self.AGENTID,
             "image": {
                 "media_id": media_id
             },
         }
-        send_msges = (bytes(json.dumps(send_values), 'utf-8'))
+        send_msges = (json.dumps(send_values))
         respone = requests.post(send_url, send_msges)
         respone = respone.json()  # 当返回的数据是json串的时候直接用.json即可将respone转换成字典
         return respone["errmsg"]
@@ -136,9 +136,9 @@ class WeChat:
         request_data = {
             "mobile": phone
         }
-        response = requests.post(request_url, data=request_data).json()
+        response = requests.post(request_url, data=json.dumps(request_data)).json()
         if response['errmsg'] == "ok":
-            return response["access_token"]
+            return response
         return response['errmsg']
 
     def create_menu(self):
@@ -207,5 +207,8 @@ class WeChat:
 
 if __name__ == '__main__':
     wx = WeChat()
-    res = wx.create_menu()
-    print(res)
+    res = wx.get_user_id_by_phone("15735656005")
+
+    media = wx.upload_image("1.jpg")
+    res2 = wx.send_image(media, "BuDa")
+    print(res2)
