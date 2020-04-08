@@ -19,12 +19,19 @@ pyautogui.FAILSAFE = False
 # qq_or_wx = "TXGuiFoundation"  qq
 # qq_or_wx = "ChatWnd"  #微信
 qq_or_wx = "WwStandaloneConversationWnd"  # 企业微信
-sleep_time = 60  # 休眠时间
-winname = ["阿尔萨斯", "Q", "不搭＊"]  # 需要发送的
+sleep_time = 300
 
-add_txt = "\n   ❤ 更多咨询请联系客服微信：876134889"
+# 休眠时间
+winname = ["阿尔萨斯"]  # 需要发送的
+
+add_txt = "\n \n 更多咨询请联系客服微信：876134889"
 
 totol_dic = set()  # 去重
+
+l, res = spider()
+res = res
+for one in res:
+    totol_dic.add(one)
 
 
 def logger(msg):
@@ -132,11 +139,12 @@ def sendMsgToWX(msg, winname):
 def main(winname):
     # totol_dic = set()
     # 接收内容
-    l, res = spider()
-    res = res
-    for one in res:
-        totol_dic.add(one)
+    # l, res = spider()
+    # res = res
+    # for one in res:
+    #     totol_dic.add(one)
 
+    global totol_dic
     while 1:
         logger("检测新闻中")
         try:
@@ -144,13 +152,13 @@ def main(winname):
             if new_res:
                 for one in new_res:
                     if one not in totol_dic:
-                        one = time.strftime("%H:%M", time.localtime(time.time())) + " " + one + add_txt
+                        tem = time.strftime("%H:%M", time.localtime(time.time())) + " " + one + add_txt
                         for wn in winname:
-                            if sendMsgToWX(one, wn):
-                                logger("发送成功:{}".format(one))
+                            if sendMsgToWX(tem, wn):
+                                logger("发送成功:{}".format(tem))
                                 totol_dic.add(one)
                             else:
-                                logger("发送失败:{},下次将会重新发送".format(one))
+                                logger("发送失败:{},下次将会重新发送".format(tem))
                     else:
                         break
             time.sleep(sleep_time)
@@ -162,21 +170,17 @@ def test(winname):
     totol_dic = set()
     # 接收内容
     l, res = spider()
-    res = res
+    res = res[:1]
     for one in res:
-        one = one + add_txt
-        if sendMsgToWX(one, winname):
-            logger("发送成功:{}".format(one))
-            time.sleep(2)
-        else:
-            loop = True
-            while loop:
-                if sendMsgToWX(one, winname):
-                    loop = False
-                logger("发送失败:{},下次将会重新发送".format(one))
-                time.sleep(5)
 
-        time.sleep(3)
+        one = time.strftime("%H:%M", time.localtime(time.time())) + " " + one + add_txt
+        for wn in winname:
+            if sendMsgToWX(one, wn):
+                logger("发送成功:{}".format(one))
+                totol_dic.add(one)
+            else:
+                logger("发送失败:{},下次将会重新发送".format(one))
+
 
 
 if __name__ == '__main__':
