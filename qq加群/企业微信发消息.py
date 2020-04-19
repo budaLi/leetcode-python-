@@ -1,6 +1,6 @@
 # @Time    : 2020/4/4 17:13
 # @Author  : Libuda
-# @FileName: tt.py
+# @FileName: 企业微信发消息.py
 # @Software: PyCharm
 import win32gui
 import win32api
@@ -11,6 +11,7 @@ import time
 import ctypes
 import pyautogui
 
+from qq加群.qihuo_spider import spider as qihuo_spider
 from qq加群.spider import spider
 
 #  安全限制
@@ -20,7 +21,7 @@ pyautogui.FAILSAFE = False
 # qq_or_wx = "ChatWnd"  #微信
 qq_or_wx = "WwStandaloneConversationWnd"  # 企业微信
 sleep_time = 300
-
+send_message_count = 10  # 每隔多长时间发送一次联系人微信
 # 休眠时间
 winname = ["阿尔萨斯"]  # 需要发送的
 
@@ -29,7 +30,10 @@ add_txt = "\n \n 更多咨询请联系客服微信：876134889"
 totol_dic = set()  # 去重
 
 l, res = spider()
-res = res
+q_l, q_res = qihuo_spider()
+
+res = res + q_res
+
 for one in res:
     totol_dic.add(one)
 
@@ -137,22 +141,24 @@ def sendMsgToWX(msg, winname):
 
 
 def main(winname):
-    # totol_dic = set()
-    # 接收内容
-    # l, res = spider()
-    # res = res
-    # for one in res:
-    #     totol_dic.add(one)
-
+    count =0
     global totol_dic
     while 1:
         logger("检测新闻中")
         try:
-            new_l, new_res = spider()
+            qihuo_l, qihuo_res = qihuo_spider()
+            new_l, res = spider()
+
+            new_res = qihuo_res + res
+
             if new_res:
                 for one in new_res:
                     if one not in totol_dic:
-                        tem = time.strftime("%H:%M", time.localtime(time.time())) + " " + one + add_txt
+                        count += 1
+                        if count % send_message_count == 0:
+                            tem = time.strftime("%H:%M", time.localtime(time.time())) + " " + one + add_txt
+                        else:
+                            tem = time.strftime("%H:%M", time.localtime(time.time())) + " " + one
                         for wn in winname:
                             if sendMsgToWX(tem, wn):
                                 logger("发送成功:{}".format(tem))
