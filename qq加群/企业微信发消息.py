@@ -23,9 +23,13 @@ qq_or_wx = "WwStandaloneConversationWnd"  # 企业微信
 sleep_time = 300
 send_message_count = 10  # 每隔多长时间发送一次联系人微信
 # 休眠时间
-winname = ["阿尔萨斯"]  # 需要发送的
-wx_number = {"阿尔萨斯": [1, "李不搭", "15735656005"]}  # 不同群对应发送的微信号
+winname = ["测试群", "期货快讯1088群", "快讯3088群@孺子牛"]  # 需要发送的
+wx_number = {"测试群": [1, "李不搭", "15735656005"],
+             "期货快讯1088群": [1088, "小祝", "876134889"],
+             "快讯3088群@孺子牛": [3088, "孺子牛", "13699679997"],
+             }  # 不同群对应发送的微信号
 add_txt = "\n \n 各位朋友好，欢迎来到实时期货快讯{}群，我是{}，我的微信号是：{}，欢迎大家一起交流。"
+
 
 totol_dic = set()  # 去重
 
@@ -160,13 +164,14 @@ def main(winname):
                         else:
                             tem = time.strftime("%H:%M", time.localtime(time.time())) + " " + one
                         for wn in winname:
-                            tem = tem.format(*wx_number[wn])
-                            if sendMsgToWX(tem, wn):
-                                logger("发送成功:{}".format(tem))
+                            s = tem
+                            s = s.format(*wx_number[wn])
+                            if sendMsgToWX(s, wn):
+                                logger("发送成功:{}".format(s))
                                 totol_dic.add(one)
                             else:
-                                sendMsgToWX(tem, wn)
-                                logger("发送成功:{}".format(tem.format(wx_number[wn])))
+                                sendMsgToWX(s, wn)
+                                logger("发送成功:{}".format(s))
                                 totol_dic.add(one)
                     # else:
                     #     break
