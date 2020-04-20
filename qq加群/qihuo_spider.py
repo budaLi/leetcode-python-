@@ -25,11 +25,11 @@ def spider():
     response = requests.get(url, headers=headers).json()
 
     res = []
-    for i in range(10):
+    for i in range(20):
         tem = response['data'][i]['data']['content']
-        if "现货报价" in tem or "了解请戳" in tem:
+        if "现货报价" in tem or "了解请戳" in tem or "金十产品" in tem:
             continue
-        tem = tem.replace("金十期货讯", "").replace("。", "。/n/n").replace("<b>", "")
+        tem = tem.replace("金十期货讯", "").replace("。", "。\n\n").replace("<b>", "").replace("<br/>", "")
         res.append(tem)
 
     return 0, res

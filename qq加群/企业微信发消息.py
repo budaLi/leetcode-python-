@@ -24,8 +24,8 @@ sleep_time = 300
 send_message_count = 10  # 每隔多长时间发送一次联系人微信
 # 休眠时间
 winname = ["阿尔萨斯"]  # 需要发送的
-
-add_txt = "\n \n 更多咨询请联系客服微信：876134889"
+wx_number = {"阿尔萨斯": [1, "李不搭", "15735656005"]}  # 不同群对应发送的微信号
+add_txt = "\n \n 各位朋友好，欢迎来到实时期货快讯{}群，我是{}，我的微信号是：{}，欢迎大家一起交流。"
 
 totol_dic = set()  # 去重
 
@@ -147,9 +147,9 @@ def main(winname):
         logger("检测新闻中")
         try:
             qihuo_l, qihuo_res = qihuo_spider()
-            new_l, res = spider()
+            new_l, res_ = spider()
 
-            new_res = qihuo_res + res
+            new_res = qihuo_res + res_
 
             if new_res:
                 for one in new_res:
@@ -160,13 +160,16 @@ def main(winname):
                         else:
                             tem = time.strftime("%H:%M", time.localtime(time.time())) + " " + one
                         for wn in winname:
+                            tem = tem.format(*wx_number[wn])
                             if sendMsgToWX(tem, wn):
                                 logger("发送成功:{}".format(tem))
                                 totol_dic.add(one)
                             else:
-                                logger("发送失败:{},下次将会重新发送".format(tem))
-                    else:
-                        break
+                                sendMsgToWX(tem, wn)
+                                logger("发送成功:{}".format(tem.format(wx_number[wn])))
+                                totol_dic.add(one)
+                    # else:
+                    #     break
             time.sleep(sleep_time)
         except Exception as e:
             logger("运行错误.{}".format(e))

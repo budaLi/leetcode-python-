@@ -14,9 +14,9 @@ def spider():
         url = base_url.format(int(time.time() * 1000))
         response = requests.get(url).text
         totle_res = eval(response.replace("var ajaxResult=", ""))
-        lis_res = totle_res['LivesList'][:10]
+        lis_res = totle_res['LivesList'][:20]
         for one in lis_res:
-            res.append(one['digest'])
+            res.append(one['digest'].replace("</b>", ""))
         return (len(lis_res), res)
     except Exception as e:
         return (0, None)
