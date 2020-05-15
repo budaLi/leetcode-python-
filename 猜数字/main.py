@@ -115,4 +115,27 @@ if __name__ == '__main__':
     # main()
 
     # 2.可视化
-    show_res()
+    # show_res()
+
+    import numpy as np
+
+    lis = [{
+        "trading_date": "2020-05-14",
+        "commodity_id": "I2009",
+        "member_name": "永安期货",
+        "rank": "1",
+        "volume": "101219",
+        "volume_change": "4148"
+    },
+        {"trading_date": "2020-05-14",
+         "commodity_id": "I2009",
+         "member_name": "xxxx",
+         "rank": "1",
+         "volume": "101219",
+         "volume_change": "4148"}
+    ]
+
+    dataframe = pd.DataFrame(lis)
+    line = dataframe[dataframe["member_name"] == "永安期货"]
+    print(line["volume"].values[0])
+    print(line["volume_change"].values[0])
