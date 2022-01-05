@@ -1,6 +1,9 @@
 # leetcode-python-
 python基础巩固以及leetcode刷题代码
 
+![Alt](https://repobeats.axiom.co/api/embed/c3244094f31a2613460d3928ef1106c3635b8ae3.svg "Repobeats analytics image")
+
+
 菜鸟学习日记 
 ==========
 在leetcode上面刷的一些算法题，还有一些Python基础语法的复习，持续更新。。。
